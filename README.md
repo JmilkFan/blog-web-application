@@ -1,7 +1,9 @@
 # JmilkFan's Blog with Python-Flask
 
 ============== 2016-11-13 =============
-First commit
-Complete development environment configuration
-Created the base application (config/main)
-Use the Flask Script CLI (manager)
+1. First commit <br>
+2. Complete development environment configuration<br>
+3. Created the base application (config/main)<br>
+4. Use the Flask Script CLI (manager)<br>
+
+CSDN BLOG: JmilkFan
