@@ -7,7 +7,7 @@
 4. Use the Flask Script CLI (manager)<br>
 5. Connect the MySQL with SQLALchemy
 
-============== 2016-11-13 =============<br>
+============== 2016-11-16 =============<br>
 1. Create the database myblog<br>
 2. Add the table users<br>
 
