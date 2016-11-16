@@ -10,4 +10,4 @@ class DevConfig(Config):
     """Development config class."""
     DEBUG = True
     # MySQL connection
-    SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://root:fanguiju@127.0.0.1:3356/myblog'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:fanguiju@127.0.0.1:3306/myblog?charset=utf8'
