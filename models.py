@@ -16,8 +16,10 @@ class User(db.Model):
     username = db.Column(db.String(255))
     password = db.Column(db.String(255))
 
-    def __init__(self, username):
+    def __init__(self, id, username, password):
+        self.id = id
         self.username = username
+        self.password = password
 
     def __repr__(self):
         """Define the string format for instance of User."""
