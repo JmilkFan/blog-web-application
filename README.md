@@ -11,5 +11,7 @@
 1. Create the database myblog<br>
 2. Add the table users<br>
 
+============== 2016-11-19 =============<br>
+1. Add the table posts<br>
 
 CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
