@@ -9,9 +9,15 @@
 
 ============== 2016-11-16 =============<br>
 1. Create the database myblog<br>
-2. Add the table users<br>
+2. Implement models class User<br>
 
 ============== 2016-11-19 =============<br>
-1. Add the table posts<br>
+1. Implement models class Post<br>
+
+============== 2016-11-19 =============<br>
+1. Implement models class Comment<br>
+1. Implement models class Tag<br>
+
+
 
 CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
