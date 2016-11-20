@@ -15,7 +15,7 @@
 ============== 2016-11-19 =============<br>
 1. Implement models class Post<br>
 
-============== 2016-11-19 =============<br>
+============== 2016-11-20 =============<br>
 1. Implement models class Comment<br>
 2. Implement models class Tag<br>
 3. Install the Flask extend: Flask-Migrate

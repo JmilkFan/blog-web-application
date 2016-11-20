@@ -6,7 +6,6 @@ from main import app
 # Will be load the SQLALCHEMY_DATABASE_URL from config.py
 db = SQLAlchemy(app)
 
-
 posts_tags = db.Table('posts_tags',
     db.Column('post_id', db.String(45), db.ForeignKey('posts.id')),
     db.Column('tag_id', db.String(45), db.ForeignKey('tags.id')))
