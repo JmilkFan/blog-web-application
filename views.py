@@ -27,7 +27,7 @@ def sidebar_data():
 def home(page=1):
     """View function for home page"""
 
-    posts = db.session.query(Post).order_by(
+    posts = Post.query.order_by(
         Post.publish_date.desc()
     ).paginate(page, 10)
 

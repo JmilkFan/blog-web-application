@@ -26,5 +26,7 @@
 3. Installed the Bootstrap<br>
 4. Implements the HTML base template of Jinja<br>
 5. Implements the macro: render pagination<br>
+6. Fix the bug from base.html
+
 
 CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
