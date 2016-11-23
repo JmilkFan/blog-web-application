@@ -20,5 +20,8 @@
 2. Implement models class Tag<br>
 3. Install the Flask extend: Flask-Migrate
 
+============== 2016-11-23 =============<br>
+1. Add the file views.py
+2. Create the view function for tables
 
 CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
