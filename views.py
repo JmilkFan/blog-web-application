@@ -60,7 +60,7 @@ def post(post_id):
 def tag(tag_name):
     """View function for tag page"""
 
-    tag = db.session.query(Tag).filter_by(title=tag_name).first_or_404()
+    tag = Tag.query.filter_by(name=tag_name).first_or_404()
     posts = tag.posts.order_by(Post.publish_date.desc()).all()
     recent, top_tags = sidebar_data()
 
