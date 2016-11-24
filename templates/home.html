@@ -17,7 +17,7 @@
         {{ post.text | truncate(255) | safe }}
         <!-- Set the link for read more -->
         <a href="{{
-          url_for('posts', post_id=post.id)
+          url_for('post', post_id=post.id)
           }}">Read More</a>
       </div>
     </div>
@@ -30,8 +30,8 @@
         {% for post in recent %}
         <!-- Set the link for recent posts. -->
         <li><a href="{{
-          url_for('post', post_id=post.id
-          )}}">{{ post.title }}</a></li>
+          url_for('post', post_id=post.id)
+          }}">{{ post.title }}</a></li>
         {% endfor %}
       </ul>
     </div>
@@ -39,8 +39,9 @@
       <h5>Popular Tags</h5>
       <ul>
         {% for tag in top_tags %}
-        <li><a href="{{ url_for('tag', tag_name=tag[0].title)
-          }}">{{ tag[0].title }}</a></li>
+        <li><a href="{{
+          url_for('tag', tag_name=tag[0].name)
+          }}">{{ tag[0].name }}</a></li>
         {% endfor %}
       </ul>
     </div>

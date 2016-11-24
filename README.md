@@ -32,6 +32,5 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-11-24 =============<br>
 1. Implements the template for view function: `home()`<br>
-
-
-
+2. Installed the Flask-WTF<br>
+3. Implements the Form class: `CommentForm`<br>
