@@ -1,5 +1,7 @@
 # JmilkFan's Blog with Python-Flask
 
+CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
+
 ============== 2016-11-13 =============<br>
 1. First commit <br>
 2. Completed development environment configuration<br>
@@ -28,5 +30,8 @@
 5. Implements the macro: render pagination<br>
 6. Fix the bug from base.html
 
+============== 2016-11-24 =============<br>
+1. Implements the template for view function: `home()`<br>
 
-CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
+
+
