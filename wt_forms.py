@@ -21,4 +21,3 @@ def custom_email(form_object, field_object):
     """Define a vaildator"""
     if not re.match(r"[^@+@[^@]+\.[^@]]+", field_object.data):
         raise ValidationError('Field must be a valid email address.')
-

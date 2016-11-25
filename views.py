@@ -1,8 +1,12 @@
+from uuid import uuid4
+import datetime
+
 from flask import render_template
 from sqlalchemy import func
 
 from main import app
 from models import db, User, Post, Tag, Comment, posts_tags
+from wt_forms import CommentForm
 
 
 def sidebar_data():
@@ -39,9 +43,23 @@ def home(page=1):
                            top_tags=top_tags)
 
 
-@app.route('/post/<string:post_id>')
+@app.route('/post/<string:post_id>', methods=('GET', 'POST'))
 def post(post_id):
     """View function for post page"""
+
+    # Form object: `Comment`
+    form = CommentForm()
+    # form.validate_on_submit() will be true and return the
+    # data object to form instance from user enter,
+    # when the HTTP request is POST
+    if form.validate_on_submit():
+        new_comment = Comment(id=str(uuid4()),
+                              name=form.name.data)
+        new_comment.text = form.text.data
+        new_comment.date = datetime.datetime.now()
+        new_comment.post_id = post_id
+        db.session.add(new_comment)
+        db.session.commit()
 
     post = Post.query.get_or_404(post_id)
     tags = post.tags
@@ -52,6 +70,7 @@ def post(post_id):
                            post=post,
                            tags=tags,
                            comments=comments,
+                           form=form,
                            recent=recent,
                            top_tags=top_tags)
 
