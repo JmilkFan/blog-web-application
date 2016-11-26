@@ -1,12 +1,21 @@
 from uuid import uuid4
-import datetime
+from os import path
+from datetime import datetime
 
-from flask import render_template
+from flask import render_template, Blueprint
 from sqlalchemy import func
 
-from main import app
-from models import db, User, Post, Tag, Comment, posts_tags
-from wt_forms import CommentForm
+from jmilkfansblog.models import db, User, Post, Tag, Comment, posts_tags
+from jmilkfansblog.forms import CommentForm
+
+
+blog_blueprint = Blueprint(
+    'blog',
+    __name__,
+    # path.pardir ==> ../
+    template_folder=path.join(path.pardir, 'templates', 'blog'),
+    # Prefix of Route URL 
+    url_prefix='/blog')
 
 
 def sidebar_data():
@@ -26,8 +35,10 @@ def sidebar_data():
     return recent, top_tags
 
 
-@app.route('/')
-@app.route('/<int:page>')
+# Use the Blueprint object to set the Route URL
+# Register the view function into blueprint
+@blog_blueprint.route('/')
+@blog_blueprint.route('/<int:page>')
 def home(page=1):
     """View function for home page"""
 
@@ -43,7 +54,7 @@ def home(page=1):
                            top_tags=top_tags)
 
 
-@app.route('/post/<string:post_id>', methods=('GET', 'POST'))
+@blog_blueprint.route('/post/<string:post_id>', methods=('GET', 'POST'))
 def post(post_id):
     """View function for post page"""
 
@@ -56,7 +67,7 @@ def post(post_id):
         new_comment = Comment(id=str(uuid4()),
                               name=form.name.data)
         new_comment.text = form.text.data
-        new_comment.date = datetime.datetime.now()
+        new_comment.date = datetime.now()
         new_comment.post_id = post_id
         db.session.add(new_comment)
         db.session.commit()
@@ -75,7 +86,7 @@ def post(post_id):
                            top_tags=top_tags)
 
 
-@app.route('/tag/<string:tag_name>')
+@blog_blueprint.route('/tag/<string:tag_name>')
 def tag(tag_name):
     """View function for tag page"""
 
@@ -90,7 +101,7 @@ def tag(tag_name):
                            top_tags=top_tags)
 
 
-@app.route('/user/<string:username>')
+@blog_blueprint.route('/user/<string:username>')
 def user(username):
     """View function for user page"""
     user = db.session.query(User).filter_by(username=username).first_or_404()
@@ -104,7 +115,7 @@ def user(username):
                            top_tags=top_tags)
 
 
-@app.errorhandler(404)
+@blog_blueprint.errorhandler(404)
 def page_not_found(error):
+    """View function for user page not found"""
     return render_template('page_not_found.html'), 404
-

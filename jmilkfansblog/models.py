@@ -1,10 +1,9 @@
 from flask.ext.sqlalchemy import SQLAlchemy
-from main import app
 
 
-# INIT the sqlalchemy object
-# Will be load the SQLALCHEMY_DATABASE_URL from config.py
-db = SQLAlchemy(app)
+# Create the db object
+# Init the db from jmilkfansblog/__init__py
+db = SQLAlchemy()
 
 posts_tags = db.Table('posts_tags',
     db.Column('post_id', db.String(45), db.ForeignKey('posts.id')),
