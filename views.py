@@ -102,3 +102,9 @@ def user(username):
                            posts=posts,
                            recent=recent,
                            top_tags=top_tags)
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('page_not_found.html'), 404
+

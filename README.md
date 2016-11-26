@@ -39,3 +39,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 1. Fix the bug for pagination linked<br>
 2. Implements template: `post.html`<br>
 3. Add the Form class CommentForm() into view function: `post()`<br>
+
+============== 2016-11-26 =============<br>
+1. Add the template: `page_not_fount.html`
