@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,, initial-scale=1">
+  <!-- Will be replace the page title -->
+  <title>{% block title %}Home{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <!-- Macro: `render paginate` -->
+  {% macro render_pagination(pagination, endpoint) %}
+    <nav>
+      <ul class="pagination">
+        <li>
+        {% if pagination.has_prev %}
+          <a href="{{ url_for('blog.home', page=pagination.prev().page)
+            }}" aria-label="Previous">
+        {% else %}
+          <a href="{{ url_for('blog.home', page=1) }}" aria-label="Previous">
+        {% endif %}
+            <span aria-label="true">&laquo;</span>
+          </a>
+        </li>
+        {% for page in pagination.iter_pages() %}
+          {% if page %}
+            {% if page != pagination.page %}
+              <li>
+                <a href="{{ url_for(endpoint, page=page) }}">
+                  {{ page }}
+                </a>
+              </li>
+            {% else %}
+              <li><a href="">{{ page }}</a></li>
+            {% endif %}
+          {% else %}
+            <li><a>...</a></li>
+          {% endif %}
+        {% endfor %}
+        <li>
+          <a href="{{ url_for('blog.home', page=pagination.next().page )
+            }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        <li>
+      </ul>
+    </nav>
+  {% endmacro %}
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <!-- Replace the route function to URL: `/` -->
+      <h1><a href="{{ url_for('blog.home')}} ">JmilkFan's Blog</a></h1>
+        <p>Welcome to the blog!</p>
+    </div>
+    {% block body %}
+      body_content
+    {% endblock %}
+  </div>
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>

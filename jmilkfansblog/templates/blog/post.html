@@ -1,0 +1,39 @@
+<!-- Replace the TITLE of template base.html -->
+{% extends "base.html"%}
+{% block title %}{{ post.name }}{% endblock %}
+
+<!-- Replace the BODY of template base.html -->
+{% block body %}
+<h3>{{ post.title }}</h3>
+{{ post.publish_date }}:
+{{ post.text }}
+
+<div class="col-lg-12">
+  <h3>New Comment:</h3>
+  <!-- Set the form -->
+  <form method="POST" action="{{ url_for('blog.post', post_id=post.id)
+    }}">
+    {{ form.hidden_tag() }}
+    <div>
+      <!-- Field: `name` label -->
+      {{ form.name.label }}
+      {% if form.name.errors %}
+        {% for e in form.name.errors %}
+          <p class="help-block">{{ e }}</p>
+        {% endfor %}
+      {% endif %}
+      {{ form.name(class_="form-control") }}
+    </div>
+    <div class="form-group">
+      {{ form.text.label }}
+      {% if form.text.errors %}
+        {% for e in form.text.errors %}
+          <p class="help-block">{{ e }}</p>
+        {% endfor %}
+      {% endif %}
+      {{ form.text(class_='form-control') }}
+    </div>
+    <input class="btn btn-primary" type="submit" value="Add Comment">
+  </form>
+</div>
+{% endblock %}
