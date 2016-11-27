@@ -49,4 +49,8 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 1. Using the Factory Method to create app instance<br>
 2. Installed the Flask-Bcrypt<br>
 3. Using the Flask-Bcrypt to encipher the password<br>
+4. Using reCAPTCHA<br>
+5. Implements Login and Register Forms
+
+
 4. Implements the Login Form class<br>
