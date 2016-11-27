@@ -1,5 +1,7 @@
 from flask.ext.sqlalchemy import SQLAlchemy
 
+from jmilkfansblog.extensions import bcrypt
+
 
 # Create the db object
 # Init the db from jmilkfansblog/__init__py
@@ -28,11 +30,18 @@ class User(db.Model):
     def __init__(self, id, username, password):
         self.id = id
         self.username = username
-        self.password = password
+        self.password = self.set_password(password)
 
     def __repr__(self):
         """Define the string format for instance of User."""
         return "<Model User `{}`>".format(self.username)
+
+    def set_password(self, password):
+        """Convert the password to cryptograph via flask-bcrypt"""
+        return bcrypt.generate_password_hash(password)
+
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password, password)
 
 
 class Post(db.Model):

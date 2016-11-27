@@ -46,4 +46,7 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 3. Reconstruction project code<br>
 
 ============== 2016-11-27 =============<br>
-1. Use the Factory Method to create app instance<br>
+1. Using the Factory Method to create app instance<br>
+2. Installed the Flask-Bcrypt<br>
+3. Using the Flask-Bcrypt to encipher the password<br>
+4. Implements the Login Form class<br>
