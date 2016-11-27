@@ -1,18 +1,24 @@
+import os
+
 from flask.ext.script import Manager, Server
 from flask.ext.migrate import Migrate, MigrateCommand
 
-from jmilkfansblog import app
+from jmilkfansblog import create_app
 from jmilkfansblog import models
 
 
+# Get the ENV from os_environ
+env = os.environ.get('BLOG_ENV', 'dev')
+# Create thr app instance via Factory Method
+app = create_app('jmilkfansblog.config.%sConfig' % env.capitalize())
 # Init manager object via app object
 manager = Manager(app)
 
 # Init migrate object via app and db object
-migrate =Migrate(app, models.db)
+migrate = Migrate(app, models.db)
 
 # Create some new commands
-manager.add_command("server", Server(host='127.0.0.1', port=8089))
+manager.add_command("server", Server(host='192.168.1.222', port=8089))
 manager.add_command("db", MigrateCommand)
 
 
