@@ -50,7 +50,7 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 2. Installed the Flask-Bcrypt<br>
 3. Using the Flask-Bcrypt to encipher the password<br>
 4. Using reCAPTCHA<br>
-5. Implements Login and Register Forms
+5. Implements Login and Register Forms<br>
 
-
-4. Implements the Login Form class<br>
+============== 2016-11-27 =============<br>
+1. Fix the bug for reCAPTCHA
