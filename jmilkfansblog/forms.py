@@ -1,13 +1,12 @@
 import re
 
-from flask_wtf import Form
+from flask_wtf import Form, RecaptchaField
 from wtforms import (
     StringField,
     TextField,
     TextAreaField,
     PasswordField,
     BooleanField,
-#    RecaptchaField,
     ValidationError
 )
 from wtforms.validators import DataRequired, Length, EqualTo, URL

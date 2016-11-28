@@ -52,5 +52,5 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 4. Using reCAPTCHA<br>
 5. Implements Login and Register Forms
 
-
-4. Implements the Login Form class<br>
+============== 2016-11-27 =============<br>
+1. Fix the bug for reCAPTCHA<br>
