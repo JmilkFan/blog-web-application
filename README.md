@@ -54,5 +54,5 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-11-27 =============<br>
 1. Fix the bug for reCAPTCHA<br>
-2. Implements view function login/logout/register
-3. Implements template: `login.html`
+2. Implements view function login/logout/register<br>
+3. Implements template: `login.html`<br>
