@@ -1,7 +1,7 @@
 from os import path
 from uuid import uuid4
 
-from flask import flash, redirect, render_template, Blueprint
+from flask import flash, url_for, redirect, render_template, Blueprint
 from jmilkfansblog.forms import LoginForm, RegisterForm
 
 from jmilkfansblog.models import db, User
@@ -10,7 +10,7 @@ from jmilkfansblog.models import db, User
 main_blueprint = Blueprint(
     'main',
     __name__,
-    template_folder=parh.join(path.parfir, 'templates.main'))
+    template_folder=path.join(path.pardir, 'templates', 'main'))
 
 
 @main_blueprint.route('/')
@@ -18,7 +18,7 @@ def index():
     return redirect(url_for('blog.home'))
 
 
-@main_blueprint.route('/login', method=['GET', 'POST'])
+@main_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     """View function for login."""
 
@@ -26,22 +26,22 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        flash("You have been logged in.", categoty="success")
+        flash("You have been logged in.", category="success")
         return redirect(url_for('blog.home'))
 
     return render_template('login.html',
                            form=form)
 
 
-@main_blueprint.route('/logout', method=['GET', 'POST'])
+@main_blueprint.route('/logout', methods=['GET', 'POST'])
 def logout():
     """View function for logout."""
 
-    flash("You have been logged out.", categoty="success")
-    return redirent(url_for('main.home'))
+    flash("You have been logged out.", category="success")
+    return redirect(url_for('blog.home'))
 
 
-@main_blueprint.route('/register', method=['GET', 'POST'])
+@main_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
     """View function for Register."""
 

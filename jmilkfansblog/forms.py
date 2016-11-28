@@ -29,7 +29,7 @@ class CommentForm(Form):
 class LoginForm(Form):
     """Login Form"""
 
-    usermame = StringField('Usermame', [DataRequired(), Length(max=255)])
+    username = StringField('Usermame', [DataRequired(), Length(max=255)])
     password = PasswordField('Password', [DataRequired()])
 
     def validate(self):

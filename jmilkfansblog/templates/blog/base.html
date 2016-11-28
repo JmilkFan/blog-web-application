@@ -55,11 +55,29 @@
       <h1><a href="{{ url_for('blog.home')}} ">JmilkFan's Blog</a></h1>
         <p>Welcome to the blog!</p>
     </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ messages }}
+          </div>
+        {% endfor%}
+      {% endif %}
+    {% endwith %}
     {% block body %}
       body_content
     {% endblock %}
   </div>
-  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  {# <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script> #}
+  {# <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script> #}
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootsrtap/3.3.2/js/bootstrap.min.js"></script>
+  {% block js %}
+  {% endblock %}
 </body>
 </html>
