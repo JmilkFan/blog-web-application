@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="row">
-  <h1 class="text-center">Create A New Post</h1>
+  <h1 class="text-center">Edit the Post</h1>
   <form method="POST" action="{{ url_for('blog.edit_post', id=post.id) }}">
     {{ form.hidden_tag() }}
     <div class="form-group">
@@ -28,7 +28,7 @@
     <input class="btn-primary" type="submit" value="Submit">
   </form>
 </div>
-{% endbody %}
+{% endblock %}
 
 {% block js %}
 <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>

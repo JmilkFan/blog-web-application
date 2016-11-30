@@ -81,7 +81,7 @@ class PostForm(Form):
     """Post Form."""
 
     title = StringField('Title', [DataRequired(), Length(max=255)])
-    test = TextAreaField('Blog Content', [DataRequired()])
+    text = TextAreaField('Blog Content', [DataRequired()])
 
 def custom_email(form_object, field_object):
     """Define a vaildator"""
