@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="col-lg-12">
+<div class="col-lg-3">
   <!-- Set the form -->
   <form method="POST" action="{{ url_for('main.register')
     }}">
@@ -27,7 +27,7 @@
       {{ form.comfirm(class_='form-control') }}
     </div>
     <input class="btn btn-primary" type="submit" value="Register">
-    <div class="g-recaptcha" data-sitekey="6LfoHg0UAAAAAJLuSB2PQMqRyMgdcrHCQ9JgBicu"></div>
+    <div class="g-recaptcha" data-sitekey="6LdBbA0UAAAAAFfpWX5fubCe8wwMp4MrjOyNqFfO"></div>
   </form>
 </div>
 {% endblock %}

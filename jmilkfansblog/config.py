@@ -3,8 +3,8 @@ class Config(object):
     # WTForm secret key
     SECRET_KEY = 'c8e6ff3e4687709ca10a1138a17cd397'
     # reCAPTCHA Public key and Private key
-    RECAPTCHA_PUBLIC_KEY = "6LfoHg0UAAAAAJLuSB2PQMqRyMgdcrHCQ9JgBicu"
-    RECAPTCHA_PRIVATE_KEY = "6LfoHg0UAAAAAFmK_vQfswAFwnr06rF1Q1zCgBXF"
+    RECAPTCHA_PUBLIC_KEY = "6LdBbA0UAAAAAFfpWX5fubCe8wwMp4MrjOyNqFfO"
+    RECAPTCHA_PRIVATE_KEY = "6LdBbA0UAAAAABzQiANZIyCAjc4Rg6JiuQkWx6pr"
 
 class ProdConfig(Config):
     """Production config class."""

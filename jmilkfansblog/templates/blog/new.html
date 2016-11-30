@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Post{% endblock %}
+
+{% block body %}
+<div class="row">
+  <h1 class="text-center">Create A New Post</h1>
+  <form method="POST" action="{{ url_for('blog.new_post') }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{ form.title.label }}
+      {% if form.title.errors %}
+        {% for e in form.title.errors %}
+          <p class="help-block">{{ e }}</p>
+        {% endfor %}
+      {% endif %}
+      {{ form.title(class_='form-control') }}
+    </div>
+    <div class="form-gruop">
+      {{ form.text.label }}
+      {% if form.text.errors %}
+        {% for e in form.text.errors %}
+          <p class="help-block">{{ e }}</p>
+        {% endfor %}
+      {% endif %}
+      {{ form.text(id="editor", class_='form-contril') }}
+    </div>
+    <input class="btn-primary" type="submit" value="Submit">
+  </form>
+</div>
+{% endbody %}
+
+{% block js %}
+<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+{% endblock %}

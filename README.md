@@ -57,5 +57,9 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 2. Implements view function login/logout/register<br>
 3. Implements template: `login.html`<br>
 
-============== 2016-11-22 =============<br>
+============== 2016-11-29 =============<br>
 1. Implements the template: `register.html`
+
+============== 2016-11-30 =============<br>
+1. Implements the View function: new_post/edit_post
+2. Implements the template: new.html/edit.html
