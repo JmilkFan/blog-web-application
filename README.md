@@ -61,5 +61,5 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 1. Implements the template: `register.html`
 
 ============== 2016-11-30 =============<br>
-1. Implements the View function: new_post/edit_post
-2. Implements the template: new.html/edit.html
+1. Implements the View function: new_post/edit_post<br>
+2. Implements the template: new.html/edit.html<br>
