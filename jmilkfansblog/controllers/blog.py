@@ -2,7 +2,7 @@ from uuid import uuid4
 from os import path
 from datetime import datetime
 
-from flask import render_template, Blueprint
+from flask import render_template, redirect, Blueprint, url_for
 from sqlalchemy import func
 
 from jmilkfansblog.models import db, User, Post, Tag, Comment, posts_tags
