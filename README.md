@@ -64,3 +64,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 1. Implements the View function: new_post/edit_post<br>
 2. Implements the template: new.html/edit.html<br>
 3. Fix the bug for edit and new the post<br>
+
+============== 2016-12-02 =============<br>
+1. Fix the bug for controller: `blog.py`

@@ -2,7 +2,7 @@ import random
 import datetime
 from uuid import uuid4
 
-from models import db, User, Tag, Post
+from jmilkfansblog.models import db, User, Tag, Post
 
 user = User(id=str(uuid4()), username='jmilkfan', password='fanguiju')
 db.session.add(user)
