@@ -83,6 +83,13 @@ class PostForm(Form):
     title = StringField('Title', [DataRequired(), Length(max=255)])
     text = TextAreaField('Blog Content', [DataRequired()])
 
+
+class OpenIDForm(Form):
+    """OpenID Form."""
+
+    openid_url = StringField('OpenID URL', [DataRequired(), URL()])
+
+
 def custom_email(form_object, field_object):
     """Define a vaildator"""
     if not re.match(r"[^@+@[^@]+\.[^@]]+", field_object.data):

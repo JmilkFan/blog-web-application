@@ -69,4 +69,10 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 1. Fix the bug for controller: `blog.py`<br>
 
 ============== 2016-12-03 =============<br>
-1. Fix the bug for login/register/net_post/edit_post
+1. Fix the bug for login/register/net_post/edit_post<br>
+
+============== 2016-12-04 =============<br>
+1. Installed the Flask-OpenID<br>
+2. Implements use the OpenID to login the blog<br>
+3. Installed the Flask-Oauth<br>
+4. Implements use the Facebook and Twitter to login the blog<br>
