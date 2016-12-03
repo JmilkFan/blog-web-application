@@ -17,12 +17,6 @@ def create_app(object_name):
     # Init the Flask-Bcrypt via app object
     bcrypt.init_app(app)
     
-    
-#    @app.route('/')
-#    def index():
-#        # Redirect the Request_url '/' to '/blog/'
-#        return redirect(url_for('blog.home'))
-    
     # Register the Blueprint into app object
     app.register_blueprint(blog.blog_blueprint)
     app.register_blueprint(main.main_blueprint)

@@ -7,6 +7,7 @@ from jmilkfansblog.forms import LoginForm, RegisterForm
 from jmilkfansblog.models import db, User
 
 
+# Create the blueprint object
 main_blueprint = Blueprint(
     'main',
     __name__,
@@ -15,6 +16,7 @@ main_blueprint = Blueprint(
 
 @main_blueprint.route('/')
 def index():
+    """Will be default callable when request url is `/`."""
     return redirect(url_for('blog.home'))
 
 
@@ -22,9 +24,10 @@ def index():
 def login():
     """View function for login."""
 
-    # Will be check the account whether rigjt.
+    # Create the form object
     form = LoginForm()
 
+    # Will be check the account whether rigjt.
     if form.validate_on_submit():
         flash("You have been logged in.", category="success")
         return redirect(url_for('blog.home'))
@@ -45,9 +48,10 @@ def logout():
 def register():
     """View function for Register."""
 
-    # Will be check the username whether exist.
+    # Create the form object.
     form = RegisterForm()
 
+    # Will be check the username whether exist.
     if form.validate_on_submit():
         new_user = User(id=str(uuid4()),
                         username=form.username.data,
@@ -56,9 +60,8 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        flash(
-            'Your user has been created, please login.',
-            category="success")
+        flash('Your user has been created, please login.',
+              category="success")
 
         return redirect(url_for('main.login'))
     return render_template('register.html',

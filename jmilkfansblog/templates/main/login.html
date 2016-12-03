@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+
+{% block title %}
+  Login
+{% endblock %}
+
 {% block body %}
 <div class="col-lg-3">
   <!-- Set the form -->
@@ -8,7 +13,7 @@
     <div>
       {{ form.username.label }}
       {% if form.username.errors %}
-        {% for e in form.name.errors %}
+        {% for e in form.username.errors %}
           <p class="help-block">{{ e }}</p>
         {% endfor %}
       {% endif %}
