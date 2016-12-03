@@ -2,7 +2,7 @@ from uuid import uuid4
 from os import path
 from datetime import datetime
 
-from flask import render_template, redirect, Blueprint, url_for
+from flask import render_template, redirect, Blueprint, url_for, flash
 from sqlalchemy import func
 
 from jmilkfansblog.models import db, User, Post, Tag, Comment, posts_tags
@@ -114,11 +114,13 @@ def user(username):
                            recent=recent,
                            top_tags=top_tags)
 
+
 @blog_blueprint.route('/new', methods=['GET', 'POST'])
 def new_post():
     """View function for new_port."""
     form = PostForm()
 
+    # Will be execute when click the submit in the create a new post page.
     if form.validate_on_submit():
         new_post = Post(id=str(uuid4()), title=form.title.data)
         new_post.text = form.text.data
@@ -126,8 +128,9 @@ def new_post():
 
         db.session.add(new_post)
         db.session.commit()
+        return redirect(url_for('blog.home'))
 
-    return render_template('new.html',
+    return render_template('new_post.html',
                            form=form)
 
 
@@ -149,8 +152,10 @@ def edit_post(id):
 
         return redirect(url_for('blog.post', post_id=post.id))
 
+    # Still retain the original content, if validate is false.
+    form.title.data = post.title
     form.text.data = post.text
-    return render_template('edit.html', form=form, post=post)
+    return render_template('edit_post.html', form=form, post=post)
 
 
 @blog_blueprint.errorhandler(404)

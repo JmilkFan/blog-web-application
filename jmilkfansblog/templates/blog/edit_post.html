@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Post{% endblock %}
+{% block title %}Edit Post{% endblock %}
 
 {% block body %}
 <div class="row">
-  <h1 class="text-center">Edit the Post</h1>
+  <h1 class="text-center">Edit The Post</h1>
   <form method="POST" action="{{ url_for('blog.edit_post', id=post.id) }}">
     {{ form.hidden_tag() }}
     <div class="form-group">
@@ -32,6 +32,7 @@
 
 {% block js %}
 <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+<!-- Use the CKEditor -->
 <script>
     CKEDITOR.replace('editor');
 </script>
