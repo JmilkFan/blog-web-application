@@ -150,11 +150,15 @@ def new_post():
 def edit_post(id):
     """View function for edit_post."""
 
+    post = Post.query.get_or_404(id)
+
     # Ensure the user logged in.
     if not current_user:
         return redirect(url_for('main.login'))
 
-    post = Post.query.get_or_404(id)
+    # Only the post onwer can be edit this post.
+    if current_user != post.users:
+        return redirect(url_for('blog.post', post_id=id))
 
     # Admin can be edit the post.
     permission = Permission(UserNeed(post.users.id))

@@ -52,11 +52,13 @@ def login():
     # Will be check the account whether rigjt.
     if form.validate_on_submit():
 
+        # Using session to check the user's login status
         # Add the user's name to cookie.
-        session['username'] = form.username.data
+        # session['username'] = form.username.data
 
         user = User.query.filter_by(username=form.username.data).one()
-        # Use the Flask-Login to processing login for user.
+
+        # Using the Flask-Login to processing and check the login status for user
         # Remember the user's login status. 
         login_user(user, remember=form.remember.data)
 
@@ -77,14 +79,14 @@ def logout():
     """View function for logout."""
 
     # Remove the username from the cookie.
-    session.pop('username', None)
+    # session.pop('username', None)
 
-    # Use the Flask-Login to processing logout for user.
+    # Using the Flask-Login to processing and check the logout status for user.
     logout_user()
 
     identity_changed.send(
         current_app._get_current_object(),
-        identiry=AnonymousIdentity())
+        identity=AnonymousIdentity())
     flash("You have been logged out.", category="success")
     return redirect(url_for('main.login'))
 

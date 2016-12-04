@@ -12,12 +12,14 @@
       }}">{{ post.users.username }}</a> on {{ post.publish_date }}</p>
     <p>{{ post.text | safe }}</p>
   </div>
+  {% if current_user %}
   <div class="column">
     <div class="col-lg-2">
       <a href="{{ url_for('blog.new_post') }}" class="btn btn-primary">New</a>
     </div>
   </div>
-  {% if g.current_user == post.users %}
+  {% endif %}
+  {% if current_user == post.users %}
   <div class="column">
     <div class="col-lg-2">
       <a href="{{ url_for('blog.edit_post', id=post.id) }}" class="btn btn-primary">Edit</a>
