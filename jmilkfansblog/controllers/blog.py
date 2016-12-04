@@ -2,11 +2,14 @@ from uuid import uuid4
 from os import path
 from datetime import datetime
 
-from flask import render_template, redirect, Blueprint, url_for, flash
+from flask import render_template, redirect, Blueprint, url_for, flash, session, abort
+from flask.ext.login import login_required, current_user
+from flask.ext.principal import Permission
 from sqlalchemy import func
 
 from jmilkfansblog.models import db, User, Post, Tag, Comment, posts_tags
 from jmilkfansblog.forms import CommentForm, PostForm
+from jmilkfansblog.extensions import poster_permission, admin_permission
 
 
 blog_blueprint = Blueprint(
@@ -116,9 +119,16 @@ def user(username):
 
 
 @blog_blueprint.route('/new', methods=['GET', 'POST'])
+@login_required
 def new_post():
     """View function for new_port."""
+
     form = PostForm()
+
+    # Ensure the user logged in.
+    # Flask-Login.current_user can be access current user.
+    if not current_user:
+        return redirect(url_for('main.login'))
 
     # Will be execute when click the submit in the create a new post page.
     if form.validate_on_submit():
@@ -135,27 +145,55 @@ def new_post():
 
 
 @blog_blueprint.route('/edit/<string:id>', methods=['GET', 'POST'])
+@login_required
+@poster_permission.require(http_exception=403)
 def edit_post(id):
     """View function for edit_post."""
 
+    # Ensure the user logged in.
+    if not current_user:
+        return redirect(url_for('main.login'))
+
     post = Post.query.get_or_404(id)
-    form = PostForm()
 
-    if form.validate_on_submit():
-        post.title = form.title.data
-        post.text = form.text.data
-        post.publish_date = datetime.now()
+    # Admin can be edit the post.
+    permission = Permission(UserNeed(post.users.id))
+    if permission.can() or admin_permission.can():
+        form = PostForm()
 
-        # Update the post
-        db.session.add(post)
-        db.session.commit()
+        #if current_user != post.users:
+        #    abort(403)
 
-        return redirect(url_for('blog.post', post_id=post.id))
+        if form.validate_on_submit():
+            post.title = form.title.data
+            post.text = form.text.data
+            post.publish_date = datetime.now()
+
+            # Update the post
+            db.session.add(post)
+            db.session.commit()
+
+            return redirect(url_for('blog.post', post_id=post.id))
+    else:
+        abort(403)
 
     # Still retain the original content, if validate is false.
     form.title.data = post.title
     form.text.data = post.text
     return render_template('edit_post.html', form=form, post=post)
+
+
+# NOTE(Jmilk Fan): Use the Flask-Login's current_user object to replace
+#                  g.current_user
+# @blog_blueprint.before_request
+def check_user():
+    """Check the user whether logged in."""
+
+    if 'username' in session:
+        g.current_user = User.query.filter_by(
+            username=session['username']).first()
+    else:
+        g.current_user = None
 
 
 @blog_blueprint.errorhandler(404)

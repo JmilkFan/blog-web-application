@@ -17,11 +17,13 @@
       <a href="{{ url_for('blog.new_post') }}" class="btn btn-primary">New</a>
     </div>
   </div>
+  {% if g.current_user == post.users %}
   <div class="column">
     <div class="col-lg-2">
       <a href="{{ url_for('blog.edit_post', id=post.id) }}" class="btn btn-primary">Edit</a>
     </div>
   </div>
+  {% endif %}
   <div class="col-lg-12">
     <h3>New Comment:</h3>
     <!-- Set the form -->

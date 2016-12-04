@@ -76,3 +76,9 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 2. Implements use the OpenID to login the blog<br>
 3. Installed the Flask-Oauth<br>
 4. Implements use the Facebook and Twitter to login the blog<br>
+5. Installed the Flask-Login<br>
+6. Installed the Flask-Principal<br>
+7. Using the session to confirm the uses login status<br>
+8. Add the table: `users_roles` and `roles`<br>
+9. Using the Flask-Principal to implements the role permission<br>
+10. Using the Flask-Login to implements the ensure the user login status<br>

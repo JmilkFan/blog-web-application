@@ -1,9 +1,11 @@
 from os import path
 from uuid import uuid4
 
-from flask import flash, url_for, redirect, render_template, Blueprint, request
-from jmilkfansblog.forms import LoginForm, RegisterForm, OpenIDForm
+from flask import flash, url_for, redirect, render_template, Blueprint, request, session
+from flask.ext.login import login_user, logout_user
+from flask.ext.principal import Identity, AnonymousIdentity, identity_changed, current_app
 
+from jmilkfansblog.forms import LoginForm, RegisterForm, OpenIDForm
 from jmilkfansblog.models import db, User
 from jmilkfansblog.extensions import openid, facebook, twitter
 
@@ -49,6 +51,19 @@ def login():
 
     # Will be check the account whether rigjt.
     if form.validate_on_submit():
+
+        # Add the user's name to cookie.
+        session['username'] = form.username.data
+
+        user = User.query.filter_by(username=form.username.data).one()
+        # Use the Flask-Login to processing login for user.
+        # Remember the user's login status. 
+        login_user(user, remember=form.remember.data)
+
+        identity_changed.send(
+            current_app._get_current_object(),
+            identity=Identity(user.id))
+
         flash("You have been logged in.", category="success")
         return redirect(url_for('blog.home'))
 
@@ -61,8 +76,17 @@ def login():
 def logout():
     """View function for logout."""
 
+    # Remove the username from the cookie.
+    session.pop('username', None)
+
+    # Use the Flask-Login to processing logout for user.
+    logout_user()
+
+    identity_changed.send(
+        current_app._get_current_object(),
+        identiry=AnonymousIdentity())
     flash("You have been logged out.", category="success")
-    return redirect(url_for('blog.home'))
+    return redirect(url_for('main.login'))
 
 
 @main_blueprint.route('/register', methods=['GET', 'POST'])
@@ -124,17 +148,24 @@ def facebook_authorized(resp):
     session['facebook_oauth_token'] = (resp['access_token'], '')
 
     me = facebook.get('/me')
-    user = User.query.filter_by(
-        username=me.data['filter_name'] + " " + me.data['last_name']).first()
-    if not user:
-        user = User(id=str(uuid4()), username=me.data['filter_name'] + " " + me.data['last_name'], password='jmilkfan')
+
+    if me.data.get('first_name', False):
+        facebook_username = me.data['first_name'] + " " + me.data['last_name']
+    else:
+        facebook_username = me.data['name']
+
+    user = User.query.filter_by(username=facebook_username).first()
+    if user is None:
+        user = User(id=str(uuid4()), username=facebook_username, password='jmilkfan')
         db.session.add(user)
         db.session.commit()
 
     flash('You have been logged in.', category='success')
 
-    return redirect(
-        request.args.get('next') or url_for('blog.home'))
+    return redirect(url_for('blog.home'))
+    # FIXME(Jmilk Fan): Use the request.args.get('next') == 'http://localhost:8089/blog/'
+    #return redirect(
+    #    request.args.get('next') or url_for('blog.home'))
 
 
 @main_blueprint.route('/twitter-login')

@@ -1,8 +1,11 @@
 from flask import Flask, redirect, url_for
+from flask.ext.login import current_user
+from flask.ext.principal import identity_loaded, UserNeed, RoleNeed
 
 from jmilkfansblog.models import db
 from jmilkfansblog.controllers import blog, main
-from jmilkfansblog.extensions import bcrypt, openid
+from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals
+
 
 
 def create_app(object_name):
@@ -18,6 +21,29 @@ def create_app(object_name):
     bcrypt.init_app(app)
     # Init the Flask-OpenID via app object
     openid.init_app(app)
+    # Init the Flask-Login via app object
+    login_manager.init_app(app)
+    # Init the Flask-Prinicpal via app object
+    principals.init_app(app)
+
+    @identity_loaded.connect_via(app)
+    def on_identity_loaded(sender, identity):
+        """Change the role via add the Need object into Role.
+
+           Need the access the app object.
+        """
+
+        # Set the identity user object
+        identity.user = current_user
+
+        # Add the UserNeed to the identity user object
+        if hasattr(current_user, 'id'):
+            identity.provides.add(UserNeed(current_user.id))
+
+        # Add each role to the identity user object
+        if hasattr(current_user, 'roles'):
+            for role in current_user.roles:
+                identity.provides.add(RoleNeed(role.name))
     
     # Register the Blueprint into app object
     app.register_blueprint(blog.blog_blueprint)

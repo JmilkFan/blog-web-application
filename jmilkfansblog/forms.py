@@ -31,6 +31,7 @@ class LoginForm(Form):
 
     username = StringField('Usermame', [DataRequired(), Length(max=255)])
     password = PasswordField('Password', [DataRequired()])
+    remember = BooleanField("Remember Me")
 
     def validate(self):
         """Validator for check the account information."""
