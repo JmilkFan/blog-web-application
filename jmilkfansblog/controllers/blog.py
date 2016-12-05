@@ -4,7 +4,7 @@ from datetime import datetime
 
 from flask import render_template, redirect, Blueprint, url_for, flash, session, abort
 from flask.ext.login import login_required, current_user
-from flask.ext.principal import Permission
+from flask.ext.principal import Permission, UserNeed
 from sqlalchemy import func
 
 from jmilkfansblog.models import db, User, Post, Tag, Comment, posts_tags
@@ -86,7 +86,9 @@ def post(post_id):
                            comments=comments,
                            form=form,
                            recent=recent,
-                           top_tags=top_tags)
+                           top_tags=top_tags,
+                           poster_permission=poster_permission,
+                           admin_permission=admin_permission)
 
 
 @blog_blueprint.route('/tag/<string:tag_name>')
@@ -135,6 +137,7 @@ def new_post():
         new_post = Post(id=str(uuid4()), title=form.title.data)
         new_post.text = form.text.data
         new_post.publish_date = datetime.now()
+        new_post.users = current_user
 
         db.session.add(new_post)
         db.session.commit()

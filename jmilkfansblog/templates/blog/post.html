@@ -12,14 +12,14 @@
       }}">{{ post.users.username }}</a> on {{ post.publish_date }}</p>
     <p>{{ post.text | safe }}</p>
   </div>
-  {% if current_user %}
+  {% if current_user.is_authenticated %}
   <div class="column">
     <div class="col-lg-2">
       <a href="{{ url_for('blog.new_post') }}" class="btn btn-primary">New</a>
     </div>
   </div>
   {% endif %}
-  {% if current_user == post.users %}
+  {% if post.users == current_user or admin_permission.can() %}
   <div class="column">
     <div class="col-lg-2">
       <a href="{{ url_for('blog.edit_post', id=post.id) }}" class="btn btn-primary">Edit</a>

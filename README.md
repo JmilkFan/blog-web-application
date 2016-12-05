@@ -82,3 +82,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 8. Add the table: `users_roles` and `roles`<br>
 9. Using the Flask-Principal to implements the role permission<br>
 10. Using the Flask-Login to implements the ensure the user login status<br>
+
+============== 2016-12-05 =============<br>
+1. Fix some bug for Flask-Principal<br>
