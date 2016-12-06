@@ -85,3 +85,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-12-05 =============<br>
 1. Fix some bug for Flask-Principal<br>
+
+============== 2016-12-06 =============<br>
+2. Add the Remember Me optional box<br>

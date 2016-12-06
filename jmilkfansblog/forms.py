@@ -49,7 +49,7 @@ class LoginForm(Form):
 
         # Check the password whether right.
         if not user.check_password(self.password.data):
-            self.username.errors.append('Invalid username or password.')
+            self.password.errors.append('Invalid username or password.')
             return False
 
         return True

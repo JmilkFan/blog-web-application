@@ -109,9 +109,9 @@ def tag(tag_name):
 @blog_blueprint.route('/user/<string:username>')
 def user(username):
     """View function for user page"""
-    user = db.session.query(User).filter_by(username=username).first_or_404()
+    user = User.query.filter_by(username=username).first_or_404()
     posts = user.posts.order_by(Post.publish_date.desc()).all()
-    recent, top_tags = sidebbar_data()
+    recent, top_tags = sidebar_data()
 
     return render_template('user.html',
                            user=user,

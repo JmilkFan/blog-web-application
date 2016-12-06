@@ -29,6 +29,10 @@
         {% endif %}
         {{ form.password(class_='form-control') }}
       </div>
+      <div class="form-group">
+        {{ form.remember.label }}<br>
+        <input id="remember" class="form-contrl" name="remember" value="n", type="checkbox">
+      </div>
  <!-- <div class="form-group">
         {{ openid_form.openid_url.label }}
         {{ openid_form.openid_url(class_='form-control') }}
