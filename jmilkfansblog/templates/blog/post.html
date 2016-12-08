@@ -65,7 +65,7 @@
       {% endfor %}
     </div> #}
   <!-- duoshuo-share -->
-  <div class="ds-share" data-thread-key="{{ post.id }}" data-title="{{ post.title }}" data-images="https://avatars0.githubusercontent.com/u/16975584?v=3&u=4994b2cb1d62530e95f1ef4a884fdaecb3245329&s=400" data-content="{{ post.text }}" data-url="{{ url_for('blog.post', post_id=post.id )}}">
+  <div class="ds-share" data-thread-key="{{ post.id }}" data-title="{{ post.title }}" data-images="https://avatars0.githubusercontent.com/u/16975584?v=3&u=4994b2cb1d62530e95f1ef4a884fdaecb3245329&s=400" data-content="{{ post.text | truncate(100) }}" data-url="{{ url_for('blog.post', post_id=post.id )}}">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	
