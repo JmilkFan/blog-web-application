@@ -10,12 +10,12 @@
     <!-- Get Pagination object-->
     {% for post in posts.items %}
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-9">
         <h1>{{ post.title }}</h1>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-9">
         {{ post.text | truncate(255) | safe }}
         <!-- Set the link for read more -->
         <a href="{{
@@ -25,6 +25,7 @@
     </div>
     {% endfor %}
   </div>
+
   <div class="col-lg-3">
     <div class="row">
       <h5>Recent Posts</h5>
@@ -33,7 +34,7 @@
         <!-- Set the link for recent posts. -->
         <li><a href="{{
           url_for('blog.post', post_id=post.id)
-          }}">{{ post.title }}</a></li>
+          }}">{{ post.title | truncate(15)}}</a></li>
         {% endfor %}
       </ul>
     </div>
@@ -48,6 +49,8 @@
       </ul>
     </div>
   </div>
+</div>
+<div class="row">
   <!-- Call the Macro: `render_pagination` from base.html -->
   {{ render_pagination(posts, 'blog.home') }}
 </div>

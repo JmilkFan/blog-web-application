@@ -88,3 +88,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-12-06 =============<br>
 2. Add the Remember Me optional box<br>
+
+============== 2016-12-08 =============<br>
+1. Add the Script plug-in with duoshuo-comment.
