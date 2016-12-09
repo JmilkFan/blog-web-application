@@ -95,3 +95,7 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-12-09 =============<br>
 1. Fix some bug for Flask-Principal<br>
+
+============== 2016-12-10 =============<br>
+1. Installed the Flask-Restful<br>
+2. Implements restful api for post<br>

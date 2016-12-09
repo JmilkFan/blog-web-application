@@ -6,6 +6,7 @@ from flask.ext.openid import OpenID
 from flask_oauth import OAuth
 from flask.ext.login import LoginManager
 from flask.ext.principal import Principal, Permission, RoleNeed
+from flask.ext.restful import Api
 
 
 # Create the Flask-Bcrypt's instance
@@ -18,6 +19,8 @@ oauth = OAuth()
 login_manager = LoginManager()
 # Create the Flask-Principal's instance
 principals = Principal()
+# Create the Flask-Restful's instancr
+restful_api = Api()
 
 # Init the permission object via RoleNeed(Need).
 admin_permission = Permission(RoleNeed('admin'))

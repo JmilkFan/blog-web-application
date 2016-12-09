@@ -58,7 +58,15 @@
       <!-- Replace the route function to URL: `/` -->
       <h1><a href="{{ url_for('blog.home')}} ">JmilkFan's Blog</a></h1>
         <p>Welcome to the blog!</p>
+      {% if current_user.is_authenticated %}
+      <div class="column">
+        <div class="col-lg-3">
+          <a href="{{ url_for('blog.new_post') }}" class="btn btn-primary">New</a>
+        </div>
+      </div>
+      {% endif %}
     </div>
+
     <!-- Will be get the messages queue from flash() -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}

@@ -29,6 +29,8 @@ class User(db.Model):
     password = db.Column(db.String(255))
     # one to many: User ==> Post 
     # Establish contact with Post's ForeignKey: user_id
+    # (FIXME): Relationship of User and Post is one to many,
+    #          So backref="user".
     posts = db.relationship(
         'Post',
         backref='users',
