@@ -149,7 +149,8 @@ def new_post():
 
 @blog_blueprint.route('/edit/<string:id>', methods=['GET', 'POST'])
 @login_required
-@poster_permission.require(http_exception=403)
+#@poster_permission.require(http_exception=403)
+@admin_permission.require(http_exception=403)
 def edit_post(id):
     """View function for edit_post."""
 

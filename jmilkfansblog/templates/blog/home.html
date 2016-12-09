@@ -34,7 +34,7 @@
         <!-- Set the link for recent posts. -->
         <li><a href="{{
           url_for('blog.post', post_id=post.id)
-          }}">{{ post.title | truncate(15)}}</a></li>
+          }}">{{ post.title }}</a></li>
         {% endfor %}
       </ul>
     </div>

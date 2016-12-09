@@ -92,3 +92,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 ============== 2016-12-08 =============<br>
 1. Add the Script plug-in with duoshuo-comment<br>
 2. Add the Script plug-in with duoshuo-share<br>
+
+============== 2016-12-09 =============<br>
+1. Fix some bug for Flask-Principal<br>

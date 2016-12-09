@@ -19,15 +19,16 @@ login_manager = LoginManager()
 # Create the Flask-Principal's instance
 principals = Principal()
 
-# Init the role permission via RoleNeed(Need).
+# Init the permission object via RoleNeed(Need).
 admin_permission = Permission(RoleNeed('admin'))
 poster_permission = Permission(RoleNeed('poster'))
 default_permission = Permission(RoleNeed('default'))
 
 # Setup the configuration for login manager.
 #     1. Set the login page.
-#     2. Set the more strong auth-protection.
+#     2. Set the more stronger auth-protection.
 #     3. Show the information when you are logging.
+#     4. Set the Login Messages type as `information`.
 login_manager.login_view = "main.login"
 login_manager.session_protection = "strong"
 login_manager.login_message = "Please login to access this page."
