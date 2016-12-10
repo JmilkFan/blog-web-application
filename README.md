@@ -98,4 +98,8 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-12-10 =============<br>
 1. Installed the Flask-Restful<br>
-2. Implements restful api for post<br>
+2. Implements restful api `GET` for /api/posts<br>
+3. Implements restful api `POST` for /api/posts<br>
+4. Implements restful api `PUT` for /api/posts/post_id<br>
+5. Implements restful api `DELETE` for /api/posts/post_id<br>
+6. Implements restful api `POST` for /api/auth<br>

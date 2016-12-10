@@ -1,7 +1,10 @@
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous import BadSignature, SignatureExpired
 from uuid import uuid4
 
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import AnonymousUserMixin
+from flask.ext.principal import current_app
 
 from jmilkfansblog.extensions import bcrypt
 
@@ -59,6 +62,7 @@ class User(db.Model):
         return bcrypt.generate_password_hash(password)
 
     def check_password(self, password):
+        """Check the entry-password whether as same as user.password."""
         return bcrypt.check_password_hash(self.password, password)
 
     def is_authenticated(self):
@@ -87,6 +91,24 @@ class User(db.Model):
         """Get the user's uuid from database."""
 
         return unicode(self.id)
+
+    @staticmethod
+    def verify_auth_token(token):
+        """Validate the token whether is night."""
+
+        serializer = Serializer(
+            current_app.config['SECRET_KEY'])
+        try:
+            # serializer object already has tokens in itself and wait for 
+            # compare with token from HTTP Request /api/posts Method `POST`.
+            data = serializer.loads(token)
+        except SignatureExpired:
+            return None
+        except BadSignature:
+            return None
+
+        user = User.query.filter_by(id=data['id']).first()
+        return user
 
 
 class Role(db.Model):

@@ -5,6 +5,7 @@ from flask.ext.principal import identity_loaded, UserNeed, RoleNeed
 from jmilkfansblog.models import db
 from jmilkfansblog.controllers import blog, main
 from jmilkfansblog.controllers.restful.posts import PostApi
+from jmilkfansblog.controllers.restful.auth import AuthApi
 from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals
 from jmilkfansblog.extensions import restful_api
 
@@ -29,9 +30,15 @@ def create_app(object_name):
 
     # Define the route of restful_api
     restful_api.add_resource(
-        PostApi, '/api/posts',
+        PostApi,
+        '/api/posts',
         '/api/posts/<string:post_id>',
-        endpoint='api')
+        endpoint='restful_api_post')
+
+    restful_api.add_resource(
+        AuthApi,
+        '/api/auth',
+        endpoint='restful_api_auth')
 
     # Init the Flask-Restful via ap object
     restful_api.init_app(app)
