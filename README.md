@@ -106,3 +106,5 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-12-11 =============<br>
 1. Added the database migrate version: `Init database`<br>
+2. Added the table `browse_volumes`<br>
+3. Added the database migrate version: `Add table of browse_volumes`<br>

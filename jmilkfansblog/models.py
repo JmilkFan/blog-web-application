@@ -190,3 +190,21 @@ class Tag(db.Model):
 
     def __repr__(self):
         return "<Model Tag `{}`>".format(self.name)
+
+
+class BrowseVolume(db.Model):
+    """Represents Proected browse_volumes."""
+
+    __tablename__ = 'browse_volumes'
+    id = db.Column(db.String(45), primary_key=True)
+    home_view_total = db.Column(db.Integer)
+
+    def __init__(self, id):
+        self.id = id
+        self.home_view_total = 0
+
+    def __repr__(self):
+        return '<Model BrowseVolume `{}`>'.format(self.home_view_total)
+
+    def add_one(self):
+        self.home_view_total += 1
