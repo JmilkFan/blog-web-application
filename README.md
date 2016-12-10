@@ -103,3 +103,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 4. Implements restful api `PUT` for /api/posts/post_id<br>
 5. Implements restful api `DELETE` for /api/posts/post_id<br>
 6. Implements restful api `POST` for /api/auth<br>
+
+============== 2016-12-11 =============<br>
+1. Added the database migrate version: `Init database`<br>
