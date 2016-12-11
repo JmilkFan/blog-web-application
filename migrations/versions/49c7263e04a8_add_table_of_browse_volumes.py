@@ -19,7 +19,7 @@ depends_on = None
 def upgrade():
     op.create_table('browse_volumes',
     sa.Column('id', sa.String(length=45), nullable=False),
-    sa.Column('name', sa.Integer, nullable=False),
+    sa.Column('home_view_total', sa.Integer, nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
 
