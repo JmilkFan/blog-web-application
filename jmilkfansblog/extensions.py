@@ -7,6 +7,7 @@ from flask_oauth import OAuth
 from flask.ext.login import LoginManager
 from flask.ext.principal import Principal, Permission, RoleNeed
 from flask.ext.restful import Api
+from flask.ext.celery import Celery
 
 
 # Create the Flask-Bcrypt's instance
@@ -19,8 +20,10 @@ oauth = OAuth()
 login_manager = LoginManager()
 # Create the Flask-Principal's instance
 principals = Principal()
-# Create the Flask-Restful's instancr
+# Create the Flask-Restful's instance
 restful_api = Api()
+# Create the Flask-Celery-Helper's instance
+celery = Celery()
 
 # Init the permission object via RoleNeed(Need).
 admin_permission = Permission(RoleNeed('admin'))

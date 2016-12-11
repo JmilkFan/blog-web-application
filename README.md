@@ -109,3 +109,4 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 2. Added the table `browse_volumes`<br>
 3. Added the database migrate version: `Add table of browse_volumes`<br>
 4. Fix some bug<br>
+5. Installed Celery and Flask-Celery-Helper<br>
