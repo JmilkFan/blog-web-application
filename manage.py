@@ -11,6 +11,7 @@ from jmilkfansblog import models
 env = os.environ.get('BLOG_ENV', 'dev')
 # Create thr app instance via Factory Method
 app = create_app('jmilkfansblog.config.%sConfig' % env.capitalize())
+
 # Init manager object via app object
 manager = Manager(app)
 

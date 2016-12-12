@@ -110,3 +110,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 3. Added the database migrate version: `Add table of browse_volumes`<br>
 4. Fix some bug<br>
 5. Installed Celery and Flask-Celery-Helper<br>
+
+============== 2016-12-12 =============<br>
+1. Implements the celery_runner(Celery worker)<br>

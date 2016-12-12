@@ -6,7 +6,7 @@ from jmilkfansblog.models import db
 from jmilkfansblog.controllers import blog, main
 from jmilkfansblog.controllers.restful.posts import PostApi
 from jmilkfansblog.controllers.restful.auth import AuthApi
-from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals
+from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, celery
 from jmilkfansblog.extensions import restful_api
 
 
@@ -27,6 +27,9 @@ def create_app(object_name):
     login_manager.init_app(app)
     # Init the Flask-Prinicpal via app object
     principals.init_app(app)
+    # Init the Flask-Celery-Helper via app object
+    # Register the celery object into app object
+    celery.init_app(app)
 
     # Define the route of restful_api
     restful_api.add_resource(
