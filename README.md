@@ -113,3 +113,7 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-12-12 =============<br>
 1. Implements the celery_runner(Celery worker)<br>
+
+============== 2016-12-13 =============<br>
+1. Installed flower<br>
+2. Setup the timed task<br>

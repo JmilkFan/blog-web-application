@@ -1,3 +1,6 @@
+import datetime
+
+
 class Config(object):
     """Base config class."""
     # WTForm secret key
@@ -18,3 +21,12 @@ class DevConfig(Config):
     # Celery <--> RabbitMQ connection
     CELERY_RESULT_BACKEND = "amqp://guest:guest@localhost:5672//"
     CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
+
+    # Timed Task configuation of celery task
+    CELERYBEAT_SCHEDULE = {
+        'log-every-30-seconds': {
+            # Setup the celery task.
+            'task': 'jmilkfansblog.tasks.log',
+            # Setup the time span.
+            'schedule': datetime.timedelta(seconds=30),
+            'args': ("Hello World",)}}
