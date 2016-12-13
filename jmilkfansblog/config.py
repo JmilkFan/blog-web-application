@@ -1,4 +1,5 @@
 import datetime
+from celery.schedules import crontab
 
 
 class Config(object):
@@ -24,9 +25,8 @@ class DevConfig(Config):
 
     # Timed Task configuation of celery task
     CELERYBEAT_SCHEDULE = {
-        'log-every-30-seconds': {
+        'weekly-digest': {
             # Setup the celery task.
-            'task': 'jmilkfansblog.tasks.log',
+            'task': 'jmilkfansblog.tasks.digest',
             # Setup the time span.
-            'schedule': datetime.timedelta(seconds=30),
-            'args': ("Hello World",)}}
+            'schedule': crontab(day_of_week=6, hour='10')}}

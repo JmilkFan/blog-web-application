@@ -1,13 +1,15 @@
 from flask import Flask, redirect, url_for
 from flask.ext.login import current_user
 from flask.ext.principal import identity_loaded, UserNeed, RoleNeed
+from sqlalchemy import event
 
-from jmilkfansblog.models import db
+from jmilkfansblog.models import db, Reminder
 from jmilkfansblog.controllers import blog, main
 from jmilkfansblog.controllers.restful.posts import PostApi
 from jmilkfansblog.controllers.restful.auth import AuthApi
 from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, celery
 from jmilkfansblog.extensions import restful_api
+from jmilkfansblog.tasks import on_reminder_save
 
 
 def create_app(object_name):
@@ -19,14 +21,22 @@ def create_app(object_name):
     
     # Will be load the SQLALCHEMY_DATABASE_URL from config.py to db object
     db.init_app(app)
+    # Using the SQLAlchemy's event
+    # Will be callback on_reminder_save when insert recond into table `reminder`.
+    event.listen(Reminder, 'after_insert', on_reminder_save)
+
     # Init the Flask-Bcrypt via app object
     bcrypt.init_app(app)
+
     # Init the Flask-OpenID via app object
     openid.init_app(app)
+
     # Init the Flask-Login via app object
     login_manager.init_app(app)
+
     # Init the Flask-Prinicpal via app object
     principals.init_app(app)
+
     # Init the Flask-Celery-Helper via app object
     # Register the celery object into app object
     celery.init_app(app)
@@ -42,7 +52,6 @@ def create_app(object_name):
         AuthApi,
         '/api/auth',
         endpoint='restful_api_auth')
-
     # Init the Flask-Restful via ap object
     restful_api.init_app(app)
 

@@ -117,3 +117,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 ============== 2016-12-13 =============<br>
 1. Installed flower<br>
 2. Setup the timed task<br>
+3. Add table `reminders`<br>
+4. Implements Remind when registered the user<br>
+5. Implements weekly digest<br>

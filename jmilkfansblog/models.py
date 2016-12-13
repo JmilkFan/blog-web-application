@@ -208,3 +208,20 @@ class BrowseVolume(db.Model):
 
     def add_one(self):
         self.home_view_total += 1
+
+
+class Reminder(db.Model):
+    """Represents Proected reminders."""
+
+    __tablename__ = 'reminders'
+    id = db.Column(db.String(45), primary_key=True)
+    date = db.Column(db.DateTime())
+    email = db.Column(db.String(255))
+    text = db.Column(db.Text())
+
+    def __init__(self, id, text):
+        self.id = id
+        self.email = text
+
+    def __repr__(self):
+        return '<Model Reminder `{}`>'.format(self.text[:20])
