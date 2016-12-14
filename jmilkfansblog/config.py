@@ -53,3 +53,10 @@ class DevConfig(Config):
             'task': 'jmilkfansblog.tasks.digest',
             # Setup the time span.
             'schedule': crontab(day_of_week=6, hour='10')}}
+
+    # FIXME(JmilkFan): Deploy the smtp server in local
+    # Setup the config for Flask-Mail
+    MAIL_SERVER = 'localhost'
+    MAIL_PORT = 25
+    MAIL_USERNAME = '<username>'
+    MAIL_PASSWORD = '<password>'

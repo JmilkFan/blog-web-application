@@ -2,7 +2,9 @@ import smtplib
 import datetime
 from email.mime.text import MIMEText
 
-from jmilkfansblog.extensions import celery
+from flask_mail import Message
+
+from jmilkfansblog.extensions import celery, mail
 from jmilkfansblog.models import Post
 
 
@@ -22,29 +24,19 @@ def multiply(x, y):
     default_retry_delay=300,
     max_retries=5)
 def remind(self, pk):
-    """Send the remind email to user when registered."""
+    """Send the remind email to user when registered.
+       Using Flask-Mail.
+    """
 
     reminder = Reminber.query.get(pk)
+
     msg = MIMEText(reminber.text)
+    msg = Message('fangui_ju@163.com',
+                  sender="fangui_ju@163.com",
+                  recipients=[reminder.email])
+    msg.body = reminder.text
 
-    msg['Subject'] = "Your Reminber"
-    msg['From'] = 'fangui_ju@163.com'
-    msg['To'] = reminder.email
-
-    try:
-        smtp_server = smtplib.SMTP('localhost')
-        smtp_server.starttls()
-        # Setup the email account.
-        smtp_server.login('fangui_ju', '<password>')
-        smtp_server.sendmail(
-            msg['Form'],
-            [reminber.email],
-            msg.as_seting())
-        smtp_server.close()
-
-        return
-    except Exception, err:
-        self.retry(exc=err)
+    mail.send(msg)
 
 
 def on_reminder_save(mapper, connect, self):

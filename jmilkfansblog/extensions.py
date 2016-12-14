@@ -12,6 +12,7 @@ from flask.ext.debugtoolbar import DebugToolbarExtension
 from flask.ext.cache import Cache
 from flask_assets import Environment, Bundle
 from flask.ext.admin import Admin
+from flask_mail import Mail
 
 
 # Create the Flask-Bcrypt's instance
@@ -36,6 +37,8 @@ cache = Cache()
 assets_env = Environment()
 # Create the Flask-Admin's instance
 flask_admin = Admin()
+# Create the Flask-Mail's instance
+mail = Mail()
 
 # Define the set for js and css file.
 main_css = Bundle(

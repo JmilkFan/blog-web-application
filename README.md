@@ -132,3 +132,4 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 8. Installed Flask-Admin<br>
 9. Implements the Post-Admin page via Flask-Admin<br>
 10. Implements access File System via Flask-Admin<br>
+11. Installed Flask-Mail<br>
