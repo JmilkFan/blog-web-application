@@ -1,16 +1,20 @@
+import os
+
 from flask import Flask, redirect, url_for
 from flask.ext.login import current_user
 from flask.ext.principal import identity_loaded, UserNeed, RoleNeed
 from sqlalchemy import event
 
-from jmilkfansblog.models import db, Reminder
+from jmilkfansblog.models import db, User, Post, Role, Tag, BrowseVolume, Reminder
 from jmilkfansblog.controllers import blog, main
 from jmilkfansblog.controllers.restful.posts import PostApi
 from jmilkfansblog.controllers.restful.auth import AuthApi
 from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, celery
-from jmilkfansblog.extensions import restful_api, debug_toolbar, cache
+from jmilkfansblog.extensions import restful_api, debug_toolbar, cache, flask_admin
 from jmilkfansblog.extensions import assets_env, main_js, main_css
 from jmilkfansblog.tasks import on_reminder_save
+from jmilkfansblog.controllers.admin import CustomView, CustomModelView
+from jmilkfansblog.controllers.admin import PostView, CustomFileAdmin
 
 
 def create_app(object_name):
@@ -66,6 +70,22 @@ def create_app(object_name):
     assets_env.init_app(app)
     assets_env.register('main_js', main_js)
     assets_env.register('main_css', main_css)
+
+    # Init the Flask-Admin via app object
+    flask_admin.init_app(app)
+    # Register view function `CustomView` into Flask-Admin
+    flask_admin.add_view(CustomView(name='Custom'))
+    # Register view function `CustomModelView` into Flask-Admin
+    models = [User, Role, Post, Tag, Reminder]
+    for model in models:
+        flask_admin.add_view(
+            CustomModelView(model, db.session, category='models'))
+    # Define path of File System
+    flask_admin.add_view(
+        CustomFileAdmin(
+            os.path.join(os.path.dirname(__file__), 'static'),
+            '/static',
+            name='Static Files'))
 
     @identity_loaded.connect_via(app)
     def on_identity_loaded(sender, identity):

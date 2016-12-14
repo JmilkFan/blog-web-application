@@ -2,6 +2,7 @@ import re
 
 from flask_wtf import Form, RecaptchaField
 from wtforms import (
+    widgets,
     StringField,
     TextField,
     TextAreaField,
@@ -83,6 +84,21 @@ class PostForm(Form):
 
     title = StringField('Title', [DataRequired(), Length(max=255)])
     text = TextAreaField('Blog Content', [DataRequired()])
+
+
+class CKTextAreaWidget(widgets.TextArea):
+    """CKeditor form for Flask-Admin."""
+
+    def __call__(self, field, **kwargs):
+        kwargs.setdefault('class_', 'ckeditor')
+        return super(CKTextAreaWidget, self).__call__(field, **kwargs)
+
+
+class CKTextAreaField(TextAreaField):
+    """Create a new Field type"""
+
+    # Add a new parts for TextAreaField.
+    widget = CKTextAreaWidget()
 
 
 class OpenIDForm(Form):

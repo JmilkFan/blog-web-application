@@ -129,3 +129,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 5. Implements make cache for `post.html/home.html` and function `verify_auth_token`<br>
 6. Using Redis as BackEndStieCache<br>
 7. Installed Flask-Assets<br>
+8. Installed Flask-Admin<br>
+9. Implements the Post-Admin page via Flask-Admin<br>
+10. Implements access File System via Flask-Admin<br>

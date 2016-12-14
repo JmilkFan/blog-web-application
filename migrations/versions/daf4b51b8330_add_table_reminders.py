@@ -17,7 +17,7 @@ depends_on = None
 
 
 def upgrade():
-    op.create_table('reminbers',
+    op.create_table('reminders',
         sa.Column('id', sa.String(length=45), nullable=False),
         sa.Column('date', sa.DateTime(), nullable=True),
         sa.Column('email', sa.String(length=255), nullable=True),

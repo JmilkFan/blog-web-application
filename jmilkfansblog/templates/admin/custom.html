@@ -1,0 +1,5 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+  This is the custom view!
+  <a href="{{ url_for('customview.second_page') }}">Link</a>
+{% endblock %}

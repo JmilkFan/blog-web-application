@@ -11,6 +11,7 @@ from flask.ext.celery import Celery
 from flask.ext.debugtoolbar import DebugToolbarExtension
 from flask.ext.cache import Cache
 from flask_assets import Environment, Bundle
+from flask.ext.admin import Admin
 
 
 # Create the Flask-Bcrypt's instance
@@ -33,6 +34,8 @@ debug_toolbar = DebugToolbarExtension()
 cache = Cache()
 # Create the Flask-Assets's instance
 assets_env = Environment()
+# Create the Flask-Admin's instance
+flask_admin = Admin()
 
 # Define the set for js and css file.
 main_css = Bundle(
