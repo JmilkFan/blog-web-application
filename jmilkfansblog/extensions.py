@@ -9,6 +9,7 @@ from flask.ext.principal import Principal, Permission, RoleNeed
 from flask.ext.restful import Api
 from flask.ext.celery import Celery
 from flask.ext.debugtoolbar import DebugToolbarExtension
+from flask.ext.cache import Cache
 
 
 # Create the Flask-Bcrypt's instance
@@ -27,6 +28,8 @@ restful_api = Api()
 celery = Celery()
 # Create the Flask-DebugToolbar's instance
 debug_toolbar = DebugToolbarExtension()
+# Create the Flask-Cache's instance
+cache = Cache()
 
 # Init the permission object via RoleNeed(Need).
 admin_permission = Permission(RoleNeed('admin'))

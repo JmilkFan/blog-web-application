@@ -124,3 +124,7 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 ============== 2016-12-14 =============<br>
 1. Implements email content of weekly-digest `digest.html`<br>
 2. Installed Flask-Debug-Toolbar<br>
+3. Installed Flask-Cache<br>
+4. Installed Flask-Redis<br>
+5. Implements make cache for `post.html/home.html` and function `verify_auth_token`<br>
+6. Using Redis as BackEndStieCache<br>

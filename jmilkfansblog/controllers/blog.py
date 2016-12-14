@@ -9,7 +9,7 @@ from sqlalchemy import func
 
 from jmilkfansblog.models import db, User, Post, Tag, Comment, posts_tags
 from jmilkfansblog.forms import CommentForm, PostForm
-from jmilkfansblog.extensions import poster_permission, admin_permission
+from jmilkfansblog.extensions import poster_permission, admin_permission, cache
 
 
 blog_blueprint = Blueprint(
@@ -21,6 +21,16 @@ blog_blueprint = Blueprint(
     url_prefix='/blog')
 
 
+def make_cache_key(*args, **kwargs):
+    """Dynamic creation the request url."""
+
+    path = request.path
+    args = str(hash(frozenset(request.args.items())))
+    lang = get_locale()
+    return (path + args + lang).encode('utf-8')
+
+
+@cache.cached(timeout=7200, key_prefix='sidebar_data')
 def sidebar_data():
     """Set the sidebar function."""
 
@@ -42,6 +52,7 @@ def sidebar_data():
 # Register the view function into blueprint
 @blog_blueprint.route('/')
 @blog_blueprint.route('/<int:page>')
+@cache.cached(timeout=60)
 def home(page=1):
     """View function for home page"""
 
@@ -58,6 +69,7 @@ def home(page=1):
 
 
 @blog_blueprint.route('/post/<string:post_id>', methods=('GET', 'POST'))
+@cache.cached(timeout=60, key_prefix=make_cache_key)
 def post(post_id):
     """View function for post page"""
 

@@ -6,7 +6,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import AnonymousUserMixin
 from flask.ext.principal import current_app
 
-from jmilkfansblog.extensions import bcrypt
+from jmilkfansblog.extensions import bcrypt, cache
 
 
 # Create the db object
@@ -93,6 +93,7 @@ class User(db.Model):
         return unicode(self.id)
 
     @staticmethod
+    @cache.memoize(60)
     def verify_auth_token(token):
         """Validate the token whether is night."""
 
