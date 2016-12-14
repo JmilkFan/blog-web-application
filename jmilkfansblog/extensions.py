@@ -8,6 +8,7 @@ from flask.ext.login import LoginManager
 from flask.ext.principal import Principal, Permission, RoleNeed
 from flask.ext.restful import Api
 from flask.ext.celery import Celery
+from flask.ext.debugtoolbar import DebugToolbarExtension
 
 
 # Create the Flask-Bcrypt's instance
@@ -24,6 +25,8 @@ principals = Principal()
 restful_api = Api()
 # Create the Flask-Celery-Helper's instance
 celery = Celery()
+# Create the Flask-DebugToolbar's instance
+debug_toolbar = DebugToolbarExtension()
 
 # Init the permission object via RoleNeed(Need).
 admin_permission = Permission(RoleNeed('admin'))

@@ -13,6 +13,7 @@ click==6.6
 Flask==0.11.1
 Flask-Bcrypt==0.7.1
 Flask-Celery-Helper==1.1.0
+Flask-DebugToolbar==0.10.0
 Flask-Login==0.4.0
 Flask-Migrate==2.0.1
 Flask-OAuth==0.12

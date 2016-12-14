@@ -1,0 +1,52 @@
+<"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Weekly Digest</title>
+  </head>
+  <body>
+    <table align="center"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="500px">
+      <tr>
+        <td style="font-size: 32px;
+                   font-family: Helvetica, sans-serif;
+                   color: #444;
+                   text-align: center;
+                   line-height: 1.65">
+          Weekly Digest
+        </td>
+      </tr>
+      {% for post in posts %}
+        <tr>
+          <td style="font-size: 24px;
+                     font-family: sans-serif;
+                     color: #444;
+                     text-align: center;
+                     text-height: 1.65">
+            {{ post.title }}
+          </td>
+        </tr>
+        <tr>
+          <td style="font-size: 14px;
+                     font-family: serif;
+                     color: #444;
+                     line-height: 1.65">
+            {{ post.text | truncate(500) | safe }}
+          </td>
+        </tr>
+        <tr>
+          <td style="font-size: 12px;
+                     font-family: serif;
+                     color: blue;
+                     margin-bottom: 20px">
+            <a href="{{ url_for('blog.post', post_id=post.id )}}">Read More</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

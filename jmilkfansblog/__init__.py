@@ -8,7 +8,7 @@ from jmilkfansblog.controllers import blog, main
 from jmilkfansblog.controllers.restful.posts import PostApi
 from jmilkfansblog.controllers.restful.auth import AuthApi
 from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, celery
-from jmilkfansblog.extensions import restful_api
+from jmilkfansblog.extensions import restful_api, debug_toolbar
 from jmilkfansblog.tasks import on_reminder_save
 
 
@@ -52,8 +52,11 @@ def create_app(object_name):
         AuthApi,
         '/api/auth',
         endpoint='restful_api_auth')
-    # Init the Flask-Restful via ap object
+    # Init the Flask-Restful via app object
     restful_api.init_app(app)
+
+    # Init the Flask-DebugToolbar via app object
+    debug_toolbar.init_app(app)
 
 
     @identity_loaded.connect_via(app)

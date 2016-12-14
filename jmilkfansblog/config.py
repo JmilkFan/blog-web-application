@@ -16,14 +16,18 @@ class ProdConfig(Config):
 
 class DevConfig(Config):
     """Development config class."""
+
+    # Flask-Debug-Toolbar's config
     DEBUG = True
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
+
     # MySQL connection
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:fanguiju@127.0.0.1:3306/myblog?charset=utf8'
     # Celery <--> RabbitMQ connection
     CELERY_RESULT_BACKEND = "amqp://guest:guest@localhost:5672//"
     CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
 
-    # Timed Task configuation of celery task
+    # Timed Task configuation of celery task `weekly digest`
     CELERYBEAT_SCHEDULE = {
         'weekly-digest': {
             # Setup the celery task.

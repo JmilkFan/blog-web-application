@@ -120,3 +120,7 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 3. Add table `reminders`<br>
 4. Implements Remind when registered the user<br>
 5. Implements weekly digest<br>
+
+============== 2016-12-14 =============<br>
+1. Implements email content of weekly-digest `digest.html`<br>
+2. Installed Flask-Debug-Toolbar<br>
