@@ -128,3 +128,4 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 4. Installed Flask-Redis<br>
 5. Implements make cache for `post.html/home.html` and function `verify_auth_token`<br>
 6. Using Redis as BackEndStieCache<br>
+7. Installed Flask-Assets<br>

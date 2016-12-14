@@ -10,6 +10,7 @@ from flask.ext.restful import Api
 from flask.ext.celery import Celery
 from flask.ext.debugtoolbar import DebugToolbarExtension
 from flask.ext.cache import Cache
+from flask_assets import Environment, Bundle
 
 
 # Create the Flask-Bcrypt's instance
@@ -30,6 +31,20 @@ celery = Celery()
 debug_toolbar = DebugToolbarExtension()
 # Create the Flask-Cache's instance
 cache = Cache()
+# Create the Flask-Assets's instance
+assets_env = Environment()
+
+# Define the set for js and css file.
+main_css = Bundle(
+    'css/bootstrap.css',
+    filters='cssmin',
+    output='css/common.css')
+
+main_js = Bundle(
+    'js/jquery.js',
+    'js/bootstrap.js',
+    filters='jsmin',
+    output='js/common.js')
 
 # Init the permission object via RoleNeed(Need).
 admin_permission = Permission(RoleNeed('admin'))

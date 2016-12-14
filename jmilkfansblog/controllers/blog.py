@@ -2,7 +2,8 @@ from uuid import uuid4
 from os import path
 from datetime import datetime
 
-from flask import render_template, redirect, Blueprint, url_for, flash, session, abort
+from flask import render_template, redirect, Blueprint, url_for, flash
+from flask import session, abort, request
 from flask.ext.login import login_required, current_user
 from flask.ext.principal import Permission, UserNeed
 from sqlalchemy import func
@@ -26,8 +27,9 @@ def make_cache_key(*args, **kwargs):
 
     path = request.path
     args = str(hash(frozenset(request.args.items())))
-    lang = get_locale()
-    return (path + args + lang).encode('utf-8')
+    # lang = get_locale()
+    # return (path + args + lang).encode('utf-8')
+    return (path + args).encode('utf-8')
 
 
 @cache.cached(timeout=7200, key_prefix='sidebar_data')

@@ -9,6 +9,7 @@ from jmilkfansblog.controllers.restful.posts import PostApi
 from jmilkfansblog.controllers.restful.auth import AuthApi
 from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, celery
 from jmilkfansblog.extensions import restful_api, debug_toolbar, cache
+from jmilkfansblog.extensions import assets_env, main_js, main_css
 from jmilkfansblog.tasks import on_reminder_save
 
 
@@ -60,6 +61,11 @@ def create_app(object_name):
 
     # Init the Flask-Cache via app object
     cache.init_app(app)
+
+    # Init the Flask-Assets via app object
+    assets_env.init_app(app)
+    assets_env.register('main_js', main_js)
+    assets_env.register('main_css', main_css)
 
     @identity_loaded.connect_via(app)
     def on_identity_loaded(sender, identity):

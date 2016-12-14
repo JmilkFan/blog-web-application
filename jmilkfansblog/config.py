@@ -29,6 +29,9 @@ class ProdConfig(Config):
 class DevConfig(Config):
     """Development config class."""
 
+    # Flask-Assets's config
+    ASSETS_DEBUG = True
+
     # Flask-Debug-Toolbar's config
     DEBUG = True
     DEBUG_TB_INTERCEPT_REDIRECTS = False
