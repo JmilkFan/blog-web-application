@@ -76,10 +76,14 @@ def create_app(object_name):
     # Register view function `CustomView` into Flask-Admin
     flask_admin.add_view(CustomView(name='Custom'))
     # Register view function `CustomModelView` into Flask-Admin
-    models = [User, Role, Post, Tag, Reminder]
+    models = [User, Role, Tag, Reminder, BrowseVolume]
     for model in models:
         flask_admin.add_view(
-            CustomModelView(model, db.session, category='models'))
+            CustomModelView(model, db.session, category='Models'))
+
+    flask_admin.add_view(
+            PostView(Post, db.session, category='PostManager'))
+
     # Define path of File System
     flask_admin.add_view(
         CustomFileAdmin(

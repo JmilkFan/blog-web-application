@@ -3,8 +3,8 @@ from flask.ext.admin.contrib.fileadmin import FileAdmin
 from flask.ext.admin.contrib.sqla import ModelView
 from flask.ext.login import login_required, current_user
 
-from jmilkfansblog.forms import CKTextAreaField
 from jmilkfansblog.extensions import admin_permission
+from jmilkfansblog.forms import CKTextAreaField
 
 
 class CustomView(BaseView):
@@ -30,18 +30,8 @@ class CustomModelView(ModelView):
         """Control the access permission."""
 
         # callable function `User.is_authenticated()`.
-        return current_user.is_authenticated() and\
-            admin_permission.can()
-
-
-class CustomFileAdmin(FileAdmin):
-    """File System admin."""
-
-    def is_accessible(self):
-        """Control the access permission."""
-
-        # callable function `User.is_authenticated()`.
-        return current_user.is_authenticated() and\
+        # FIXME(JMilkFan): Using function is_authenticated()
+        return current_user.is_authenticated and\
             admin_permission.can()
 
 
@@ -55,3 +45,14 @@ class PostView(CustomModelView):
 
     create_template = 'admin/post_edit.html'
     edit_template = 'admin/post_edit.html'
+
+
+class CustomFileAdmin(FileAdmin):
+    """File System admin."""
+
+    def is_accessible(self):
+        """Control the access permission."""
+
+        # callable function `User.is_authenticated()`.
+        return current_user.is_authenticated and\
+            admin_permission.can()
