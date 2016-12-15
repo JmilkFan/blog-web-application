@@ -28,7 +28,7 @@ principals = Principal()
 # Create the Flask-Restful's instance
 restful_api = Api()
 # Create the Flask-Celery-Helper's instance
-celery = Celery()
+flask_celery = Celery()
 # Create the Flask-DebugToolbar's instance
 debug_toolbar = DebugToolbarExtension()
 # Create the Flask-Cache's instance

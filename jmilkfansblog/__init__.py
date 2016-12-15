@@ -9,7 +9,7 @@ from jmilkfansblog.models import db, User, Post, Role, Tag, BrowseVolume, Remind
 from jmilkfansblog.controllers import blog, main
 from jmilkfansblog.controllers.restful.posts import PostApi
 from jmilkfansblog.controllers.restful.auth import AuthApi
-from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, celery
+from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, flask_celery
 from jmilkfansblog.extensions import restful_api, debug_toolbar, cache, flask_admin
 from jmilkfansblog.extensions import assets_env, main_js, main_css, mail
 from jmilkfansblog.tasks import on_reminder_save
@@ -44,7 +44,7 @@ def create_app(object_name):
 
     # Init the Flask-Celery-Helper via app object
     # Register the celery object into app object
-    celery.init_app(app)
+    flask_celery.init_app(app)
 
     # Define the route of restful_api
     restful_api.add_resource(

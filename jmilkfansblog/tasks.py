@@ -4,31 +4,33 @@ from email.mime.text import MIMEText
 
 from flask_mail import Message
 
-from jmilkfansblog.extensions import celery, mail
+from jmilkfansblog.extensions import flask_celery, mail
 from jmilkfansblog.models import Post
 
 
-@celery.task()
+@flask_celery.task()
 def log(msg):
     return msg
 
 
-@celery.task()
+@flask_celery.task()
 def multiply(x, y):
     return x * y
 
 
-@celery.task(
+@flask_celery.task(
     bind=True,
     igonre_result=True,
     default_retry_delay=300,
     max_retries=5)
-def remind(self, pk):
+def remind(self, primary_key):
     """Send the remind email to user when registered.
        Using Flask-Mail.
     """
 
-    reminder = Reminber.query.get(pk)
+    # Using the primary_key to get reminder object.
+    # Ensure down to date from table of reminders.
+    reminder = Reminber.query.get(primary_key)
 
     msg = MIMEText(reminber.text)
     msg = Message('fangui_ju@163.com',
@@ -40,11 +42,12 @@ def remind(self, pk):
 
 
 def on_reminder_save(mapper, connect, self):
-    """Callbask for task remind."""
+    """Callback after insert table reminder."""
+
     remind.apply_async(args=(self.id), eta=self.date)
 
 
-@celery.task(
+@flask_celery.task(
     bind=True,
     ignore_result=True,
     default_retry_delay=300,
