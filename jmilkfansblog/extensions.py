@@ -15,31 +15,35 @@ from flask.ext.admin import Admin
 from flask_mail import Mail
 
 
-# Create the Flask-Bcrypt's instance
+#### Create the Flask-Bcrypt's instance
 bcrypt = Bcrypt()
-# Create the Flask-OpenID's instance
+
+#### Create the Flask-OpenID's instance
 openid = OpenID()
-# Create the Flask-OAuth's instance
-oauth = OAuth()
-# Create the Flask-Login's instance
-login_manager = LoginManager()
-# Create the Flask-Principal's instance
+
+#### Create the Flask-Principal's instance
 principals = Principal()
-# Create the Flask-Restful's instance
+
+#### Create the Flask-Restful's instance
 restful_api = Api()
-# Create the Flask-Celery-Helper's instance
+
+#### Create the Flask-Celery-Helper's instance
 flask_celery = Celery()
-# Create the Flask-DebugToolbar's instance
+
+#### Create the Flask-DebugToolbar's instance
 debug_toolbar = DebugToolbarExtension()
-# Create the Flask-Cache's instance
+
+#### Create the Flask-Cache's instance
 cache = Cache()
-# Create the Flask-Assets's instance
-assets_env = Environment()
-# Create the Flask-Admin's instance
+
+#### Create the Flask-Admin's instance
 flask_admin = Admin()
-# Create the Flask-Mail's instance
+
+### Create the Flask-Mail's instance
 mail = Mail()
 
+#### Create the Flask-Assets's instance
+assets_env = Environment()
 # Define the set for js and css file.
 main_css = Bundle(
     'css/bootstrap.css',
@@ -52,11 +56,12 @@ main_js = Bundle(
     filters='jsmin',
     output='js/common.js')
 
+#### Create the Flask-Login's instance
+login_manager = LoginManager()
 # Init the permission object via RoleNeed(Need).
 admin_permission = Permission(RoleNeed('admin'))
 poster_permission = Permission(RoleNeed('poster'))
 default_permission = Permission(RoleNeed('default'))
-
 # Setup the configuration for login manager.
 #     1. Set the login page.
 #     2. Set the more stronger auth-protection.
@@ -68,6 +73,8 @@ login_manager.login_message = "Please login to access this page."
 login_manager.login_message_category = "info"
 # login_manager.anonymous_user = CustomAnonymousUser
 
+#### Create the Flask-OAuth's instance
+oauth = OAuth()
 # Create the auth object for facebook.
 facebook = oauth.remote_app(
     'facebook',
@@ -78,7 +85,7 @@ facebook = oauth.remote_app(
     consumer_key='1634926073468088',
     consumer_secret='a45ec6096ad272c4d61788b912a66394',
     request_token_params={'scope': 'email'})
-
+# Create the auth object for twitter.
 twitter = oauth.remote_app(
     'twitter',
     base_url='https://api.twitter.com/1.1/',

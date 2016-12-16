@@ -14,10 +14,10 @@ class Config(object):
 class ProdConfig(Config):
     """Production config class."""
 
-    # Setup Cache type config
+    #### Setup Flask-Cache type config
     # CACHE_TYPE = 'simple'
 
-    # Setup the config for redis
+    #### Setup the config for redis
     CACHE_TYPE = 'redis'
     CACHE_REDIS_HOST = 'localhost'
     CACHE_REDIS_PORT = '6379'
@@ -29,23 +29,25 @@ class ProdConfig(Config):
 class DevConfig(Config):
     """Development config class."""
 
-    # Flask-Assets's config
+    #### Flask-Assets's config
     ASSETS_DEBUG = True
 
-    # Flask-Debug-Toolbar's config
+    #### Flask-Debug-Toolbar's config
     DEBUG = True
+    # No intercept redirects
     DEBUG_TB_INTERCEPT_REDIRECTS = False
+    # Enable the profiler on all requests
+    DEBUG_TB_PROFILER_ENABLED = True
 
-    # MySQL connection
+    #### Flask-SQLAlchemy's config MySQL connection
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:fanguiju@127.0.0.1:3306/myblog?charset=utf8'
 
-    # Setup Cache type config
+    #### Flask-Cache's config
     CACHE_TYPE = 'null'
 
-    # Celery <--> RabbitMQ connection
+    #### Celery's config: Celery <--> RabbitMQ <--> APP connection
     CELERY_RESULT_BACKEND = "amqp://guest:guest@localhost:5672//"
     CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
-
     # Timed Task configuation of celery task `weekly digest`
     CELERYBEAT_SCHEDULE = {
         'weekly-digest': {
@@ -54,8 +56,8 @@ class DevConfig(Config):
             # Setup the time span.
             'schedule': crontab(day_of_week=6, hour='10')}}
 
+    #### Flask-Mail's Config
     # FIXME(JmilkFan): Deploy the smtp server in local
-    # Setup the config for Flask-Mail
     MAIL_SERVER = 'localhost'
     MAIL_PORT = 25
     MAIL_USERNAME = '<username>'

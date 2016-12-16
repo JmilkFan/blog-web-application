@@ -136,3 +136,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-12-15 =============<br>
 1. Fix some bug<br>
+
+============== 2016-12-16 =============<br>
+2. Fix some bug<br>
