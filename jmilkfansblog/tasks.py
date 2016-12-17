@@ -8,16 +8,6 @@ from jmilkfansblog.extensions import flask_celery, mail
 from jmilkfansblog.models import Post
 
 
-@flask_celery.task()
-def log(msg):
-    return msg
-
-
-@flask_celery.task()
-def multiply(x, y):
-    return x * y
-
-
 @flask_celery.task(
     bind=True,
     igonre_result=True,
@@ -44,7 +34,7 @@ def remind(self, primary_key):
 def on_reminder_save(mapper, connect, self):
     """Callback after insert table reminder."""
 
-    remind.apply_async(args=(self.id), eta=self.date)
+    remind.apply_async(args=(self.id,), eta=self.date)
 
 
 @flask_celery.task(

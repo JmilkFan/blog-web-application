@@ -2,7 +2,6 @@ import os
 
 from celery import Celery
 
-from jmilkfansblog.tasks import log
 from jmilkfansblog import create_app
 
 

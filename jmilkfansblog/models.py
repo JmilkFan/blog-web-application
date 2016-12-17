@@ -121,9 +121,8 @@ class Role(db.Model):
     name = db.Column(db.String(255), unique=True)
     description = db.Column(db.String(255))
 
-    def __init__(self, id, name):
-        self.id = id
-        self.name = name
+    def __init__(self):
+        self.id = str(uuid4())
 
     def __repr__(self):
         return "<Model Role `{}`>".format(self.name)
@@ -152,9 +151,8 @@ class Post(db.Model):
         secondary=posts_tags,
         backref=db.backref('posts', lazy='dynamic'))
     
-    def __init__(self, id, title):
-        self.id = id
-        self.title = title
+    def __init__(self):
+        self.id = str(uuid4())
 
     def __repr__(self):
         return "<Model Post `{}`>".format(self.title)
@@ -170,9 +168,8 @@ class Comment(db.Model):
     date = db.Column(db.DateTime())
     post_id = db.Column(db.String(45), db.ForeignKey('posts.id'))
 
-    def __init__(self, id, name):
-        self.id = id
-        self.name = name
+    def __init__(self):
+        self.id = str(uuid4())
 
     def __repr__(self):
         return '<Model Comment `{}`>'.format(self.name)
@@ -185,12 +182,11 @@ class Tag(db.Model):
     id = db.Column(db.String(45), primary_key=True)
     name = db.Column(db.String(255))
 
-    def __init__(self, id, name):
-        self.id = id
-        self.name = name
+    def __init__(self):
+        self.id = str(uuid4())
 
     def __repr__(self):
-        return "<Model Tag `{}`>".format(self.name)
+        return '<Model Tag `{}`>'.format(self.name)
 
 
 class BrowseVolume(db.Model):
@@ -200,9 +196,10 @@ class BrowseVolume(db.Model):
     id = db.Column(db.String(45), primary_key=True)
     home_view_total = db.Column(db.Integer)
 
-    def __init__(self, id):
-        self.id = id
+    def __init__(self):
+        self.id = str(uuid4())
         self.home_view_total = 0
+
 
     def __repr__(self):
         return '<Model BrowseVolume `{}`>'.format(self.home_view_total)
@@ -220,9 +217,8 @@ class Reminder(db.Model):
     email = db.Column(db.String(255))
     text = db.Column(db.Text())
 
-    def __init__(self, id, text):
-        self.id = id
-        self.email = text
+    def __init__(self):
+        self.id = str(uuid4())
 
     def __repr__(self):
         return '<Model Reminder `{}`>'.format(self.text[:20])
