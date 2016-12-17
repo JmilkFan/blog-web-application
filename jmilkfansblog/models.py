@@ -1,3 +1,5 @@
+import sys
+
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import BadSignature, SignatureExpired
 from uuid import uuid4
@@ -8,6 +10,15 @@ from flask.ext.principal import current_app
 
 from jmilkfansblog.extensions import bcrypt, cache
 
+
+# Fix the BUG:
+#    UnicodeEncodeError: 'ascii' codec can't encode characters in position
+# TS: Set the system encoding to utf-8(support chinese)
+# Q: Why need to reload the sys module?
+# A: System will be deleted the sys.setdefaultencoding after imported the site.py
+#    So, we have to reload the sys module and reset the default encoding again
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 # Create the db object
 # Init the db from jmilkfansblog/__init__py
@@ -161,6 +172,9 @@ class Post(db.Model):
         self.id = str(uuid4())
 
     def __repr__(self):
+        # FIXME(JmilkFan): UnicodeEncodeError:'ascii' codec can't encode characters
+        # title = self.title.decode('ascii')
+        # return "<Model Post `{}`>".format(title.encode('utf-8'))
         return "<Model Post `{}`>".format(self.title)
 
 

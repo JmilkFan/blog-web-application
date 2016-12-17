@@ -47,14 +47,14 @@ assets_env = Environment()
 # Define the set for js and css file.
 main_css = Bundle(
     'css/bootstrap.css',
+    'css/bootstrap-theme.css',
     filters='cssmin',
-    output='css/common.css')
+    output='assets/css/common.css')
 
 main_js = Bundle(
-    'js/jquery.js',
     'js/bootstrap.js',
     filters='jsmin',
-    output='js/common.js')
+    output='assets/js/common.js')
 
 #### Create the Flask-Login's instance
 login_manager = LoginManager()

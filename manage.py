@@ -3,9 +3,11 @@ import os
 from flask.ext.script import Manager, Server
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script.commands import ShowUrls, Clean
+from flask_assets import ManageAssets
 
 from jmilkfansblog import create_app
 from jmilkfansblog import models
+from jmilkfansblog.extensions import assets_env
 
 
 # Get the ENV from os_environ
@@ -28,6 +30,8 @@ manager.add_command("db", MigrateCommand)
 manager.add_command("show-urls", ShowUrls())
 # Clean alll the file of .pyc and .pyo
 manager.add_command("clean", Clean())
+# Pack the static file
+manager.add_command('assets', ManageAssets(assets_env))
 
 
 @manager.shell

@@ -90,14 +90,17 @@ class CKTextAreaWidget(widgets.TextArea):
     """CKeditor form for Flask-Admin."""
 
     def __call__(self, field, **kwargs):
+        """Define callable type(class)."""
+
+        # Add a new class property ckeditor: `<input class=ckedior ...>`
         kwargs.setdefault('class_', 'ckeditor')
         return super(CKTextAreaWidget, self).__call__(field, **kwargs)
 
 
 class CKTextAreaField(TextAreaField):
-    """Create a new Field type"""
+    """Create a new Field type."""
 
-    # Add a new parts for TextAreaField.
+    # Add a new widget `CKTextAreaField` inherit from TextAreaField.
     widget = CKTextAreaWidget()
 
 

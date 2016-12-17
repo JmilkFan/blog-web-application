@@ -143,3 +143,8 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 ============== 2016-12-17 =============<br>
 1. Fix some bug for Flask-Admin<br>
 2. Replace the property of Post Model: `users` to `user`<br>
+
+============== 2016-12-18 =============<br>
+1. Create a new manager command `assset`<br>
+2. Pack up the static file<br>
+3. Fix the bug for UnicodeEncodeError<br>

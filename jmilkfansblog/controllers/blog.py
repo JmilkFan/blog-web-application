@@ -175,8 +175,6 @@ def edit_post(id):
         return redirect(url_for('main.login'))
 
     # Only the post onwer can be edit this post.
-    import pdb
-    pdb.set_trace()
     if current_user != post.user:
         return redirect(url_for('blog.post', post_id=id))
 
