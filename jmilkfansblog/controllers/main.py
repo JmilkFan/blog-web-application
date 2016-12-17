@@ -115,8 +115,7 @@ def register():
 
     # Will be check the username whether exist.
     if form.validate_on_submit():
-        new_user = User(id=str(uuid4()),
-                        username=form.username.data,
+        new_user = User(username=form.username.data,
                         password=form.password.data)
 
         db.session.add(new_user)
@@ -158,7 +157,7 @@ def facebook_authorized(resp):
 
     user = User.query.filter_by(username=facebook_username).first()
     if user is None:
-        user = User(id=str(uuid4()), username=facebook_username, password='jmilkfan')
+        user = User(username=facebook_username, password='jmilkfan')
         db.session.add(user)
         db.session.commit()
 
@@ -194,7 +193,7 @@ def twitter_authorized(resp):
         username=resp['screen_name']).first()
 
     if not user:
-        user = User(id=str(uuid4()), username = resp['screen_name'], password='jmilkfan')
+        user = User(username = resp['screen_name'], password='jmilkfan')
         db.session.add(user)
         db.session.commit()
 

@@ -15,7 +15,7 @@ nested_tag_fields = {
 
 # String format output of post
 post_fields = {
-    'author': fields.String(attribute=lambda x: x.users.username),
+    'author': fields.String(attribute=lambda x: x.user.username),
     'title': fields.String(),
     'text': jf_fields.HTMLField(),
     'tags': fields.List(fields.Nested(nested_tag_fields)),
@@ -69,10 +69,11 @@ class PostApi(Resource):
             if not user:
                 abort(401)
 
-            new_post = Post(id=str(uuid4()), title=args['title'])
+            new_post = Post()
+            new_post.title = args['title']
             new_post.date = datetime.datetime.now()
             new_post.text = args['text']
-            new_post.users = user
+            new_post.user = user
 
             if args['tags']:
                 for item in args['tags']:
@@ -83,7 +84,8 @@ class PostApi(Resource):
                     # If the tag not exist, create the new one.
                     # Will be write into DB with session do.
                     else:
-                        new_tag = Tag(id=str(uuid4()), name=item)
+                        new_tag = Tag()
+                        new_tag.name = item
                         new_post.tags.append(new_tag)
 
         db.session.add(new_post)
@@ -105,7 +107,7 @@ class PostApi(Resource):
 
         if not user:
             abort(401)
-        if user != post.users:
+        if user != post.user:
             abort(403)
 
         if args['title']:
@@ -118,7 +120,8 @@ class PostApi(Resource):
                 if tag:
                     post.tags.append(tag)
                 else:
-                   new_tag = Tag(id=str(uuid4()), name=item)
+                   new_tag = Tag()
+                   new_tag.name = item
                    post.tags.append(new_tag)
 
         db.session.add(post)
@@ -138,7 +141,7 @@ class PostApi(Resource):
 
         args = parsers.post_delete_parser.parse_args(strict=True)
         user = User.verify_auth_token(args['token'])
-        if user != post.users:
+        if user != post.user:
             abort(403)
 
         # Will be delete relationship record with posts_tags too.

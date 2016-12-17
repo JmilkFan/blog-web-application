@@ -138,7 +138,8 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 1. Fix some bug<br>
 
 ============== 2016-12-16 =============<br>
-2. Fix some bug<br>
+1. Fix some bug<br>
 
 ============== 2016-12-17 =============<br>
-2. Fix some bug for Flask-Admin<br>
+1. Fix some bug for Flask-Admin<br>
+2. Replace the property of Post Model: `users` to `user`<br>

@@ -21,7 +21,7 @@ migrate = Migrate(app, models.db)
 
 # Create some new commands:
 # Start the flask web server
-manager.add_command("server", Server(host='192.168.1.222', port=8089))
+manager.add_command("server", Server(host='localhost', port=8089))
 # Manage database migrate
 manager.add_command("db", MigrateCommand)
 # Show all mapper of route url

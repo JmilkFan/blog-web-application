@@ -81,8 +81,8 @@ def post(post_id):
     # data object to form instance from user enter,
     # when the HTTP request is POST
     if form.validate_on_submit():
-        new_comment = Comment(id=str(uuid4()),
-                              name=form.name.data)
+        new_comment = Comment()
+        new_comment.name = form.name.data
         new_comment.text = form.text.data
         new_comment.date = datetime.now()
         new_comment.post_id = post_id
@@ -148,10 +148,11 @@ def new_post():
 
     # Will be execute when click the submit in the create a new post page.
     if form.validate_on_submit():
-        new_post = Post(id=str(uuid4()), title=form.title.data)
+        new_post = Post()
+        new_post.title = form.title.data
         new_post.text = form.text.data
         new_post.publish_date = datetime.now()
-        new_post.users = current_user
+        new_post.user = current_user
 
         db.session.add(new_post)
         db.session.commit()
@@ -163,7 +164,6 @@ def new_post():
 
 @blog_blueprint.route('/edit/<string:id>', methods=['GET', 'POST'])
 @login_required
-#@poster_permission.require(http_exception=403)
 @admin_permission.require(http_exception=403)
 def edit_post(id):
     """View function for edit_post."""
@@ -175,15 +175,17 @@ def edit_post(id):
         return redirect(url_for('main.login'))
 
     # Only the post onwer can be edit this post.
-    if current_user != post.users:
+    import pdb
+    pdb.set_trace()
+    if current_user != post.user:
         return redirect(url_for('blog.post', post_id=id))
 
     # Admin can be edit the post.
-    permission = Permission(UserNeed(post.users.id))
+    permission = Permission(UserNeed(post.user.id))
     if permission.can() or admin_permission.can():
         form = PostForm()
 
-        #if current_user != post.users:
+        #if current_user != post.user:
         #    abort(403)
 
         if form.validate_on_submit():

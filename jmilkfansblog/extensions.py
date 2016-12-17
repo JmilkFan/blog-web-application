@@ -109,7 +109,7 @@ def create_or_login(resp):
 
     user = User.query.filter_by(username=usernmae).first()
     if user is None:
-        user = User(id=str(uuid4()), username=username, password='jmilkfan')
+        user = User(username=username, password='jmilkfan')
         db.session.add(user)
         db.session.commit()
 

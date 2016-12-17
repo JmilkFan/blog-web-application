@@ -8,8 +8,8 @@
 
 <div class="row">
   <div class="col-lg-6">
-    <p>Written By <a href="{{ url_for('blog.user', username=post.users.username)
-      }}">{{ post.users.username }}</a> on {{ post.publish_date }}</p>
+    <p>Written By <a href="{{ url_for('blog.user', username=post.user.username)
+      }}">{{ post.user.username }}</a> on {{ post.publish_date }}</p>
     <p>{{ post.text | safe }}</p>
   </div>
   {% if current_user.is_authenticated %}
@@ -19,7 +19,7 @@
     </div>
   </div>
   {% endif %}
-  {% if post.users == current_user or admin_permission.can() %}
+  {% if post.user == current_user or admin_permission.can() %}
   <div class="column">
     <div class="col-lg-2">
       <a href="{{ url_for('blog.edit_post', id=post.id) }}" class="btn btn-primary">Edit</a>

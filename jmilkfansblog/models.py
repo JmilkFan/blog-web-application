@@ -27,25 +27,24 @@ class User(db.Model):
 
     # Set the name for table
     __tablename__ = 'users'
+
     id = db.Column(db.String(45), primary_key=True)
     username = db.Column(db.String(255))
     password = db.Column(db.String(255))
+
     # one to many: User ==> Post 
-    # Establish contact with Post's ForeignKey: user_id
-    # (FIXME): Relationship of User and Post is one to many,
-    #          So backref="user".
     posts = db.relationship(
         'Post',
-        backref='users',
-        lazy='dynamic')
+        back_populates='user')
 
+    # many to many: user <==> roles
     roles = db.relationship(
         'Role',
         secondary=users_roles,
         backref=db.backref('users', lazy='dynamic'))
 
-    def __init__(self, id, username, password):
-        self.id = id
+    def __init__(self, username, password):
+        self.id = str(uuid4())
         self.username = username
         self.password = self.set_password(password)
 
@@ -138,12 +137,19 @@ class Post(db.Model):
     publish_date = db.Column(db.DateTime)
     # Set the foreign key for Post
     user_id = db.Column(db.String(45), db.ForeignKey('users.id'))
+
+    # one to many: user <==> posts
+    user = db.relationship(
+        'User',
+        back_populates='posts')
+
     # one to many: Post ==> Comment
     # Establish contact with Comment's ForeignKey: post_id
     comments = db.relationship(
         'Comment',
         backref='posts',
         lazy='dynamic')
+
     # many to many: posts <==> tags
     # Association table: posts_tags
     tags = db.relationship(

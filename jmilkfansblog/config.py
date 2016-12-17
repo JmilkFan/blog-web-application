@@ -49,12 +49,12 @@ class DevConfig(Config):
     CELERY_RESULT_BACKEND = "amqp://guest:guest@localhost:5672//"
     CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
     # Timed Task configuation of celery task `weekly digest`
-    CELERYBEAT_SCHEDULE = {
-        'weekly-digest': {
-            # Setup the celery task.
-            'task': 'jmilkfansblog.tasks.digest',
-            # Setup the time span.
-            'schedule': crontab(day_of_week=6, hour='10')}}
+    # CELERYBEAT_SCHEDULE = {
+    #     'weekly-digest': {
+    #         # Setup the celery task.
+    #         'task': 'jmilkfansblog.tasks.digest',
+    #         # Setup the time span.
+    #         'schedule': crontab(day_of_week=6, hour='10')}}
 
     #### Flask-Mail's Config
     # FIXME(JmilkFan): Deploy the smtp server in local
