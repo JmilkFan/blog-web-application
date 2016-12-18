@@ -14,6 +14,7 @@ from flask_assets import Environment, Bundle
 from flask.ext.admin import Admin
 from flask_mail import Mail
 from flask_youku import Youku
+from flask_gzip import GZip
 
 
 #### Create the Flask-Bcrypt's instance
@@ -98,6 +99,9 @@ twitter = oauth.remote_app(
 
 #### Create the Flask-Youku's instance
 youku = Youku()
+
+#### Create the Flask-Gzip's instance
+flask_gzip = GZip()
 
 
 @openid.after_login

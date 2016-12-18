@@ -151,3 +151,4 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-12-19 =============<br>
 1. Implements Flask-Youku extension<br>
+2. Implements Flask-GZip extension<br>
