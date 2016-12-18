@@ -11,7 +11,7 @@ from jmilkfansblog.controllers.restful.posts import PostApi
 from jmilkfansblog.controllers.restful.auth import AuthApi
 from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, flask_celery
 from jmilkfansblog.extensions import restful_api, debug_toolbar, cache, flask_admin
-from jmilkfansblog.extensions import assets_env, main_js, main_css, mail
+from jmilkfansblog.extensions import assets_env, main_js, main_css, mail, youku
 from jmilkfansblog.tasks import on_reminder_save
 from jmilkfansblog.controllers.admin import CustomView, CustomModelView
 from jmilkfansblog.controllers.admin import PostView, CustomFileAdmin
@@ -93,6 +93,9 @@ def create_app(object_name):
 
     #### Init the Flask-Mail via app object
     mail.init_app(app)
+
+    #### Init the Flask-Youku via app object
+    youku.init_app(app)
 
     @identity_loaded.connect_via(app)
     def on_identity_loaded(sender, identity):

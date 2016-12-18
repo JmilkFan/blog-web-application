@@ -7,6 +7,10 @@
 <!-- The data object from view function: `home()` -->
 <div class="row">
   <div class="col-lg-9">
+
+    <!-- Flask-Youku setup the templates_golbal -->
+    {{ youku("XMTg1NTY2MTY1Ng==") }}
+
     <!-- Get Pagination object-->
     {% for post in posts.items %}
     <div class="row">

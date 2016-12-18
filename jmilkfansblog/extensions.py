@@ -13,6 +13,7 @@ from flask.ext.cache import Cache
 from flask_assets import Environment, Bundle
 from flask.ext.admin import Admin
 from flask_mail import Mail
+from flask_youku import Youku
 
 
 #### Create the Flask-Bcrypt's instance
@@ -94,6 +95,9 @@ twitter = oauth.remote_app(
     authorize_url='https://api.twitter.com/oauth/authenticate',
     consumer_key='<TWITTER_APP_ID>',
     consumer_secret='<TWITTER_APP_SECRET>')
+
+#### Create the Flask-Youku's instance
+youku = Youku()
 
 
 @openid.after_login
