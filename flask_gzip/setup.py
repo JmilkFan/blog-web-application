@@ -2,10 +2,10 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='Flask-Youku',
+    name='Flask-Gzip',
     version='0.1',
     license='MIT',
-    description='Flask extension to allow easy embedding of Youku videos',
+    description='Flask extension to condense your web responses.',
     author='JmilkFan(Fan Guiju)',
     author_email='fangui_ju@163.com',
     url='https://github.com/JmilkFan/JmilkFan-s-Blog',

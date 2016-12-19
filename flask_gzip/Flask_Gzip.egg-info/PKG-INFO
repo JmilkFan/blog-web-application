@@ -1,7 +1,7 @@
 Metadata-Version: 1.0
-Name: Flask-Youku
+Name: Flask-Gzip
 Version: 0.1
-Summary: Flask extension to allow easy embedding of Youku videos
+Summary: Flask extension to condense your web responses.
 Home-page: https://github.com/JmilkFan/JmilkFan-s-Blog
 Author: JmilkFan(Fan Guiju)
 Author-email: fangui_ju@163.com
