@@ -160,3 +160,4 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 1. Installed selenium<br>
 2. Installed coverage<br>
 3. Implements Unit test `TestURLs`<br>
+4. Fix some bug<br>
