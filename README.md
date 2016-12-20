@@ -155,3 +155,8 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-12-20 =============<br>
 1. Packup the extensions Flask-Youku and Flask-GZip<br>
+
+============== 2016-12-21 =============<br>
+1. Installed selenium<br>
+2. Installed coverage<br>
+3. Implements Unit test `TestURLs`<br>

@@ -30,6 +30,7 @@ class DevConfig(Config):
     """Development config class."""
 
     #### Flask-Assets's config
+    # Can not compress the CSS/JS on Dev environment.
     ASSETS_DEBUG = True
 
     #### Flask-Debug-Toolbar's config
@@ -62,3 +63,22 @@ class DevConfig(Config):
     MAIL_PORT = 25
     MAIL_USERNAME = '<username>'
     MAIL_PASSWORD = '<password>'
+
+
+class TestConfig(Config):
+
+    # Using the temp file to test.
+    # Can't effect the data of DevENV
+    db_file = tempfile.NamedTemporaryFile()
+    # Close the CSRF check for WTForm.
+    WTF_CSRF_ENABLED = False
+
+    DEBUG = True
+    DEBUG_TB_ENABLED = False
+
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:fanguiju@127.0.0.1:3306/myblog?charset=utf8'
+
+    CACHE_TYPE = 'null'
+
+    CELERY_RESULT_BACKEND = "amqp://guest:guest@localhost:5672//"
+    CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
