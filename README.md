@@ -164,3 +164,7 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-12-24 =============<br>
 1. Fix some bug for flask_youku<br>
+
+============== 2016-12-25 =============<br>
+1. Installed oslo_config<br>
+2. Using oslo_config to setup the config<br>

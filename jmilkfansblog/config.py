@@ -1,31 +1,81 @@
 import datetime
 import tempfile
+from os import path
+
+from oslo_config import cfg
 
 from celery.schedules import crontab
 
 
+jmilkfansblog_default_opts = [
+    cfg.BoolOpt('DEBUG',
+                default=True,
+                help="Close the debug."),
+
+    cfg.StrOpt('SECRET_KEY',
+               help="WTForm secret key."),
+
+    cfg.StrOpt('RECAPTCHA_PUBLIC_KEY',
+               help="Google reCaptcha public key."),
+
+    cfg.StrOpt('RECAPTCHA_PRIVATE_KEY',
+               help="Google reCaptche private key."),
+
+    cfg.StrOpt('CELERY_RESULT_BACKEND',
+               help='Celery Backend.'),
+
+    cfg.StrOpt('CELERY_BROKER_URL',
+               help='Celery Broker.'),
+
+    cfg.StrOpt('CACHE_TYPE',
+               default='null',
+               help='Flask-Cache.'),
+
+    cfg.BoolOpt('ASSETS_DEBUG',
+                default=True,
+                help='Flask-Assets.')]
+
+sqlalchemy_group = cfg.OptGroup(name='flask_sqlalchemy')
+
+sqlalchemy_uri_opt = cfg.StrOpt('SQLALCHEMY_DATABASE_URI',
+                                help='SQLAlchemy.')
+
+CONF = cfg.CONF
+CONF.register_opts(jmilkfansblog_default_opts)
+CONF.register_group(sqlalchemy_group)
+CONF.register_opt(sqlalchemy_uri_opt, sqlalchemy_group)
+
+CONFIG_FILE = path.join('etc', 'jmilkfansblog.conf')
+CONF(default_config_files=[CONFIG_FILE])
+
+
 class Config(object):
     """Base config class."""
+
     # WTForm secret key
-    SECRET_KEY = 'c8e6ff3e4687709ca10a1138a17cd397'
+    SECRET_KEY = CONF.SECRET_KEY
     # reCAPTCHA Public key and Private key
-    RECAPTCHA_PUBLIC_KEY = "6LdBbA0UAAAAAFfpWX5fubCe8wwMp4MrjOyNqFfO"
-    RECAPTCHA_PRIVATE_KEY = "6LdBbA0UAAAAABzQiANZIyCAjc4Rg6JiuQkWx6pr"
+    RECAPTCHA_PUBLIC_KEY = CONF.RECAPTCHA_PUBLIC_KEY
+    RECAPTCHA_PRIVATE_KEY = CONF.RECAPTCHA_PRIVATE_KEY
 
 
 class ProdConfig(Config):
     """Production config class."""
 
-    #### Setup Flask-Cache type config
-    # CACHE_TYPE = 'simple'
+    DEBUG = CONF.DEBUG
+    CACHE_TYPE = CONF.CACHE_TYPE
+    ASSETS_DEBUG = CONF.ASSETS_DEBUG
+    CELERY_RESULT_BACKEND = CONF.CELERY_RESULT_BACKEND
+    CELERY_BROKER_URL = CONF.CELERY_BROKER_URL
+    SQLALCHEMY_DATABASE_URI = CONF.flask_sqlalchemy.SQLALCHEMY_DATABASE_URI
 
     #### Setup the config for redis
-    CACHE_TYPE = 'redis'
-    CACHE_REDIS_HOST = 'localhost'
-    CACHE_REDIS_PORT = '6379'
+    # CACHE_TYPE = 'redis'
+    # CACHE_REDIS_HOST = 'localhost'
+    # CACHE_REDIS_PORT = '6379'
     # FIXME(JmilkFan): Choise the password of Redis
-    CACHE_REDIS_PASSWORD = 'password'
-    CACHE_REDIS_DB = '0'
+    # CACHE_REDIS_PASSWORD = 'password'
+    # CACHE_REDIS_DB = '0'
 
 
 class DevConfig(Config):
