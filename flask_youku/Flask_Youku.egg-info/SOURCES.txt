@@ -1,6 +1,0 @@
-setup.py
-Flask_Youku.egg-info/PKG-INFO
-Flask_Youku.egg-info/SOURCES.txt
-Flask_Youku.egg-info/dependency_links.txt
-Flask_Youku.egg-info/requires.txt
-Flask_Youku.egg-info/top_level.txt

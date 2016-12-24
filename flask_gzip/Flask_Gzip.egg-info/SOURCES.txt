@@ -1,6 +1,0 @@
-setup.py
-Flask_Gzip.egg-info/PKG-INFO
-Flask_Gzip.egg-info/SOURCES.txt
-Flask_Gzip.egg-info/dependency_links.txt
-Flask_Gzip.egg-info/requires.txt
-Flask_Gzip.egg-info/top_level.txt

@@ -10,5 +10,8 @@ setup(
     author_email='fangui_ju@163.com',
     url='https://github.com/JmilkFan/JmilkFan-s-Blog',
     install_requires=['Flask'],
-    packages=find_packages()
+    packages=find_packages('flask_youku'),
+    package_dir={'': 'flask_youku'},
+    package_data = {
+        '': ['*.html']}
 )

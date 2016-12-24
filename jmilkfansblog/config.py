@@ -1,4 +1,6 @@
 import datetime
+import tempfile
+
 from celery.schedules import crontab
 
 

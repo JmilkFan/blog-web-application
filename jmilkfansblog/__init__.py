@@ -83,7 +83,7 @@ def create_app(object_name):
             CustomModelView(model, db.session, category='Models'))
     # Register view function `PostView` into Flask-Admin
     flask_admin.add_view(
-        PostView(Post, db.session, category='PostManager'))
+        PostView(Post, db.session, name='PostManager'))
     # Register and define path of File System for Flask-Admin
     flask_admin.add_view(
         CustomFileAdmin(
