@@ -161,3 +161,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 2. Installed coverage<br>
 3. Implements Unit test `TestURLs`<br>
 4. Fix some bug<br>
+
+============== 2016-12-24 =============<br>
+1. Fix some bug for flask_youku<br>
