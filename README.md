@@ -167,5 +167,12 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 2. Installed oslo_config<br>
 3. Using oslo_config to setup the config<br>
 
+
+============== tag 0.0.1 Done to Python-Flask =============<br>
+
+
 ============== 2016-12-26 =============<br>
 1. Fix the bug for oslo_config<br>
+2. Implements setup.cfg and setup.py<br>
+3. Tag 0.0.1 Done to Python-Flask<br>
+4. Source archive v0.0.1<br>

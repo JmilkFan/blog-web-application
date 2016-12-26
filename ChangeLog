@@ -1,0 +1,89 @@
+CHANGES
+=======
+
+0.0.1
+-----
+
+* Fix the bug for oslo_config
+* Edit README
+* Using the oslo_config to setup the blog config
+* Edit the README
+* Fix some bug
+* Delete directory htmlcov
+* Fix some bug
+* Implements Unit test `TestURLs`
+* Fix some bug
+* Packup the extensions Flask-Youku and Flask-GZip
+* Implements Flask-GZip extension
+* Implements Extension of Flask-Youku
+* Create a new manager command `assets`
+* Replace property of Post Model `users` to `user`
+* Fix bug fot Flask-Admin
+* Fix some bug
+* Fix some bug
+* Fix some bug
+* Using Flask-Mail
+* Using Flask-Admin
+* Installed Flask-Assets
+* Using the Redis as backend-cache
+* Using Flask-DebugToolbar
+* Implements the weekly digest
+* Setup the timed task
+* Implements celery_runner(Celery worker)
+* Using the Celery
+* Fix some bug
+* Add table browse_volumes
+* Add database migrate version: `Init database`
+* Implements the restful api for posts and auth
+* Implememts restful api `GET` for post
+* Fix some bug
+* Fix some bug
+* Add the Script plug-in with duoshuo-share
+* Add the Script Plug-in duoshuo-comments
+* Implements Remember Me Optional Checkbox
+* Fix some bug for Flask-Principal
+* Fix some bug
+* Implements user login status and role permission
+* Implements the login mode of third parth
+* Fix the bug for login/register/new_post/edit_post
+* Fix some bug for login and register
+* Fix some bug
+* Fix the bug for controller: `blog.py`
+* Fix the bug for edit/new post
+* Edit the README.md
+* Implements new post and edit post
+* Use the reCAPTCHA into register
+* Implements the template `register.html`
+* Edit the README
+* Implements view functions login/logout/register
+* Implements view function for login/logout/register
+* Fix the bug for reCAPTCHA
+* Implements Login and Register Forms class
+* Implement the LoginForm and Installed Flask-Bcrypt
+* Use the Factory Method to create the app object
+* Create the Blueprint blog's templates directory
+* Reconstruction project code
+* Add the template: `page_not_found.html`
+* Add the <body> for post.html
+* Implements comment form for post.html
+* Fix the bug for views.py
+* Implements the Form class: `CommentForm`
+* Implements template for view fuunction: `home()`
+* Fix the bug from base.html
+* Implements the base template with Bootstrap
+* Create the View function for tables
+* Edit README.md
+* Use the Flask-Migrate
+* Implement models class Tag and Comment
+* Add table posts
+* Implement the constructor for class User
+* Edit the README
+* Create the database myblog and table users
+* Connect MySQL with SQLalchemy
+* Edit the README
+* User the Flask Script
+* Created the base application
+* Complete development environment configuration
+* Edit the README
+* first commit
+* first commit

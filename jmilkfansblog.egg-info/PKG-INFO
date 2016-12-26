@@ -1,0 +1,18 @@
+Metadata-Version: 1.1
+Name: jmilkfansblog
+Version: 0.0.1
+Summary: JmilkFan's blog with Python-Flask
+Home-page: UNKNOWN
+Author: JmilkFan(Fan Guiju)
+Author-email: fangui_ju@163.com
+License: UNKNOWN
+Description: False
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
