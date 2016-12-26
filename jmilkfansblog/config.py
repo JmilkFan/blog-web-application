@@ -46,7 +46,11 @@ CONF.register_group(sqlalchemy_group)
 CONF.register_opt(sqlalchemy_uri_opt, sqlalchemy_group)
 
 CONFIG_FILE = path.join('etc', 'jmilkfansblog.conf')
-CONF(default_config_files=[CONFIG_FILE])
+
+# Have to define the param `args(List)`, 
+# otherwise will be capture the CLI option when execute `python manage.py server`.
+# oslo_config: (args if args is not None else sys.argv[1:])
+CONF(args=[], default_config_files=[CONFIG_FILE])
 
 
 class Config(object):
