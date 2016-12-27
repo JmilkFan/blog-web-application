@@ -5,16 +5,16 @@ from flask.ext.login import current_user
 from flask.ext.principal import identity_loaded, UserNeed, RoleNeed
 from sqlalchemy import event
 
-from jmilkfansblog.models import db, User, Post, Role, Tag, BrowseVolume, Reminder
-from jmilkfansblog.controllers import blog, main
+from jmilkfansblog.db.sqlalchemy.models import db, User, Post, Role, Tag, BrowseVolume, Reminder
+from jmilkfansblog.controllers import blog
+from jmilkfansblog.controllers.account import main
 from jmilkfansblog.controllers.restful.posts import PostApi
 from jmilkfansblog.controllers.restful.auth import AuthApi
 from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, flask_celery
 from jmilkfansblog.extensions import restful_api, debug_toolbar, cache, flask_admin
 from jmilkfansblog.extensions import assets_env, main_js, main_css, mail, youku, flask_gzip
 from jmilkfansblog.tasks import on_reminder_save
-from jmilkfansblog.controllers.admin import CustomView, CustomModelView
-from jmilkfansblog.controllers.admin import PostView, CustomFileAdmin
+from jmilkfansblog.controllers import admin
 
 
 def create_app(object_name):
@@ -75,18 +75,18 @@ def create_app(object_name):
     #### Init the Flask-Admin via app object
     flask_admin.init_app(app)
     # Register view function `CustomView` into Flask-Admin
-    flask_admin.add_view(CustomView(name='Custom'))
+    flask_admin.add_view(admin.CustomView(name='Custom'))
     # Register view function `CustomModelView` into Flask-Admin
     models = [Role, Tag, Reminder, BrowseVolume]
     for model in models:
         flask_admin.add_view(
-            CustomModelView(model, db.session, category='Models'))
+            admin.CustomModelView(model, db.session, category='Models'))
     # Register view function `PostView` into Flask-Admin
     flask_admin.add_view(
-        PostView(Post, db.session, name='PostManager'))
+        admin.PostView(Post, db.session, name='PostManager'))
     # Register and define path of File System for Flask-Admin
     flask_admin.add_view(
-        CustomFileAdmin(
+        admin.CustomFileAdmin(
             os.path.join(os.path.dirname(__file__), 'static'),
             '/static',
             name='Static Files'))

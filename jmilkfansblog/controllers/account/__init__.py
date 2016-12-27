@@ -14,7 +14,7 @@ from jmilkfansblog.extensions import openid, facebook, twitter
 main_blueprint = Blueprint(
     'main',
     __name__,
-    template_folder=path.join(path.pardir, 'templates', 'main'))
+    template_folder=path.join(path.pardir, path.pardir, 'templates', 'main'))
 
 
 @main_blueprint.route('/')

@@ -6,7 +6,7 @@ from flask.ext.script.commands import ShowUrls, Clean
 from flask_assets import ManageAssets
 
 from jmilkfansblog import create_app
-from jmilkfansblog import models
+from jmilkfansblog.db.sqlalchemy import models
 from jmilkfansblog.extensions import assets_env
 
 

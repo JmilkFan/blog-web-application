@@ -17,7 +17,7 @@ blog_blueprint = Blueprint(
     'blog',
     __name__,
     # path.pardir ==> ../
-    template_folder=path.join(path.pardir, 'templates', 'blog'),
+    template_folder=path.join(path.pardir, path.pardir, 'templates', 'blog'),
     # Prefix of Route URL 
     url_prefix='/blog')
 

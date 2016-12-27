@@ -176,3 +176,9 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 2. Implements setup.cfg and setup.py<br>
 3. Tag 0.0.1 Done to Python-Flask<br>
 4. Source archive v0.0.1<br>
+
+============== 2016-12-27 =============<br>
+1. Installed Pecan<br>
+2. Implements Restful api `v1/users` via Pecan<br>
+3. Create the db directory<br>
+4. Create the api directory for Pecan RESTful API<br>
