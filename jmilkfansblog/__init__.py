@@ -7,7 +7,7 @@ from sqlalchemy import event
 
 from jmilkfansblog.db.sqlalchemy.models import db, User, Post, Role, Tag, BrowseVolume, Reminder
 from jmilkfansblog.controllers import blog
-from jmilkfansblog.controllers.account import main
+from jmilkfansblog.controllers import account
 from jmilkfansblog.controllers.restful.posts import PostApi
 from jmilkfansblog.controllers.restful.auth import AuthApi
 from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, flask_celery
@@ -123,6 +123,6 @@ def create_app(object_name):
     
     # Register the Blueprint into app object
     app.register_blueprint(blog.blog_blueprint)
-    app.register_blueprint(main.main_blueprint)
+    app.register_blueprint(account.main_blueprint)
 
     return app
