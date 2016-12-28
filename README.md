@@ -182,3 +182,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 2. Implements Restful api `v1/users` via Pecan<br>
 3. Create the db directory<br>
 4. Create the api directory for Pecan RESTful API<br>
+
+============== 2016-12-28 =============<br>
+1. Implements RESTful API `v1/posts` via Pecan<br>

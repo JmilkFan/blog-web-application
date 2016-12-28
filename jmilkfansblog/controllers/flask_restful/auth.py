@@ -3,8 +3,8 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import abort, current_app
 from flask.ext.restful import Resource
 
-from jmilkfansblog.controllers.restful import parsers
-from jmilkfansblog.models import User
+from jmilkfansblog.controllers.flask_restful import parsers
+from jmilkfansblog.db.sqlalchemy.models import User
 
 
 class AuthApi(Resource):

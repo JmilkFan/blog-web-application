@@ -4,8 +4,8 @@ from uuid import uuid4
 from flask.ext.restful import Resource, fields, marshal_with 
 from flask import abort
 from jmilkfansblog.models import db, User, Post, Tag
-from jmilkfansblog.controllers.restful import fields as jf_fields
-from jmilkfansblog.controllers.restful import parsers
+from jmilkfansblog.controllers.flask_restful import fields as jf_fields
+from jmilkfansblog.controllers.flask_restful import parsers
 
 
 # String format output of tag

@@ -14,4 +14,4 @@ class V1Controller(rest.RestController):
 
     @expose.expose(wtypes.text)
     def get(self):
-        return 'jmilkfansblog v1controller'
+        return 'jmilkfansblog v1 controller'

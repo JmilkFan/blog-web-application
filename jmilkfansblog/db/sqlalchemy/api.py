@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 import sqlalchemy.orm
 from sqlalchemy.orm import exc as sqlal_exc
 
-from jmilkfansblog.db.sqlalchemy import models as db_models
+from jmilkfansblog.db.sqlalchemy import models
 
 
 sqlalchemy_group = cfg.OptGroup(name='flask_sqlalchemy')
@@ -30,7 +30,7 @@ def get_engine():
         return _ENGINE
 
     _ENGINE = create_engine(CONF.flask_sqlalchemy.SQLALCHEMY_DATABASE_URI)
-    # db_models.Base.metadata.create_all(_ENGINE)
+    # models.Base.metadata.create_all(_ENGINE)
     return _ENGINE
 
 def get_session_maker(engine):
@@ -56,19 +56,20 @@ class Connection(object):
 
     def get_user(self, user_id):
         """Get a user via id."""
-        query = self.session.query(db_models.User).filter_by(id=user_id)
-
+        query = self.session.query(models.User).filter_by(id=user_id)
         try:
             user = query.one()
         except sqlal_exc.NoResultFound:
             raise 
-
         return user
 
     def list_users(self):
         """Get a list the users."""
-
-        query = self.session.query(db_models.User)
+        query = self.session.query(models.User)
         users = query.all()
-
         return users
+
+    def post_get_all(self):
+        """Get a list of posts."""
+        posts = self.session.query(models.Post).all()
+        return posts

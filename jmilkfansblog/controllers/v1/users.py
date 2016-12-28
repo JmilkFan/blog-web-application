@@ -20,34 +20,6 @@ class Users(wtypes.Base):
     users = [User]
 
 
-class UserController(rest.RestController):
-
-    def __init__(self, user_id):
-        self.user_id = str(user_id)
-
-    @expose.expose(User)
-    def get(self):
-        user_info = {
-            'id': self.user_id,
-            'username': 'JmilkFan',
-            'password': 'fanguiju2016'
-        }
-        return User(**user_info)
-
-    @expose.expose(User, body=User)
-    def put(self, user):
-        user_info = {
-            'id': self.user_id,
-            'username': user.username,
-            'password': user.password
-        }
-        return User(**user_info)
-
-    @expose.expose()
-    def delete(self):
-        print 'Delete user_id: %s' % self.user_id
-
-
 class UsersController(rest.RestController):
 
     @pecan.expose()

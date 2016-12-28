@@ -8,8 +8,8 @@ from sqlalchemy import event
 from jmilkfansblog.db.sqlalchemy.models import db, User, Post, Role, Tag, BrowseVolume, Reminder
 from jmilkfansblog.controllers import blog
 from jmilkfansblog.controllers import account
-from jmilkfansblog.controllers.restful.posts import PostApi
-from jmilkfansblog.controllers.restful.auth import AuthApi
+from jmilkfansblog.controllers.flask_restful.posts import PostApi
+from jmilkfansblog.controllers.flask_restful.auth import AuthApi
 from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, flask_celery
 from jmilkfansblog.extensions import restful_api, debug_toolbar, cache, flask_admin
 from jmilkfansblog.extensions import assets_env, main_js, main_css, mail, youku, flask_gzip
