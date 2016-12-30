@@ -1,52 +1,46 @@
-from os import path
+"""Implementation of SQLAlchemy backend."""
 
 from oslo_config import cfg
-
-from sqlalchemy import create_engine
-import sqlalchemy.orm
-from sqlalchemy.orm import exc as sqlal_exc
+from oslo_db.sqlalchemy import session as db_session
 
 from jmilkfansblog.db.sqlalchemy import models
 
-
-sqlalchemy_group = cfg.OptGroup(name='flask_sqlalchemy')
-sqlalchemy_uri_opt = cfg.StrOpt('SQLALCHEMY_DATABASE_URI',
-                                help='SQLAlchemy URI.')
-
 CONF = cfg.CONF
-CONF.register_group(sqlalchemy_group)
-CONF.register_opt(sqlalchemy_uri_opt, sqlalchemy_group)
+# Import the config option group `database` from jmilkfansblog.config
+CONF.import_group('database', 'jmilkfansblog.config')
 
-CONFIG_FILE = path.join('etc', 'jmilkfansblog.conf')
-CONF(args=[], default_config_files=[CONFIG_FILE])
+_FACADE = None
 
-_ENGINE = None
-_SESSION_MAKER = None
+
+def _create_facade_lazily():
+    global _FACADE
+    if _FACADE is None:
+        _FACADE = db_session.EngineFacade(
+            CONF.database.connection,
+            **dict(CONF.database))
+    return _FACADE
 
 
 def get_engine():
-    global _ENGINE
-    if _ENGINE is not None:
-        return _ENGINE
+    return _create_facade_lazily().get_engine()
 
-    _ENGINE = create_engine(CONF.flask_sqlalchemy.SQLALCHEMY_DATABASE_URI)
-    # models.Base.metadata.create_all(_ENGINE)
-    return _ENGINE
 
-def get_session_maker(engine):
-    global _SESSION_MAKER
-    if _SESSION_MAKER is not None:
-        return _SESSION_MAKER
+def get_session(**kwargs):
+    return _create_facade_lazily().get_session(**kwargs)
 
-    _SESSION_MAKER = sqlalchemy.orm.sessionmaker(bind=engine)
-    return _SESSION_MAKER
 
-def get_session():
-    engine = get_engine()
-    maker = get_session_maker(engine)
-    session = maker()
+def get_backend():
+    """Define the SQLAlchemy Backend Implements."""
 
-    return session
+    # return sys.modules[__name__]
+    #    This module is the Backend Implements.
+    #    Don't need to Create the class `SQLAlchemyClass`
+    #    and define the functions in it.
+    return Connection
+
+
+def dispose_engine():
+    get_engine().dispose()
 
 
 class Connection(object):

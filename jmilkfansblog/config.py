@@ -8,45 +8,60 @@ from celery.schedules import crontab
 
 
 jmilkfansblog_default_opts = [
-    cfg.BoolOpt('DEBUG',
+    cfg.BoolOpt('debug',
                 default=True,
                 help="Close the debug."),
 
-    cfg.StrOpt('SECRET_KEY',
-               help="WTForm secret key."),
-
-    cfg.StrOpt('RECAPTCHA_PUBLIC_KEY',
+    cfg.StrOpt('recaptcha_public_key',
                help="Google reCaptcha public key."),
 
-    cfg.StrOpt('RECAPTCHA_PRIVATE_KEY',
-               help="Google reCaptche private key."),
+    cfg.StrOpt('recaptcha_private_key',
+               help="Google reCaptche private key.")]
 
-    cfg.StrOpt('CELERY_RESULT_BACKEND',
-               help='Celery Backend.'),
+flask_wtform_group = cfg.OptGroup(name='flask_wtform')
+flask_wtform_secret_key_opt = cfg.StrOpt('secret_key',
+                                         help='Flask-WTForm.')
 
-    cfg.StrOpt('CELERY_BROKER_URL',
-               help='Celery Broker.'),
+flask_cache_group = cfg.OptGroup(name='flask_cache')
+flask_cache_type_opt = cfg.StrOpt('cache_type',
+                                  help='Flask-Cache.')
 
-    cfg.StrOpt('CACHE_TYPE',
-               default='null',
-               help='Flask-Cache.'),
+flask_assets_group = cfg.OptGroup(name='flask_assets')
+flask_assets_debug_opt = cfg.BoolOpt('assets_debug',
+                                     help='Flask-Assets.')
 
-    cfg.BoolOpt('ASSETS_DEBUG',
-                default=True,
-                help='Flask-Assets.')]
+celery_group = cfg.OptGroup(name='celery')
+celery_opts = [
+    cfg.StrOpt('celery_result_backend',
+               default='amqp://guest:guest@localhost:5672//',
+               help='Celery result backend.'),
+    cfg.StrOpt('celery_broker_url',
+               default='amqp://guest:guest@localhost:5672//',
+               help='Celery broker url.')]
 
-sqlalchemy_group = cfg.OptGroup(name='flask_sqlalchemy')
-
-sqlalchemy_uri_opt = cfg.StrOpt('SQLALCHEMY_DATABASE_URI',
-                                help='SQLAlchemy.')
+sqlalchemy_group = cfg.OptGroup(name='database')
+sqlalchemy_opt =  cfg.StrOpt('connection',
+                              help='SQLAlchemy.')
 
 CONF = cfg.CONF
 CONF.register_opts(jmilkfansblog_default_opts)
+
+CONF.register_group(flask_wtform_group)
+CONF.register_opt(flask_wtform_secret_key_opt, flask_wtform_group)
+
+CONF.register_group(flask_cache_group)
+CONF.register_opt(flask_cache_type_opt, flask_cache_group)
+
+CONF.register_group(flask_assets_group)
+CONF.register_opt(flask_assets_debug_opt, flask_assets_group)
+
+CONF.register_group(celery_group)
+CONF.register_opts(celery_opts, celery_group)
+
 CONF.register_group(sqlalchemy_group)
-CONF.register_opt(sqlalchemy_uri_opt, sqlalchemy_group)
+CONF.register_opt(sqlalchemy_opt, sqlalchemy_group)
 
 CONFIG_FILE = path.join('etc', 'jmilkfansblog.conf')
-
 # Have to define the param `args(List)`, 
 # otherwise will be capture the CLI option when execute `python manage.py server`.
 # oslo_config: (args if args is not None else sys.argv[1:])
@@ -57,21 +72,21 @@ class Config(object):
     """Base config class."""
 
     # WTForm secret key
-    SECRET_KEY = CONF.SECRET_KEY
+    SECRET_KEY = CONF.flask_wtform.secret_key
     # reCAPTCHA Public key and Private key
-    RECAPTCHA_PUBLIC_KEY = CONF.RECAPTCHA_PUBLIC_KEY
-    RECAPTCHA_PRIVATE_KEY = CONF.RECAPTCHA_PRIVATE_KEY
+    RECAPTCHA_PUBLIC_KEY = CONF.recaptcha_public_key
+    RECAPTCHA_PRIVATE_KEY = CONF.recaptcha_private_key
 
 
 class ProdConfig(Config):
     """Production config class."""
 
-    DEBUG = CONF.DEBUG
-    CACHE_TYPE = CONF.CACHE_TYPE
-    ASSETS_DEBUG = CONF.ASSETS_DEBUG
-    CELERY_RESULT_BACKEND = CONF.CELERY_RESULT_BACKEND
-    CELERY_BROKER_URL = CONF.CELERY_BROKER_URL
-    SQLALCHEMY_DATABASE_URI = CONF.flask_sqlalchemy.SQLALCHEMY_DATABASE_URI
+    DEBUG = CONF.debug
+    CACHE_TYPE = CONF.flask_cache.cache_type
+    ASSETS_DEBUG = CONF.flask_assets.assets_debug
+    CELERY_RESULT_BACKEND = CONF.celery.celery_result_backend
+    CELERY_BROKER_URL = CONF.celery.celery_broker_url
+    SQLALCHEMY_DATABASE_URI = CONF.database.connection
 
     #### Setup the config for redis
     # CACHE_TYPE = 'redis'

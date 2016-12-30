@@ -185,3 +185,7 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2016-12-28 =============<br>
 1. Implements RESTful API `v1/posts` via Pecan<br>
+
+============== 2016-12-30 =============<br>
+1. Installed oslo_db<br>
+2. Using oslo_db.sqlalchemy.session.EngineFacahe to create the session<br>
