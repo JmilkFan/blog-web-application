@@ -7,4 +7,4 @@ class DBHook(hooks.PecanHook):
 
     def before(self, state):
         """Excute the DBHook.before() before handle the restful request."""
-        state.request.db_conn = db_api.Connection()
+        state.request.db_conn = db_api.get_session()

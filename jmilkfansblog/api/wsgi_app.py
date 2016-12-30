@@ -18,7 +18,8 @@ def setup_app(config=None):
         config = get_pecan_config()
 
     # Setup the hooks for WSGI Application(Like Middleware in Paste).
-    app_hooks = [hooks.DBHook()]
+    #    EG. app_hooks = [hooks.DBHook()]
+    app_hooks = []
     # Setup the config for WSGI Application.
     app_conf = dict(config.app)
 

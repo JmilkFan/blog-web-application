@@ -6,6 +6,7 @@ from pecan import rest
 from wsme import types as wtypes
 
 from jmilkfansblog.api import expose
+from jmilkfansblog.db import api as db_api
 
 
 class User(wtypes.Base):
@@ -28,11 +29,10 @@ class UsersController(rest.RestController):
 
     @expose.expose(Users)
     def get(self):
-        # Get the db session(SQLAlchemy) from hooks `DBHook` before 
-        # handle the restful api request.
-        db_conn = request.db_conn
-        users = db_conn.list_users()
+
+        users = db_api.user_get_all()
         users_list = []
+
         for user in users:
             u = User()
             u.id = user.id

@@ -189,3 +189,4 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 ============== 2016-12-30 =============<br>
 1. Installed oslo_db<br>
 2. Using oslo_db.sqlalchemy.session.EngineFacahe to create the session<br>
+3. Using oslo_db.concurrency to wrapper the operation of database<br>

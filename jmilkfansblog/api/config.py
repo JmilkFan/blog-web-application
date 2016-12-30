@@ -8,7 +8,7 @@ app = {
     'root': 'jmilkfansblog.controllers.root.RootController',
     # Define the modules directory of pecan
     'modules': ['jmilkfansblog.api'],
-    'debug': True,
+    'debug': False
     # Setup the class list of hooks.
     # Don't need setup again, if setup on the setup_app() in wsgi_app.py
     # 'hooks': [hooks.DBHook()],

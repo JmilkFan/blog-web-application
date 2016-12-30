@@ -40,8 +40,11 @@ celery_opts = [
                help='Celery broker url.')]
 
 sqlalchemy_group = cfg.OptGroup(name='database')
-sqlalchemy_opt =  cfg.StrOpt('connection',
-                              help='SQLAlchemy.')
+sqlalchemy_opts =  [
+    cfg.StrOpt('connection',
+               help='SQLAlchemy.'),
+    cfg.StrOpt('backend',
+               help='Multi-Backend.')]
 
 CONF = cfg.CONF
 CONF.register_opts(jmilkfansblog_default_opts)
@@ -59,7 +62,7 @@ CONF.register_group(celery_group)
 CONF.register_opts(celery_opts, celery_group)
 
 CONF.register_group(sqlalchemy_group)
-CONF.register_opt(sqlalchemy_opt, sqlalchemy_group)
+CONF.register_opts(sqlalchemy_opts, sqlalchemy_group)
 
 CONFIG_FILE = path.join('etc', 'jmilkfansblog.conf')
 # Have to define the param `args(List)`, 
