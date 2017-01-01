@@ -30,8 +30,10 @@ class CustomModelView(ModelView):
         """Setup the access permission for CustomModelView."""
 
         # callable function `User.is_authenticated()`.
-        # FIXME(JMilkFan): Using function is_authenticated()
-        return current_user.is_authenticated() and\
+        # FIXME(JMilkFan): Using function is_authenticated(),
+        #                  Can return the value of current_user.is_authenticated() 
+        #                  when user was logged in.
+        return current_user.is_authenticated and\
             admin_permission.can()
 
 
@@ -60,5 +62,5 @@ class CustomFileAdmin(FileAdmin):
         """Setup the access permission for CustomFileAdmin."""
 
         # callable function `User.is_authenticated()`.
-        return current_user.is_authenticated() and\
+        return current_user.is_authenticated and\
             admin_permission.can()
