@@ -15,6 +15,8 @@ nested_tag_fields = {
 
 # String format output of post
 post_fields = {
+    # x == object of post
+    'id': fields.String(),
     'author': fields.String(attribute=lambda x: x.user.username),
     'title': fields.String(),
     'text': jf_fields.HTMLField(),
@@ -23,7 +25,7 @@ post_fields = {
 
 
 class PostApi(Resource):
-    """Restful API of Post."""
+    """Restful API of posts resource."""
 
     @marshal_with(post_fields)
     def get(self, post_id=None):

@@ -2,6 +2,13 @@ from HTMLParser import HTMLParser
 from flask.ext.restful import fields
 
 
+class HTMLField(fields.Raw):
+    """Define a new fields for filter the HTML tags string."""
+
+    def format(self, value):
+        return strip_tags(str(value))
+
+
 class HTMLStripper(HTMLParser):
     """HTML Parser of Stripper."""
 
@@ -14,13 +21,6 @@ class HTMLStripper(HTMLParser):
 
     def get_data(self):
         return ''.join(self.fed)
-
-
-class HTMLField(fields.Raw):
-    """Define a new fields for filter the HTML tags string."""
-
-    def format(self, value):
-        return strip_tags(str(value))
 
 
 def strip_tags(html):
