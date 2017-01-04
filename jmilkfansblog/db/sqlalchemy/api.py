@@ -49,3 +49,10 @@ def user_get_all():
     with session.begin():
         users = session.query(models.User).all()
     return users
+
+
+def post_get_all():
+    session = get_session()
+    with session.begin():
+        posts = session.query(models.Post).all()
+    return posts

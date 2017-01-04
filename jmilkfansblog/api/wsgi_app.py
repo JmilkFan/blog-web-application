@@ -31,3 +31,7 @@ def setup_app(config=None):
         **app_conf
     )
     return app
+
+
+def app_factory(global_config, **local_conf):
+    return setup_app()

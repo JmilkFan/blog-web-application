@@ -27,3 +27,7 @@ def dispose_engine():
 
 def user_get_all():
     return IMPL.user_get_all()
+
+
+def post_get_all():
+    return IMPL.post_get_all()

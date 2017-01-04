@@ -193,4 +193,7 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 
 ============== 2017-01-02 =============<br>
 1. Fix the bug for Flask-Admin<br>
-2. Return post_id when response the restful api `/posts` GET<br>
+2. Return post_id when response the flask_restful api `/posts` GET<br>
+
+============== 2017-01-04 =============<br>
+1. Implements the GET `v1/posts` via pecan RESTful<br>

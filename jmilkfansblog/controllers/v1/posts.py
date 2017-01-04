@@ -6,6 +6,7 @@ from wsme import types as wtypes
 
 from jmilkfansblog.api.expose import expose as wsexpose
 from jmilkfansblog.controllers.v1.views import posts as posts_views
+from jmilkfansblog.db import api as db_api
 
 
 class Post(wtypes.Base):
@@ -16,9 +17,19 @@ class Post(wtypes.Base):
     text = wtypes.text
     user_id = str
 
+    @classmethod
+    def sample(cls, post):
+        sample = cls(
+            id=post.id,
+            title=post.title,
+            text=post.text,
+            user_id=post.user_id)
+        return sample
+
 
 class Posts(wtypes.Base):
     """Response data validation for posts object"""
+
     posts = [Post]
 
 
@@ -36,19 +47,9 @@ class PostsController(rest.RestController):
     def get(self):
         """Get a list of the posts."""
 
-        db_conn = request.db_conn
-        posts = db_conn.post_get_all()
-        posts_list = []
-        for post in posts:
-            post_val = Post()
-            post_val.id = post.id
-            post_val.title = post.title
-            post_val.text = post.text
-            post_val.user_id = post.user_id
-            posts_list.append(post_val)
         # FIXME(JmilkFan): Support Chinese
-        return Posts(posts=posts_list)
-            
+        posts = db_api.post_get_all()
+        return Posts(posts=[Post.sample(post) for post in posts])
 
     @wsexpose()
     def get_one(self):

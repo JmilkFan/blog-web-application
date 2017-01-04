@@ -1,11 +1,28 @@
 """Root(`/`) controller Pecan RESTful API."""
 
-from pecan import rest
+import pecan
+from pecan import rest 
 from wsme import types as wtypes
 import wsmeext.pecan as wsme_pecan
 
-from jmilkfansblog.api import expose
-from jmilkfansblog.controllers.v1 import controller as v1_controller
+from jmilkfansblog.api.expose import expose as wsexpose
+from jmilkfansblog.controllers import v1 as v1_controller
+
+
+class Root(wtypes.Base):
+
+    name = wtypes.text
+    """The name of the API"""
+
+    description = wtypes.text
+    """Some information about this API"""
+
+    @staticmethod
+    def convert():
+        root = Root()
+        root.name = "JmilkFan's Blog API"
+        root.description = "JmilkFan's Blog with Python-Flask"
+        return root
 
 
 class RootController(rest.RestController):
@@ -16,10 +33,10 @@ class RootController(rest.RestController):
     _default_version = 'v1'
     """The default API version"""
 
-    v1 = v1_controller.V1Controller()
+    v1 = v1_controller.Controller()
 
     # Route Controller decorator `expose`.
-    @expose.expose(wtypes.text)
+    @wsexpose(Root)
     def get(self):
         """Processing the GET `/`."""
-        return "jmilkfansblog root controller."
+        return Root.convert()
