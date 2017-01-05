@@ -8,10 +8,6 @@ from celery.schedules import crontab
 
 
 jmilkfansblog_default_opts = [
-    cfg.BoolOpt('debug',
-                default=True,
-                help="Close the debug."),
-
     cfg.StrOpt('recaptcha_public_key',
                help="Google reCaptcha public key."),
 
@@ -20,31 +16,36 @@ jmilkfansblog_default_opts = [
 
 flask_wtform_group = cfg.OptGroup(name='flask_wtform')
 flask_wtform_secret_key_opt = cfg.StrOpt('secret_key',
-                                         help='Flask-WTForm.')
+                                         help="Flask-WTForm.")
+
+flask_debugtoolbar_group = cfg.OptGroup(name='flask_debugtoolbar')
+flask_debugtoolbar_opt = cfg.StrOpt('debug',
+                                    default=False,
+                                    help="Flask-DebugToolBar.")
 
 flask_cache_group = cfg.OptGroup(name='flask_cache')
 flask_cache_type_opt = cfg.StrOpt('cache_type',
-                                  help='Flask-Cache.')
+                                  help="Flask-Cache.")
 
 flask_assets_group = cfg.OptGroup(name='flask_assets')
 flask_assets_debug_opt = cfg.BoolOpt('assets_debug',
-                                     help='Flask-Assets.')
+                                     help="Flask-Assets.")
 
 celery_group = cfg.OptGroup(name='celery')
 celery_opts = [
     cfg.StrOpt('celery_result_backend',
                default='amqp://guest:guest@localhost:5672//',
-               help='Celery result backend.'),
+               help="Celery result backend."),
     cfg.StrOpt('celery_broker_url',
                default='amqp://guest:guest@localhost:5672//',
-               help='Celery broker url.')]
+               help="Celery broker url.")]
 
 sqlalchemy_group = cfg.OptGroup(name='database')
 sqlalchemy_opts =  [
     cfg.StrOpt('connection',
                help='SQLAlchemy.'),
     cfg.StrOpt('backend',
-               help='Multi-Backend.')]
+               help="Multi-Backend.")]
 
 CONF = cfg.CONF
 CONF.register_opts(jmilkfansblog_default_opts)

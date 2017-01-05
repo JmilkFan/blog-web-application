@@ -1,5 +1,8 @@
 import os
 
+from oslo_log import log as logging
+from oslo_config import cfg
+
 from flask import Flask, redirect, url_for
 from flask.ext.login import current_user
 from flask.ext.principal import identity_loaded, UserNeed, RoleNeed
@@ -15,10 +18,21 @@ from jmilkfansblog.extensions import restful_api, debug_toolbar, cache, flask_ad
 from jmilkfansblog.extensions import assets_env, main_js, main_css, mail, youku, flask_gzip
 from jmilkfansblog.tasks import on_reminder_save
 from jmilkfansblog.controllers import admin
+from jmilkfansblog.i18n import _LI, _LE
+
+
+LOG = logging.getLogger(__name__)
+CONF = cfg.CONF
+DOMAIN = "jmilkfansblog"
+
+logging.register_options(CONF)
+logging.setup(CONF, DOMAIN)
 
 
 def create_app(object_name):
     """Create the app instance via `Factory Method`"""
+
+    LOG.info(_LI("Create the flask application object %s"), object_name)
 
     app = Flask(__name__)
     # Set the config for app instance

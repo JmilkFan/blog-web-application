@@ -2,6 +2,8 @@ from uuid import uuid4
 from os import path
 from datetime import datetime
 
+from oslo_log import log as logging
+
 from flask import render_template, redirect, Blueprint, url_for, flash
 from flask import session, abort, request
 from flask.ext.login import login_required, current_user
@@ -12,6 +14,8 @@ from jmilkfansblog.models import db, User, Post, Tag, Comment, posts_tags
 from jmilkfansblog.forms import CommentForm, PostForm
 from jmilkfansblog.extensions import poster_permission, admin_permission, cache
 
+
+LOG = logging.getLogger(__name__)
 
 blog_blueprint = Blueprint(
     'blog',
@@ -75,6 +79,7 @@ def home(page=1):
 def post(post_id):
     """View function for post page"""
 
+    LOG.info("Access view function `post` and access URL `/post/%s`", post_id)
     # Form object: `Comment`
     form = CommentForm()
     # form.validate_on_submit() will be true and return the
