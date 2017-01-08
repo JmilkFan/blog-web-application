@@ -201,3 +201,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 ============== 2017-01-05 =============<br>
 1. Installed oslo_i18n<br>
 2. Try to use the oslo_log and oslo_config<br>
+
+============== 2017-01-08 =============<br>
+1. Fix some bug<br>

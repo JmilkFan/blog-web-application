@@ -25,6 +25,11 @@ LOG = logging.getLogger(__name__)
 CONF = cfg.CONF
 DOMAIN = "jmilkfansblog"
 
+# log_level_opts = [
+#     cfg.BoolOpt('debug',
+#                 default=True)]
+# CONF.register_opts(log_level_opts)
+
 logging.register_options(CONF)
 logging.setup(CONF, DOMAIN)
 
