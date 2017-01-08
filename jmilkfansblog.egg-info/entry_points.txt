@@ -1,3 +1,4 @@
 [console_scripts]
-
+jmilkfansblog-api = jmilkfansblog.cmd.api:main
+jmilkfansblog-manager = jmilkfansblog.cmd.manager:main
 

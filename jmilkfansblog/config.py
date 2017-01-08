@@ -8,6 +8,18 @@ from celery.schedules import crontab
 
 
 jmilkfansblog_default_opts = [
+    cfg.StrOpt('host',
+               default='localhost',
+               help="Server ipaddress of jmilkfansblog."),
+
+    cfg.IntOpt('server_port',
+               default=8089,
+               help="Server port of jmilkfansblog."),
+
+    cfg.IntOpt('api_port',
+               default=8080,
+               help="API port of jmilkfansblog."),
+
     cfg.StrOpt('recaptcha_public_key',
                help="Google reCaptcha public key."),
 

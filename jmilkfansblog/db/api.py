@@ -14,6 +14,9 @@ db_options.set_defaults(CONF)
 
 _BACKEND_MAPPING = {'sqlalchemy': 'jmilkfansblog.db.sqlalchemy.api'}
 
+
+
+
 # IMPL = db_api.DBAPI.from_config(CONF, backend_mapping=_BACKEND_MAPPING)
 # NOTE(Fan Guiju): CONF.database.connection == None
 IMPL = db_concurrency.TpoolDbapiWrapper(CONF,

@@ -1,5 +1,8 @@
 import os
 
+from oslo_config import cfg
+from oslo_log import log as logging
+
 from flask.ext.script import Manager, Server
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script.commands import ShowUrls, Clean
@@ -8,7 +11,13 @@ from flask_assets import ManageAssets
 from jmilkfansblog import create_app
 from jmilkfansblog.db.sqlalchemy import models
 from jmilkfansblog.extensions import assets_env
+from jmilkfansblog.i18n import _LI
+# Load the oslo_config object `CONF` from jmilkfansblog.config
+from jmilkfansblog import config
 
+
+CONF = cfg.CONF
+LOG = logging.getLogger(__name__)
 
 # Get the ENV from os_environ
 env = os.environ.get('BLOG_ENV', 'dev')
@@ -23,7 +32,7 @@ migrate = Migrate(app, models.db)
 
 # Create some new commands:
 # Start the flask web server
-manager.add_command("server", Server(host='localhost', port=8089))
+manager.add_command("server", Server(host=CONF.host, port=CONF.server_port))
 # Manage database migrate
 manager.add_command("db", MigrateCommand)
 # Show all mapper of route url
@@ -52,5 +61,6 @@ def make_shell_context():
                 Reminder=models.Reminder,
                 Server=Server)
 
-if __name__ == '__main__':
+def main():
+    LOG.info(_LI("Start the jmilkfansblog manager."))
     manager.run()
