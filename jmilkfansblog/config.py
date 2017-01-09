@@ -3,6 +3,7 @@ import tempfile
 from os import path
 
 from oslo_config import cfg
+from oslo_log import log as logging
 
 from celery.schedules import crontab
 
@@ -78,10 +79,15 @@ CONF.register_group(sqlalchemy_group)
 CONF.register_opts(sqlalchemy_opts, sqlalchemy_group)
 
 CONFIG_FILE = path.join('etc', 'jmilkfansblog.conf')
+
+
+LOG = logging.getLogger(__name__)
+DOMAIN = "jmilkfansblog"
 # Have to define the param `args(List)`, 
 # otherwise will be capture the CLI option when execute `python manage.py server`.
 # oslo_config: (args if args is not None else sys.argv[1:])
-CONF(args=[], default_config_files=[CONFIG_FILE])
+CONF(args=[], project=DOMAIN, default_config_files=[CONFIG_FILE])
+logging.setup(CONF, DOMAIN)
 
 
 class Config(object):

@@ -8,14 +8,12 @@ from oslo_db import api as db_api
 
 db_opts = []
 CONF = cfg.CONF
+# Load the config option from etc.jmilkfansblog
 CONF.register_opts(db_opts)
 
 db_options.set_defaults(CONF)
 
 _BACKEND_MAPPING = {'sqlalchemy': 'jmilkfansblog.db.sqlalchemy.api'}
-
-
-
 
 # IMPL = db_api.DBAPI.from_config(CONF, backend_mapping=_BACKEND_MAPPING)
 # NOTE(Fan Guiju): CONF.database.connection == None

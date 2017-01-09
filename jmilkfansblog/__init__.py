@@ -22,16 +22,8 @@ from jmilkfansblog.i18n import _LI, _LE
 
 
 LOG = logging.getLogger(__name__)
+
 CONF = cfg.CONF
-DOMAIN = "jmilkfansblog"
-
-# log_level_opts = [
-#     cfg.BoolOpt('debug',
-#                 default=True)]
-# CONF.register_opts(log_level_opts)
-
-logging.register_options(CONF)
-logging.setup(CONF, DOMAIN)
 
 
 def create_app(object_name):
@@ -42,7 +34,7 @@ def create_app(object_name):
     app = Flask(__name__)
     # Set the config for app instance
     app.config.from_object(object_name)
-    
+
     #### Init the Flask-SQLAlchemy via app boject
     # Will be load the SQLALCHEMY_DATABASE_URL from config.py to db object
     db.init_app(app)

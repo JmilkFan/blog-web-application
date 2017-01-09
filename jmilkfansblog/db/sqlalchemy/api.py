@@ -17,7 +17,8 @@ def _create_facade_lazily():
     if _FACADE is None:
         _FACADE = db_session.EngineFacade(
             # FIXME(Fan Guiju): Can't be use: CONF.database.connection
-            'mysql+pymysql://root:fanguiju@127.0.0.1:3306/myblog?charset=utf8',
+            # db.api ==> db.sqlalchemy.api
+            CONF.database.connection,
             **dict(CONF.database))
     return _FACADE
 

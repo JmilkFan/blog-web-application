@@ -205,3 +205,6 @@ CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
 ============== 2017-01-08 =============<br>
 1. Fix some bug<br>
 2. Implements console-script via setup.cfg<br>
+
+============== 2017-01-09 =============<br>
+1. Fix the bug for db.api.CONF<br>
