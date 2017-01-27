@@ -66,6 +66,9 @@ CONF.register_opts(jmilkfansblog_default_opts)
 CONF.register_group(flask_wtform_group)
 CONF.register_opt(flask_wtform_secret_key_opt, flask_wtform_group)
 
+CONF.register_group(flask_debugtoolbar_group)
+CONF.register_opt(flask_debugtoolbar_opt, flask_debugtoolbar_group)
+
 CONF.register_group(flask_cache_group)
 CONF.register_opt(flask_cache_type_opt, flask_cache_group)
 
@@ -87,7 +90,7 @@ DOMAIN = "jmilkfansblog"
 # otherwise will be capture the CLI option when execute `python manage.py server`.
 # oslo_config: (args if args is not None else sys.argv[1:])
 CONF(args=[], project=DOMAIN, default_config_files=[CONFIG_FILE])
-logging.setup(CONF, DOMAIN)
+#logging.setup(CONF, DOMAIN)
 
 
 class Config(object):
@@ -103,7 +106,7 @@ class Config(object):
 class ProdConfig(Config):
     """Production config class."""
 
-    DEBUG = CONF.debug
+    DEBUG = CONF.flask_debugtoolbar.debug
     CACHE_TYPE = CONF.flask_cache.cache_type
     ASSETS_DEBUG = CONF.flask_assets.assets_debug
     CELERY_RESULT_BACKEND = CONF.celery.celery_result_backend

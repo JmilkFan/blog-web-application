@@ -1,7 +1,6 @@
-# from pecan import hooks
-# 
-# from jmilkfansblog.db.sqlalchemy import api as db_api
-# 
+from pecan import hooks
+
+
 # class DBHook(hooks.PecanHook):
 #     """Create a db connection instance."""
 # 
