@@ -131,7 +131,7 @@ def create_app(object_name):
         if hasattr(current_user, 'roles'):
             for role in current_user.roles:
                 identity.provides.add(RoleNeed(role.name))
-    
+
     # Register the Blueprint into app object
     app.register_blueprint(blog.blog_blueprint)
     app.register_blueprint(account.main_blueprint)
