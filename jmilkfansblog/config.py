@@ -86,7 +86,7 @@ CONFIG_FILE = path.join('etc', 'jmilkfansblog.conf')
 
 LOG = logging.getLogger(__name__)
 DOMAIN = "jmilkfansblog"
-# Have to define the param `args(List)`, 
+# Have to define the param `args(List)`,
 # otherwise will be capture the CLI option when execute `python manage.py server`.
 # oslo_config: (args if args is not None else sys.argv[1:])
 CONF(args=[], project=DOMAIN, default_config_files=[CONFIG_FILE])
