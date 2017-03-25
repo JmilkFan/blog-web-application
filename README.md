@@ -1,6 +1,6 @@
 # JmilkFan's Blog: Blog system using Python Flask.
 
-CSDN Blog column: [[http://blog.csdn.net/column/details/13463.html| 用 Flask 来写个轻博客]]<br>
+CSDN Blog column: [用 Flask 来写个轻博客](http://blog.csdn.net/column/details/13463.html)<br>
 
 ## Installation
 
@@ -21,8 +21,10 @@ source blog_env/bin/activate
 pip install -r requirements.txt -e .
 ```
 
-
-
+## Issue
+1. ERROR: `Command "python setup.py egg_info" failed with error code 1`
+if you meet this error when you installing the dependency packet from requirements file.
+Plase check whether installed the MySQL, because the package PyMySQL will be depend on it.
 
 
 ## Change Log
