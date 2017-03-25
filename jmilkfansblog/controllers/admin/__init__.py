@@ -30,15 +30,19 @@ class CustomModelView(ModelView):
         """Setup the access permission for CustomModelView."""
 
         # callable function `User.is_authenticated()`.
-        # FIXME(JMilkFan): Using function is_authenticated(),
-        #                  Can return the value of current_user.is_authenticated() 
-        #                  when user was logged in.
+        # FIXME(JMilkFan):
+        #     Using function is_authenticated(),
+        #     Can return the value of current_user.is_authenticated()
+        #     when user was logged in.
         return current_user.is_authenticated and\
             admin_permission.can()
 
 
 class PostView(CustomModelView):
-    """View function of Flask-Admin for Post create/edit Page includedin Models page"""
+    """View function of Flask-Admin
+
+       The View func for Post create/edit Page includedin Models page
+    """
 
     # Using the CKTextAreaField to replace the Field name is `test`
     form_overrides = dict(text=CKTextAreaField)

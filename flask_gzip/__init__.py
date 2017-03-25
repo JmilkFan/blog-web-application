@@ -17,7 +17,7 @@ class GZip(object):
         # Check the Browser whether can be receive the gzip encoding.
         # and check the response whether successfully.
         encoding = request.headers.get('Accept-Encoding', '')
-        if 'gzip' not in encoding or not response.status_code in (200, 201):
+        if 'gzip' not in encoding or response.status_code not in (200, 201):
             return response
 
         # Response can't be direct passthrough.
@@ -26,10 +26,9 @@ class GZip(object):
         contents = BytesIO()
 
         # Compress the response in the memory.
-        with GzipFile(
-            mode='wb',
-            compresslevel=5,
-            fileobj=contents) as gzip_file:
+        with GzipFile(mode='wb',
+                      compresslevel=5,
+                      fileobj=contents) as gzip_file:
             gzip_file.write(response.get_data())
 
         response.set_data(bytes(contents.getvalue()))

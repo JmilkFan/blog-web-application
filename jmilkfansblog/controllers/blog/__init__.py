@@ -1,10 +1,9 @@
-from uuid import uuid4
 from os import path
 from datetime import datetime
 
 from oslo_log import log as logging
 
-from flask import render_template, redirect, Blueprint, url_for, flash
+from flask import render_template, redirect, Blueprint, url_for
 from flask import session, abort, request
 from flask.ext.login import login_required, current_user
 from flask.ext.principal import Permission, UserNeed
@@ -22,7 +21,7 @@ blog_blueprint = Blueprint(
     __name__,
     # path.pardir ==> ../
     template_folder=path.join(path.pardir, path.pardir, 'templates', 'blog'),
-    # Prefix of Route URL 
+    # Prefix of Route URL
     url_prefix='/blog')
 
 
@@ -188,7 +187,7 @@ def edit_post(id):
     if permission.can() or admin_permission.can():
         form = PostForm()
 
-        #if current_user != post.user:
+        # if current_user != post.user:
         #    abort(403)
 
         if form.validate_on_submit():

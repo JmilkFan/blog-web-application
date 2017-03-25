@@ -3,22 +3,26 @@ import os
 from oslo_log import log as logging
 from oslo_config import cfg
 
-from flask import Flask, redirect, url_for
+from flask import Flask
 from flask.ext.login import current_user
 from flask.ext.principal import identity_loaded, UserNeed, RoleNeed
 from sqlalchemy import event
 
-from jmilkfansblog.db.sqlalchemy.models import db, User, Post, Role, Tag, BrowseVolume, Reminder
+from jmilkfansblog.db.sqlalchemy.models import BrowseVolume, db, Post
+from jmilkfansblog.db.sqlalchemy.models import Reminder, Role, Tag
 from jmilkfansblog.controllers import blog
 from jmilkfansblog.controllers import account
 from jmilkfansblog.controllers.flask_restful.posts import PostApi
 from jmilkfansblog.controllers.flask_restful.auth import AuthApi
-from jmilkfansblog.extensions import bcrypt, openid, login_manager, principals, flask_celery
-from jmilkfansblog.extensions import restful_api, debug_toolbar, cache, flask_admin
-from jmilkfansblog.extensions import assets_env, main_js, main_css, mail, youku, flask_gzip
+from jmilkfansblog.extensions import bcrypt, openid, login_manager
+from jmilkfansblog.extensions import principals, flask_celery
+from jmilkfansblog.extensions import restful_api, debug_toolbar
+from jmilkfansblog.extensions import cache, flask_admin
+from jmilkfansblog.extensions import assets_env, main_js, main_css
+from jmilkfansblog.extensions import mail, youku
 from jmilkfansblog.tasks import on_reminder_save
 from jmilkfansblog.controllers import admin
-from jmilkfansblog.i18n import _LI, _LE
+from jmilkfansblog.i18n import _LI
 
 
 LOG = logging.getLogger(__name__)
@@ -39,7 +43,7 @@ def create_app(object_name):
     # Will be load the SQLALCHEMY_DATABASE_URL from config.py to db object
     db.init_app(app)
     # Using the SQLAlchemy's event
-    # Will be callback on_reminder_save when insert recond into table `reminder`.
+    # Will be callback on_reminder_save when insert into table `reminder`.
     event.listen(Reminder, 'after_insert', on_reminder_save)
 
     #### Init the Flask-Bcrypt via app object

@@ -3,7 +3,7 @@ from jmilkfansblog.api import hooks
 """Setup the Pecan application config."""
 
 app = {
-    # Define the controller path of pecan_root.py, 
+    # Define the controller path of pecan_root.py,
     # entry_point for application, analysis the URL `/`
     'root': 'jmilkfansblog.controllers.root.RootController',
 

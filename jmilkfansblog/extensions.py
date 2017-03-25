@@ -1,6 +1,4 @@
-from uuid import uuid4
-
-from flask import session
+from flask import session, flash, redirect, url_for
 from flask.ext.bcrypt import Bcrypt
 from flask.ext.openid import OpenID
 from flask_oauth import OAuth
@@ -110,12 +108,12 @@ def create_or_login(resp):
 
     from jmilkfansblog.models import db, User
 
-    usernmae = resp.fullname or resp.nickname or resp.email
+    username = resp.fullname or resp.nickname or resp.email
     if not username:
         flash('Invalid login. Please try again.', 'danger')
         return redirect(url_for('main.login'))
 
-    user = User.query.filter_by(username=usernmae).first()
+    user = User.query.filter_by(username=username).first()
     if user is None:
         user = User(username=username, password='jmilkfan')
         db.session.add(user)

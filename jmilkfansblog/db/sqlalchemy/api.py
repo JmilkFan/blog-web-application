@@ -1,4 +1,5 @@
 """Implementation of SQLAlchemy backend."""
+
 import sys
 
 from oslo_config import cfg

@@ -11,13 +11,13 @@ from sqlalchemy.ext import declarative
 
 from jmilkfansblog.extensions import bcrypt, cache
 
-
 # Fix the BUG:
 #    UnicodeEncodeError: 'ascii' codec can't encode characters in position
 # TS: Set the system encoding to utf-8(support chinese)
 # Q: Why need to reload the sys module?
-# A: System will be deleted the sys.setdefaultencoding after imported the site.py
-#    So, we have to reload the sys module and reset the default encoding again
+# A: System will be deleted the sys.setdefaultencoding after imported the
+#    site.py. So, we have to reload the sys module and reset the default
+#    encoding again
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
@@ -25,11 +25,13 @@ sys.setdefaultencoding("utf-8")
 # Init the db from jmilkfansblog/__init__py
 db = SQLAlchemy()
 
-posts_tags = db.Table('posts_tags',
+posts_tags = db.Table(
+    'posts_tags',
     db.Column('post_id', db.String(45), db.ForeignKey('posts.id')),
     db.Column('tag_id', db.String(45), db.ForeignKey('tags.id')))
 
-users_roles = db.Table('users_roles',
+users_roles = db.Table(
+    'users_roles',
     db.Column('user_id', db.String(45), db.ForeignKey('users.id')),
     db.Column('role_id', db.String(45), db.ForeignKey('roles.id')))
 
@@ -47,7 +49,7 @@ class User(db.Model):
     username = db.Column(db.String(255))
     password = db.Column(db.String(255))
 
-    # one to many: User ==> Post 
+    # one to many: User ==> Post
     posts = db.relationship(
         'Post',
         back_populates='user')
@@ -114,7 +116,7 @@ class User(db.Model):
         serializer = Serializer(
             current_app.config['SECRET_KEY'])
         try:
-            # serializer object already has tokens in itself and wait for 
+            # serializer object already has tokens in itself and wait for
             # compare with token from HTTP Request /api/posts Method `POST`.
             data = serializer.loads(token)
         except SignatureExpired:
@@ -171,12 +173,13 @@ class Post(db.Model):
         'Tag',
         secondary=posts_tags,
         backref=db.backref('posts', lazy='dynamic'))
-    
+
     def __init__(self):
         self.id = str(uuid4())
 
     def __repr__(self):
-        # FIXME(JmilkFan): UnicodeEncodeError:'ascii' codec can't encode characters
+        # FIXME(JmilkFan): UnicodeEncodeError:'ascii' codec can't encode
+        #                  characters
         # title = self.title.decode('ascii')
         # return "<Model Post `{}`>".format(title.encode('utf-8'))
         return "<Model Post `{}`>".format(self.title)
@@ -223,7 +226,6 @@ class BrowseVolume(db.Model):
     def __init__(self):
         self.id = str(uuid4())
         self.home_view_total = 0
-
 
     def __repr__(self):
         return '<Model BrowseVolume `{}`>'.format(self.home_view_total)

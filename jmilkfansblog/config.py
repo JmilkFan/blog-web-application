@@ -1,11 +1,8 @@
-import datetime
 import tempfile
 from os import path
 
 from oslo_config import cfg
 from oslo_log import log as logging
-
-from celery.schedules import crontab
 
 
 jmilkfansblog_default_opts = [
@@ -54,7 +51,7 @@ celery_opts = [
                help="Celery broker url.")]
 
 sqlalchemy_group = cfg.OptGroup(name='database')
-sqlalchemy_opts =  [
+sqlalchemy_opts = [
     cfg.StrOpt('connection',
                help='SQLAlchemy.'),
     cfg.StrOpt('backend',
@@ -86,11 +83,11 @@ CONFIG_FILE = path.join('etc', 'jmilkfansblog.conf')
 
 LOG = logging.getLogger(__name__)
 DOMAIN = "jmilkfansblog"
-# Have to define the param `args(List)`,
-# otherwise will be capture the CLI option when execute `python manage.py server`.
+# Have to define the param `args(List)`, otherwise will be capture the CLI
+# option when execute `python manage.py server`.
 # oslo_config: (args if args is not None else sys.argv[1:])
 CONF(args=[], project=DOMAIN, default_config_files=[CONFIG_FILE])
-#logging.setup(CONF, DOMAIN)
+# logging.setup(CONF, DOMAIN)
 
 
 class Config(object):
@@ -137,7 +134,8 @@ class DevConfig(Config):
     DEBUG_TB_PROFILER_ENABLED = True
 
     #### Flask-SQLAlchemy's config MySQL connection
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:fanguiju@127.0.0.1:3306/myblog?charset=utf8'
+    SQLALCHEMY_DATABASE_URI = ('mysql+pymysql://root:fanguiju@127.0.0.1:3306'
+                               '/myblog?charset=utf8')
 
     #### Flask-Cache's config
     CACHE_TYPE = 'null'
@@ -172,7 +170,8 @@ class TestConfig(Config):
     DEBUG = True
     DEBUG_TB_ENABLED = False
 
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:fanguiju@127.0.0.1:3306/myblog?charset=utf8'
+    SQLALCHEMY_DATABASE_URI = ('mysql+pymysql://root:fanguiju@127.0.0.1:3306/'
+                               'myblog?charset=utf8')
 
     CACHE_TYPE = 'null'
 

@@ -1,4 +1,3 @@
-from os import path
 from wsgiref import simple_server
 
 from oslo_config import cfg

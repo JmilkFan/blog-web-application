@@ -1,9 +1,10 @@
 from os import path
-from uuid import uuid4
 
-from flask import flash, url_for, redirect, render_template, Blueprint, request, session
+from flask import flash, url_for, redirect, render_template
+from flask import Blueprint, request, session
 from flask.ext.login import login_user, logout_user
-from flask.ext.principal import Identity, AnonymousIdentity, identity_changed, current_app
+from flask.ext.principal import Identity, AnonymousIdentity
+from flash.ext.principal import identity_changed, current_app
 
 from jmilkfansblog.forms import LoginForm, RegisterForm, OpenIDForm
 from jmilkfansblog.models import db, User
@@ -27,7 +28,7 @@ def index():
 @openid.loginhandler
 def login():
     """View function for login.
-       
+
        Flask-OpenID will be receive the Authentication-information
        from relay party.
     """
@@ -58,8 +59,8 @@ def login():
 
         user = User.query.filter_by(username=form.username.data).one()
 
-        # Using the Flask-Login to processing and check the login status for user
-        # Remember the user's login status. 
+        # Using the Flask-Login to processing and check the login status for
+        # user. Remember the user's login status.
         login_user(user, remember=form.remember.data)
 
         identity_changed.send(
@@ -104,7 +105,7 @@ def register():
     # Send the request for login to relay party(URL).
     if openid_form.validate_on_submit():
         return openid.try_login(
-            openid_from.openid_url.data,
+            openid_form.openid_url.data,
             ask_for=['nickname', 'email'],
             ask_for_optional=['fullname'])
 
@@ -164,9 +165,10 @@ def facebook_authorized(resp):
     flash('You have been logged in.', category='success')
 
     return redirect(url_for('blog.home'))
-    # FIXME(Jmilk Fan): Use the request.args.get('next') == 'http://localhost:8089/blog/'
-    #return redirect(
-    #    request.args.get('next') or url_for('blog.home'))
+    # FIXME(Jmilk Fan):
+    #     Use the request.args.get('next') == 'http://localhost:8089/blog/'
+    # return redirect(
+    #     request.args.get('next') or url_for('blog.home'))
 
 
 @main_blueprint.route('/twitter-login')
@@ -193,10 +195,9 @@ def twitter_authorized(resp):
         username=resp['screen_name']).first()
 
     if not user:
-        user = User(username = resp['screen_name'], password='jmilkfan')
+        user = User(username=resp['screen_name'], password='jmilkfan')
         db.session.add(user)
         db.session.commit()
-
 
     flash("You have been logged in.", category="success")
     return redirect(

@@ -1,7 +1,4 @@
-from uuid import uuid4
-
 import pecan
-from pecan import request
 from pecan import rest
 from wsme import types as wtypes
 
@@ -25,7 +22,7 @@ class UsersController(rest.RestController):
 
     @pecan.expose()
     def _lookup(self, user_id, *remainder):
-        return UserController(user_id), remainder
+        return UsersController(user_id), remainder
 
     @expose.expose(Users)
     def get(self):

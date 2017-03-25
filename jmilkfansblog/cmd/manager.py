@@ -61,6 +61,7 @@ def make_shell_context():
                 Reminder=models.Reminder,
                 Server=Server)
 
+
 def main():
     LOG.info(_LI("Start the jmilkfansblog manager."))
     manager.run()

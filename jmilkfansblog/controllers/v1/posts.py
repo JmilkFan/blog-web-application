@@ -1,6 +1,3 @@
-from uuid import uuid4
-
-from pecan import request, Response
 from pecan import rest
 from wsme import types as wtypes
 

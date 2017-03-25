@@ -1,9 +1,7 @@
 """Root(`/`) controller Pecan RESTful API."""
 
-import pecan
-from pecan import rest 
+from pecan import rest
 from wsme import types as wtypes
-import wsmeext.pecan as wsme_pecan
 
 from jmilkfansblog.api.expose import expose as wsexpose
 from jmilkfansblog.controllers import v1 as v1_controller

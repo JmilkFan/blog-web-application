@@ -1,5 +1,7 @@
 import unittest
 
+from jmilkfansblog.controllers import admin
+from jmilkfansblog.controllers import rest_api
 from jmilkfansblog import create_app
 from jmilkfansblog.models import db
 
@@ -8,7 +10,8 @@ class TestURLs(unittest.TestCase):
     """Unit test for route functions."""
 
     def setUp(self):
-        # Destroy the Flask-Admin and Flask-Result object after delete app object
+        # Destroy the Flask-Admin and Flask-Result object after delete app
+        # object
         admin._views = []
         rest_api.resource = []
 

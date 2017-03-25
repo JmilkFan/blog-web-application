@@ -1,7 +1,6 @@
 import pecan
 
 from jmilkfansblog.api import config as api_config
-from jmilkfansblog.api import hooks
 
 
 def get_pecan_config():

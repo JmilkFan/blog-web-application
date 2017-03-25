@@ -1,17 +1,17 @@
 from flask import Blueprint, Markup
-from flask import flash, redirect, url_for, session, render_template
+from flask import render_template
 
 
 class Youku(object):
     """Flask-Youku extents."""
 
     def __init__(self, app=None, **kwargs):
-        """Init Flask-Youku's instance via app object"""        
+        """Init Flask-Youku's instance via app object"""
         if app:
             self.init_app(app)
 
     def init_app(self, app):
-        """Init Flask-Youku's instance via app object"""        
+        """Init Flask-Youku's instance via app object"""
 
         self.register_blueprint(app)
         # Create the Jinja function `youku`
