@@ -59,7 +59,7 @@ oslo.serialization==2.15.0
 oslo.utils==3.21.0
 pbr==1.10.0
 pecan==1.2.1
-# pkg_resources==0.0.0
+pkg_resources==0.0.0
 positional==1.1.1
 py==1.4.32
 pycparser==2.17

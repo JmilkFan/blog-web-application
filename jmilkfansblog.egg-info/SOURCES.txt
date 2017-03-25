@@ -1,4 +1,3 @@
-.coverage
 AUTHORS
 ChangeLog
 LICENSE
@@ -20,7 +19,6 @@ jmilkfansblog/config.py
 jmilkfansblog/extensions.py
 jmilkfansblog/forms.py
 jmilkfansblog/i18n.py
-jmilkfansblog/models.py
 jmilkfansblog/tasks.py
 jmilkfansblog.egg-info/PKG-INFO
 jmilkfansblog.egg-info/SOURCES.txt

@@ -12,7 +12,7 @@ from wtforms import (
 )
 from wtforms.validators import DataRequired, Length, EqualTo, URL
 
-from jmilkfansblog.models import User
+from jmilkfansblog.db.sqlalchemy.models import User
 
 
 class CommentForm(Form):

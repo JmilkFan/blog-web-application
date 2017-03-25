@@ -4,10 +4,10 @@ from flask import flash, url_for, redirect, render_template
 from flask import Blueprint, request, session
 from flask.ext.login import login_user, logout_user
 from flask.ext.principal import Identity, AnonymousIdentity
-from flash.ext.principal import identity_changed, current_app
+from flask.ext.principal import identity_changed, current_app
 
 from jmilkfansblog.forms import LoginForm, RegisterForm, OpenIDForm
-from jmilkfansblog.models import db, User
+from jmilkfansblog.db.sqlalchemy.models import db, User
 from jmilkfansblog.extensions import openid, facebook, twitter
 
 

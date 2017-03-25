@@ -9,7 +9,8 @@ from flask.ext.login import login_required, current_user
 from flask.ext.principal import Permission, UserNeed
 from sqlalchemy import func
 
-from jmilkfansblog.models import db, User, Post, Tag, Comment, posts_tags
+from jmilkfansblog.db.sqlalchemy.models import db, User, Post, Tag
+from jmilkfansblog.db.sqlalchemy.models import Comment, posts_tags
 from jmilkfansblog.forms import CommentForm, PostForm
 from jmilkfansblog.extensions import poster_permission, admin_permission, cache
 

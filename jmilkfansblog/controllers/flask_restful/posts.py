@@ -2,7 +2,7 @@ import datetime
 
 from flask.ext.restful import Resource, fields, marshal_with
 from flask import abort
-from jmilkfansblog.models import db, User, Post, Tag
+from jmilkfansblog.db.sqlalchemy.models import db, User, Post, Tag
 from jmilkfansblog.controllers.flask_restful import fields as jf_fields
 from jmilkfansblog.controllers.flask_restful import parsers
 

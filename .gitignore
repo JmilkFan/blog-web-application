@@ -2,3 +2,4 @@ blog_env/
 *.pyc
 .ropeproject/
 .eggs/
+.coverage

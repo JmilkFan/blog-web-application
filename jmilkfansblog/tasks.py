@@ -6,7 +6,7 @@ from flask import render_template
 from flask_mail import Message
 
 from jmilkfansblog.extensions import flask_celery, mail
-from jmilkfansblog.models import Post, Reminber
+from jmilkfansblog.db.sqlalchemy.models import Post, Reminder
 
 
 @flask_celery.task(
@@ -21,13 +21,13 @@ def remind(self, primary_key):
 
     # Using the primary_key to get reminder object.
     # Ensure down to date from table of reminders.
-    reminber = Reminber.query.get(primary_key)
+    reminder = Reminder.query.get(primary_key)
 
-    msg = MIMEText(reminber.text)
+    msg = MIMEText(reminder.text)
     msg = Message('fangui_ju@163.com',
                   sender="fangui_ju@163.com",
-                  recipients=[reminber.email])
-    msg.body = reminber.text
+                  recipients=[reminder.email])
+    msg.body = reminder.text
 
     mail.send(msg)
 
