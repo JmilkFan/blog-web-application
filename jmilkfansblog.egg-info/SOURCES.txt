@@ -5,7 +5,6 @@ LICENSE
 README.md
 celery_runner.py
 fake_data.py
-manage.py
 requirements.txt
 setup.cfg
 setup.py

@@ -23,9 +23,10 @@ def make_celery(app):
         abstract = True
 
         def __call__(self, *args, **kwargs):
-            """Will be execute when create the instance object of ContextTesk."""
+            """Will be execute when create the instance object of ContextTesk.
+            """
 
-            # Will context(Flask's Extends) of app object(Producer Sit) 
+            # Will context(Flask's Extends) of app object(Producer Sit)
             # be included in celery object(Consumer Site).
             with app.app_context():
                 return TaskBase.__call__(self, *args, **kwargs)

@@ -1,7 +1,31 @@
-# JmilkFan's Blog with Python-Flask
+# JmilkFan's Blog: Blog system using Python Flask.
 
-CSDN Blog column: JmilkFan http://blog.csdn.net/column/details/13463.html<br>
+CSDN Blog column: [[http://blog.csdn.net/column/details/13463.html| 用 Flask 来写个轻博客]]<br>
 
+## Installation
+
+- **Step 1**: clone the source code from GitHub
+```
+git clone https://github.com/JmilkFan/JmilkFan-s-Blog.git
+```
+
+- **Step 2**: building and using virtual environment via tools of `virtualenv`
+```
+virtualenv blog_env
+
+source blog_env/bin/activate
+```
+
+- **Step 3**: Install the requirements package
+```
+pip install -r requirements.txt -e .
+```
+
+
+
+
+
+## Change Log
 ============== 2016-11-13 =============<br>
 1. First commit <br>
 2. Completed development environment configuration<br>
