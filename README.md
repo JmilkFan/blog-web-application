@@ -33,7 +33,7 @@ mysql -uroot -pfanguiju -e "GRANT ALL ON egis.* TO 'user'@'localhost' IDENTIFIED
 mysql -uroot -pfanguiju -e "GRANT ALL ON egis.* TO 'user'@'%' IDENTIFIED BY 'fanguiju';"
 ```
 
-- **Step 2**: Setup the Configuration.
+- **Step 2**: Setup the Configuration.<br>
 Edit the config option `connection` for etc file `etc/jmilkfansblog.conf` e.g.
 ```
 connection = 'mysql+pymysql://root:fanguiju@127.0.0.1:3306/myblog?charset=utf8'
@@ -61,9 +61,9 @@ jmilkfansblog-manager server
 jmilkfansblog-api
 ```
 
-- **Step 6**: Login the jmilkfansblog
+- **Step 6**: Register the account(Have to access the google reCAPTCHA).
 ```
-http://127.0.0.1:8088
+http://127.0.0.1:8088/register
 ```
 
 ## Issue
