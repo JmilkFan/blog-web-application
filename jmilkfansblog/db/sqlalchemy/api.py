@@ -17,8 +17,6 @@ def _create_facade_lazily():
     global _FACADE
     if _FACADE is None:
         _FACADE = db_session.EngineFacade(
-            # FIXME(Fan Guiju): Can't be use: CONF.database.connection
-            # db.api ==> db.sqlalchemy.api
             CONF.database.connection,
             **dict(CONF.database))
     return _FACADE

@@ -27,13 +27,11 @@ from jmilkfansblog.i18n import _LI
 
 LOG = logging.getLogger(__name__)
 
-CONF = cfg.CONF
-
 
 def create_app(object_name):
     """Create the app instance via `Factory Method`"""
 
-    LOG.info(_LI("Create the flask application object %s"), object_name)
+    LOG.info(_LI("Create the flask application object via %s"), object_name)
 
     app = Flask(__name__)
     # Set the config for app instance

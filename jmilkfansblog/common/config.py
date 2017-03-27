@@ -58,6 +58,10 @@ sqlalchemy_opts = [
                help="Multi-Backend.")]
 
 CONF = cfg.CONF
+DOMAIN = 'jmilkfansblog'
+logging.register_options(CONF)
+logging.setup(CONF, DOMAIN)
+
 CONF.register_opts(jmilkfansblog_default_opts)
 
 CONF.register_group(flask_wtform_group)
@@ -81,13 +85,10 @@ CONF.register_opts(sqlalchemy_opts, sqlalchemy_group)
 CONFIG_FILE = path.join('etc', 'jmilkfansblog.conf')
 
 
-LOG = logging.getLogger(__name__)
-DOMAIN = "jmilkfansblog"
 # Have to define the param `args(List)`, otherwise will be capture the CLI
 # option when execute `python manage.py server`.
 # oslo_config: (args if args is not None else sys.argv[1:])
 CONF(args=[], project=DOMAIN, default_config_files=[CONFIG_FILE])
-# logging.setup(CONF, DOMAIN)
 
 
 class Config(object):

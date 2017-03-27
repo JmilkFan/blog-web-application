@@ -12,8 +12,7 @@ from jmilkfansblog import create_app
 from jmilkfansblog.db.sqlalchemy import models
 from jmilkfansblog.extensions import assets_env
 from jmilkfansblog.i18n import _LI
-# Load the oslo_config object `CONF` from jmilkfansblog.config
-from jmilkfansblog import config
+from jmilkfansblog.common import config
 
 
 CONF = cfg.CONF
