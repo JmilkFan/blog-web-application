@@ -279,3 +279,6 @@ Plase check whether installed the MySQL, because the package PyMySQL will be dep
 
 ============== 2017-01-09 =============<br>
 1. Fix the bug for db.api.CONF<br>
+
+============== 2017-03-31 =============<br>
+1. Test the oslo_config

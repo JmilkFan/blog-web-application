@@ -26,7 +26,7 @@ from jmilkfansblog.i18n import _LI
 
 
 LOG = logging.getLogger(__name__)
-
+CONF = cfg.CONF
 
 def create_app(object_name):
     """Create the app instance via `Factory Method`"""
@@ -105,7 +105,7 @@ def create_app(object_name):
             name='Static Files'))
 
     #### Init the Flask-Mail via app object
-    mail.init_app(app)
+    # mail.init_app(app)
 
     #### Init the Flask-Youku via app object
     youku.init_app(app)

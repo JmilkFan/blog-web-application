@@ -23,6 +23,7 @@ env = os.environ.get('BLOG_ENV', 'dev')
 # Create thr app instance via Factory Method
 app = create_app('jmilkfansblog.config.%sConfig' % env.capitalize())
 
+
 # Init manager object via app object
 manager = Manager(app)
 
@@ -62,5 +63,5 @@ def make_shell_context():
 
 
 def main():
-    LOG.info(_LI("Start the jmilkfansblog manager."))
+    LOG.info('jmilkfansblog manager start')
     manager.run()

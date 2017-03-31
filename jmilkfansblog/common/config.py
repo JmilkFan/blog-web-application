@@ -5,13 +5,24 @@ from oslo_config import cfg
 from oslo_log import log as logging
 
 
+CONF = cfg.CONF
+DOMAIN = 'jmilkfansblog'
+logging.register_options(CONF)
+logging.setup(CONF, DOMAIN)
+
+
 jmilkfansblog_default_opts = [
+
+    cfg.BoolOpt('debug',
+                default=True,
+                help="Oslo_log level."),
+
     cfg.StrOpt('host',
                default='localhost',
                help="Server ipaddress of jmilkfansblog."),
 
     cfg.IntOpt('server_port',
-               default=8089,
+               default=8088,
                help="Server port of jmilkfansblog."),
 
     cfg.IntOpt('api_port',
@@ -24,12 +35,13 @@ jmilkfansblog_default_opts = [
     cfg.StrOpt('recaptcha_private_key',
                help="Google reCaptche private key.")]
 
+
 flask_wtform_group = cfg.OptGroup(name='flask_wtform')
 flask_wtform_secret_key_opt = cfg.StrOpt('secret_key',
                                          help="Flask-WTForm.")
 
 flask_debugtoolbar_group = cfg.OptGroup(name='flask_debugtoolbar')
-flask_debugtoolbar_opt = cfg.StrOpt('debug',
+flask_debugtoolbar_opt = cfg.StrOpt('debugtoolbar',
                                     default=False,
                                     help="Flask-DebugToolBar.")
 
@@ -57,11 +69,6 @@ sqlalchemy_opts = [
     cfg.StrOpt('backend',
                help="Multi-Backend.")]
 
-CONF = cfg.CONF
-DOMAIN = 'jmilkfansblog'
-logging.register_options(CONF)
-logging.setup(CONF, DOMAIN)
-
 CONF.register_opts(jmilkfansblog_default_opts)
 
 CONF.register_group(flask_wtform_group)
@@ -83,8 +90,6 @@ CONF.register_group(sqlalchemy_group)
 CONF.register_opts(sqlalchemy_opts, sqlalchemy_group)
 
 CONFIG_FILE = path.join('etc', 'jmilkfansblog.conf')
-
-
 # Have to define the param `args(List)`, otherwise will be capture the CLI
 # option when execute `python manage.py server`.
 # oslo_config: (args if args is not None else sys.argv[1:])
@@ -104,7 +109,7 @@ class Config(object):
 class ProdConfig(Config):
     """Production config class."""
 
-    DEBUG = CONF.flask_debugtoolbar.debug
+    DEBUG = CONF.flask_debugtoolbar.debugtoolbar
     CACHE_TYPE = CONF.flask_cache.cache_type
     ASSETS_DEBUG = CONF.flask_assets.assets_debug
     CELERY_RESULT_BACKEND = CONF.celery.celery_result_backend
