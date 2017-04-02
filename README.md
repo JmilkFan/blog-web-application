@@ -281,4 +281,7 @@ Plase check whether installed the MySQL, because the package PyMySQL will be dep
 1. Fix the bug for db.api.CONF<br>
 
 ============== 2017-03-31 =============<br>
-1. Test the oslo_config
+1. Test the oslo_config<br>
+
+============== 2017-04-03 =============<br>
+1. Fix the oslo_log and jinja syntax bug<br>

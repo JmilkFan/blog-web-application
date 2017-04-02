@@ -1,21 +1,8 @@
-import tempfile
-from os import path
-
 from oslo_config import cfg
 from oslo_log import log as logging
 
 
-CONF = cfg.CONF
-DOMAIN = 'jmilkfansblog'
-logging.register_options(CONF)
-logging.setup(CONF, DOMAIN)
-
-
-jmilkfansblog_default_opts = [
-
-    cfg.BoolOpt('debug',
-                default=True,
-                help="Oslo_log level."),
+DEFAULT_OPTS = [
 
     cfg.StrOpt('host',
                default='localhost',
@@ -33,122 +20,146 @@ jmilkfansblog_default_opts = [
                help="Google reCaptcha public key."),
 
     cfg.StrOpt('recaptcha_private_key',
-               help="Google reCaptche private key.")]
+               help="Google reCaptche private key."),
+]
 
+DATABASE_GROUP = cfg.OptGroup(name='database')
+DATABASE_OPTS = [
 
-flask_wtform_group = cfg.OptGroup(name='flask_wtform')
-flask_wtform_secret_key_opt = cfg.StrOpt('secret_key',
-                                         help="Flask-WTForm.")
+    cfg.StrOpt('connection',
+               help='SQLAlchemy connection.'),
 
-flask_debugtoolbar_group = cfg.OptGroup(name='flask_debugtoolbar')
-flask_debugtoolbar_opt = cfg.StrOpt('debugtoolbar',
-                                    default=False,
-                                    help="Flask-DebugToolBar.")
+    cfg.StrOpt('backend',
+               default='mysql',
+               help="Multi-Backend.")
+]
 
-flask_cache_group = cfg.OptGroup(name='flask_cache')
-flask_cache_type_opt = cfg.StrOpt('cache_type',
-                                  help="Flask-Cache.")
+WTF_GROUP = cfg.OptGroup(name='flask_wtform')
+WTF_OPTS = [
 
-flask_assets_group = cfg.OptGroup(name='flask_assets')
-flask_assets_debug_opt = cfg.BoolOpt('assets_debug',
-                                     help="Flask-Assets.")
+    cfg.StrOpt('SECRET_KEY',
+               help="Flask-WTF secret key."),
 
-celery_group = cfg.OptGroup(name='celery')
-celery_opts = [
-    cfg.StrOpt('celery_result_backend',
+    cfg.BoolOpt('WTF_CSRF_ENABLED',
+                default=False,
+                help="CSRF check for Flask-WTF."),
+]
+
+DEBUGTOOLBAR_GROUP = cfg.OptGroup(name='flask_debugtoolbar')
+DEBUGTOOLBAR_OPTS = [
+
+    cfg.BoolOpt('DEBUG_TB_INTERCEPT_REDIRECTS',
+                default=False,
+                help="Intercept redirects."),
+
+    cfg.BoolOpt('DEBUG_TB_PROFILER_ENABLED',
+                default=True,
+                help="Profiler on all requests."),
+
+]
+
+ASSETS_GROUP = cfg.OptGroup(name='flask_assets')
+ASSETS_OPTS = [
+
+    cfg.BoolOpt('ASSETS_DEBUG',
+                default=True,
+                help="Compress the CSS/JS file to implements web page loading"
+                     "speed."),
+
+]
+
+CACHE_GROUP = cfg.OptGroup(name='flask_cache')
+CACHE_OPTS = [
+
+    cfg.StrOpt('CACHE_TYPE',
+               default='null',
+               help="Flask-Cache type."),
+
+]
+
+CELERY_GROUP = cfg.OptGroup(name='celery')
+CELERY_OPTS = [
+
+    cfg.StrOpt('CELERY_RESULT_BACKEND',
                default='amqp://guest:guest@localhost:5672//',
                help="Celery result backend."),
-    cfg.StrOpt('celery_broker_url',
+
+    cfg.StrOpt('CELERY_BROKER_URL',
                default='amqp://guest:guest@localhost:5672//',
-               help="Celery broker url.")]
+               help="Celery broker url."),
 
-sqlalchemy_group = cfg.OptGroup(name='database')
-sqlalchemy_opts = [
-    cfg.StrOpt('connection',
-               help='SQLAlchemy.'),
-    cfg.StrOpt('backend',
-               help="Multi-Backend.")]
+]
 
-CONF.register_opts(jmilkfansblog_default_opts)
+CONF = cfg.CONF
+DOMAIN = 'jmilkfansblog'
 
-CONF.register_group(flask_wtform_group)
-CONF.register_opt(flask_wtform_secret_key_opt, flask_wtform_group)
+logging.register_options(CONF)
+logging.setup(CONF, DOMAIN)
 
-CONF.register_group(flask_debugtoolbar_group)
-CONF.register_opt(flask_debugtoolbar_opt, flask_debugtoolbar_group)
+# Register the options index.
+CONF.register_opts(DEFAULT_OPTS)
 
-CONF.register_group(flask_cache_group)
-CONF.register_opt(flask_cache_type_opt, flask_cache_group)
+CONF.register_group(DATABASE_GROUP)
+CONF.register_opts(DATABASE_OPTS, DATABASE_GROUP)
 
-CONF.register_group(flask_assets_group)
-CONF.register_opt(flask_assets_debug_opt, flask_assets_group)
+CONF.register_group(WTF_GROUP)
+CONF.register_opts(WTF_OPTS, WTF_GROUP)
 
-CONF.register_group(celery_group)
-CONF.register_opts(celery_opts, celery_group)
+CONF.register_group(DEBUGTOOLBAR_GROUP)
+CONF.register_opts(DEBUGTOOLBAR_OPTS, DEBUGTOOLBAR_GROUP)
 
-CONF.register_group(sqlalchemy_group)
-CONF.register_opts(sqlalchemy_opts, sqlalchemy_group)
+CONF.register_group(ASSETS_GROUP)
+CONF.register_opts(ASSETS_OPTS, ASSETS_GROUP)
 
-CONFIG_FILE = path.join('etc', 'jmilkfansblog.conf')
-# Have to define the param `args(List)`, otherwise will be capture the CLI
-# option when execute `python manage.py server`.
-# oslo_config: (args if args is not None else sys.argv[1:])
-CONF(args=[], project=DOMAIN, default_config_files=[CONFIG_FILE])
+CONF.register_group(CACHE_GROUP)
+CONF.register_opts(CACHE_OPTS, CACHE_GROUP)
+
+CONF.register_group(CELERY_GROUP)
+CONF.register_opts(CELERY_OPTS, CELERY_GROUP)
+
+# Parse the options
+CONF(args=[], project=DOMAIN,
+     default_config_files=['etc/jmilkfansblog.conf'])
 
 
 class Config(object):
-    """Base config class."""
+    """Application config."""
 
-    # WTForm secret key
-    SECRET_KEY = CONF.flask_wtform.secret_key
+    DEBUG = CONF.debug
+
     # reCAPTCHA Public key and Private key
     RECAPTCHA_PUBLIC_KEY = CONF.recaptcha_public_key
     RECAPTCHA_PRIVATE_KEY = CONF.recaptcha_private_key
 
-
-class ProdConfig(Config):
-    """Production config class."""
-
-    DEBUG = CONF.flask_debugtoolbar.debugtoolbar
-    CACHE_TYPE = CONF.flask_cache.cache_type
-    ASSETS_DEBUG = CONF.flask_assets.assets_debug
-    CELERY_RESULT_BACKEND = CONF.celery.celery_result_backend
-    CELERY_BROKER_URL = CONF.celery.celery_broker_url
+    # Flask-SQLAlchemy's configuration
     SQLALCHEMY_DATABASE_URI = CONF.database.connection
 
-    #### Setup the config for redis
-    # CACHE_TYPE = 'redis'
-    # CACHE_REDIS_HOST = 'localhost'
-    # CACHE_REDIS_PORT = '6379'
-    # FIXME(JmilkFan): Choise the password of Redis
-    # CACHE_REDIS_PASSWORD = 'password'
-    # CACHE_REDIS_DB = '0'
+    # Flask-WTF's configuration
+    # secret key
+    SECRET_KEY = CONF.flask_wtform.SECRET_KEY
+    # NOTE(JmilkFan): Should not set 'False' when run the unit testting.
+    WTF_CSRF_ENABLED = CONF.flask_wtform.WTF_CSRF_ENABLED
 
-
-class DevConfig(Config):
-    """Development config class."""
-
-    #### Flask-Assets's config
-    # Can not compress the CSS/JS on Dev environment.
-    ASSETS_DEBUG = True
-
-    #### Flask-Debug-Toolbar's config
-    DEBUG = True
+    # Flask-debugtoolbar's configuration
     # No intercept redirects
-    DEBUG_TB_INTERCEPT_REDIRECTS = False
+    DEBUG_TB_INTERCEPT_REDIRECTS = \
+        CONF.flask_debugtoolbar.DEBUG_TB_INTERCEPT_REDIRECTS
     # Enable the profiler on all requests
-    DEBUG_TB_PROFILER_ENABLED = True
+    DEBUG_TB_PROFILER_ENABLED = \
+        CONF.flask_debugtoolbar.DEBUG_TB_PROFILER_ENABLED
 
-    #### Flask-SQLAlchemy's config MySQL connection
-    SQLALCHEMY_DATABASE_URI = ('mysql+pymysql://root:fanguiju@127.0.0.1:3306'
-                               '/myblog?charset=utf8')
+    # Flask-Assets's configuration
+    # NOTE(JmilkFan): Should not compress the CSS/JS when development stage
+    ASSETS_DEBUG = CONF.flask_assets.ASSETS_DEBUG
 
-    #### Flask-Cache's config
-    CACHE_TYPE = 'null'
+    # Flask-Cache's configuration
+    # NOTE(JmilkFan): Should be set 'null' when development stage
+    CACHE_TYPE = CONF.flask_cache.CACHE_TYPE
 
-    #### Celery's config: Celery <--> RabbitMQ <--> APP connection
-    CELERY_RESULT_BACKEND = "amqp://guest:guest@localhost:5672//"
-    CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"
+    # Celery asynchronous task configuration
+    # Celery <--> RabbitMQ <--> APP connection
+    CELERY_RESULT_BACKEND = CONF.celery.CELERY_RESULT_BACKEND
+    CELERY_BROKER_URL = CONF.celery.CELERY_BROKER_URL
     # Timed Task configuation of celery task `weekly digest`
     # CELERYBEAT_SCHEDULE = {
     #     'weekly-digest': {
@@ -156,30 +167,3 @@ class DevConfig(Config):
     #         'task': 'jmilkfansblog.tasks.digest',
     #         # Setup the time span.
     #         'schedule': crontab(day_of_week=6, hour='10')}}
-
-    #### Flask-Mail's Config
-    # FIXME(JmilkFan): Deploy the smtp server in local
-    MAIL_SERVER = 'localhost'
-    MAIL_PORT = 25
-    MAIL_USERNAME = '<username>'
-    MAIL_PASSWORD = '<password>'
-
-
-class TestConfig(Config):
-
-    # Using the temp file to test.
-    # Can't effect the data of DevENV
-    db_file = tempfile.NamedTemporaryFile()
-    # Close the CSRF check for WTForm.
-    WTF_CSRF_ENABLED = False
-
-    DEBUG = True
-    DEBUG_TB_ENABLED = False
-
-    SQLALCHEMY_DATABASE_URI = ('mysql+pymysql://root:fanguiju@127.0.0.1:3306/'
-                               'myblog?charset=utf8')
-
-    CACHE_TYPE = 'null'
-
-    CELERY_RESULT_BACKEND = "amqp://guest:guest@localhost:5672//"
-    CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672//"

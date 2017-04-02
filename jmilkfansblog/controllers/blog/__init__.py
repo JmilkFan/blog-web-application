@@ -13,6 +13,7 @@ from jmilkfansblog.db.sqlalchemy.models import db, User, Post, Tag
 from jmilkfansblog.db.sqlalchemy.models import Comment, posts_tags
 from jmilkfansblog.forms import CommentForm, PostForm
 from jmilkfansblog.extensions import poster_permission, admin_permission, cache
+from jmilkfansblog.i18n import _LI
 
 
 LOG = logging.getLogger(__name__)

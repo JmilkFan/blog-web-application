@@ -19,7 +19,7 @@ from jmilkfansblog.extensions import principals, flask_celery
 from jmilkfansblog.extensions import restful_api, debug_toolbar
 from jmilkfansblog.extensions import cache, flask_admin
 from jmilkfansblog.extensions import assets_env, main_js, main_css
-from jmilkfansblog.extensions import mail, youku
+from jmilkfansblog.extensions import youku
 from jmilkfansblog.tasks import on_reminder_save
 from jmilkfansblog.controllers import admin
 from jmilkfansblog.i18n import _LI
@@ -28,39 +28,41 @@ from jmilkfansblog.i18n import _LI
 LOG = logging.getLogger(__name__)
 CONF = cfg.CONF
 
+
 def create_app(object_name):
     """Create the app instance via `Factory Method`"""
 
-    LOG.info(_LI("Create the flask application object via %s"), object_name)
+    LOG.info(_LI("Creating the flask application object."))
 
     app = Flask(__name__)
     # Set the config for app instance
     app.config.from_object(object_name)
 
-    #### Init the Flask-SQLAlchemy via app boject
+    # Init the Flask-SQLAlchemy via app boject
     # Will be load the SQLALCHEMY_DATABASE_URL from config.py to db object
     db.init_app(app)
+
     # Using the SQLAlchemy's event
     # Will be callback on_reminder_save when insert into table `reminder`.
     event.listen(Reminder, 'after_insert', on_reminder_save)
 
-    #### Init the Flask-Bcrypt via app object
+    # Init the Flask-Bcrypt via app object
     bcrypt.init_app(app)
 
-    #### Init the Flask-OpenID via app object
+    # Init the Flask-OpenID via app object
     openid.init_app(app)
 
-    #### Init the Flask-Login via app object
+    # Init the Flask-Login via app object
     login_manager.init_app(app)
 
-    #### Init the Flask-Prinicpal via app object
+    # Init the Flask-Prinicpal via app object
     principals.init_app(app)
 
-    #### Init the Flask-Celery-Helper via app object
+    # Init the Flask-Celery-Helper via app object
     # Register the celery object into app object
     flask_celery.init_app(app)
 
-    #### Init the Flask-Restful via app object
+    # Init the Flask-Restful via app object
     # Define the route of restful_api
     restful_api.add_resource(
         PostApi,
@@ -74,18 +76,18 @@ def create_app(object_name):
         endpoint='restful_api_auth')
     restful_api.init_app(app)
 
-    #### Init the Flask-DebugToolbar via app object
+    # Init the Flask-DebugToolbar via app object
     debug_toolbar.init_app(app)
 
-    #### Init the Flask-Cache via app object
+    # Init the Flask-Cache via app object
     cache.init_app(app)
 
-    #### Init the Flask-Assets via app object
+    # Init the Flask-Assets via app object
     assets_env.init_app(app)
     assets_env.register('main_js', main_js)
     assets_env.register('main_css', main_css)
 
-    #### Init the Flask-Admin via app object
+    # Init the Flask-Admin via app object
     flask_admin.init_app(app)
     # Register view function `CustomView` into Flask-Admin
     flask_admin.add_view(admin.CustomView(name='Custom'))
@@ -104,13 +106,10 @@ def create_app(object_name):
             '/static',
             name='Static Files'))
 
-    #### Init the Flask-Mail via app object
-    # mail.init_app(app)
-
-    #### Init the Flask-Youku via app object
+    # Init the Flask-Youku via app object
     youku.init_app(app)
 
-    #### Init the Flask-GZip via app object
+    # Init the Flask-GZip via app object
     # FIXME(Fan Guiju): UnicodeDecodeError
     #                   Have to setup the `DEBUG = False`
     # flask_gzip.init_app(app)

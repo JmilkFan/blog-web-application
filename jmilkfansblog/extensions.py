@@ -15,34 +15,34 @@ from flask_youku import Youku
 from flask_gzip import GZip
 
 
-#### Create the Flask-Bcrypt's instance
+# Create the Flask-Bcrypt's instance
 bcrypt = Bcrypt()
 
-#### Create the Flask-OpenID's instance
+# Create the Flask-OpenID's instance
 openid = OpenID()
 
-#### Create the Flask-Principal's instance
+# Create the Flask-Principal's instance
 principals = Principal()
 
-#### Create the Flask-Restful's instance
+# Create the Flask-Restful's instance
 restful_api = Api()
 
-#### Create the Flask-Celery-Helper's instance
+# Create the Flask-Celery-Helper's instance
 flask_celery = Celery()
 
-#### Create the Flask-DebugToolbar's instance
+# Create the Flask-DebugToolbar's instance
 debug_toolbar = DebugToolbarExtension()
 
-#### Create the Flask-Cache's instance
+# Create the Flask-Cache's instance
 cache = Cache()
 
-#### Create the Flask-Admin's instance
+# Create the Flask-Admin's instance
 flask_admin = Admin()
 
-### Create the Flask-Mail's instance
+# Create the Flask-Mail's instance
 mail = Mail()
 
-#### Create the Flask-Assets's instance
+# Create the Flask-Assets's instance
 assets_env = Environment()
 # Define the set for js and css file.
 main_css = Bundle(
@@ -56,7 +56,7 @@ main_js = Bundle(
     filters='jsmin',
     output='assets/js/common.js')
 
-#### Create the Flask-Login's instance
+# Create the Flask-Login's instance
 login_manager = LoginManager()
 # Init the permission object via RoleNeed(Need).
 admin_permission = Permission(RoleNeed('admin'))
@@ -73,7 +73,7 @@ login_manager.login_message = "Please login to access this page."
 login_manager.login_message_category = "info"
 # login_manager.anonymous_user = CustomAnonymousUser
 
-#### Create the Flask-OAuth's instance
+# Create the Flask-OAuth's instance
 oauth = OAuth()
 # Create the auth object for facebook.
 facebook = oauth.remote_app(
@@ -95,10 +95,10 @@ twitter = oauth.remote_app(
     consumer_key='<TWITTER_APP_ID>',
     consumer_secret='<TWITTER_APP_SECRET>')
 
-#### Create the Flask-Youku's instance
+# Create the Flask-Youku's instance
 youku = Youku()
 
-#### Create the Flask-Gzip's instance
+# Create the Flask-Gzip's instance
 flask_gzip = GZip()
 
 
@@ -106,7 +106,7 @@ flask_gzip = GZip()
 def create_or_login(resp):
     """Will be execute after pass the auth via openid."""
 
-    from jmilkfansblog.models import db, User
+    from jmilkfansblog.db.sqlalchemy.models import db, User
 
     username = resp.fullname or resp.nickname or resp.email
     if not username:
@@ -137,5 +137,5 @@ def get_twitter_token():
 def load_user(user_id):
     """Load the user's info."""
 
-    from models import User
+    from jmilkfansblog.db.sqlalchemy.models import User
     return User.query.filter_by(id=user_id).first()

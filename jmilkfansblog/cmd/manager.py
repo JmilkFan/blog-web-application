@@ -1,5 +1,3 @@
-import os
-
 from oslo_config import cfg
 from oslo_log import log as logging
 
@@ -16,13 +14,11 @@ from jmilkfansblog.common import config
 
 
 CONF = cfg.CONF
+
 LOG = logging.getLogger(__name__)
 
-# Get the ENV from os_environ
-env = os.environ.get('BLOG_ENV', 'dev')
 # Create thr app instance via Factory Method
-app = create_app('jmilkfansblog.config.%sConfig' % env.capitalize())
-
+app = create_app(config.__name__ + '.Config')
 
 # Init manager object via app object
 manager = Manager(app)
@@ -30,7 +26,7 @@ manager = Manager(app)
 # Init migrate object via app and db object
 migrate = Migrate(app, models.db)
 
-# Create some new commands:
+# Create the new application manage commands as below
 # Start the flask web server
 manager.add_command("server", Server(host=CONF.host, port=CONF.server_port))
 # Manage database migrate
@@ -63,5 +59,5 @@ def make_shell_context():
 
 
 def main():
-    LOG.info('jmilkfansblog manager start')
+    LOG.info(_LI('Running jmilkfansblog manager.'))
     manager.run()
