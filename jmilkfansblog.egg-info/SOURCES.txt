@@ -3,7 +3,6 @@ ChangeLog
 LICENSE
 README.md
 celery_runner.py
-fake_data.py
 requirements.txt
 setup.cfg
 setup.py
@@ -15,7 +14,6 @@ flask_youku/templates/__init__.py
 flask_youku/templates/youku/__init__.py
 flask_youku/templates/youku/video.html
 jmilkfansblog/__init__.py
-jmilkfansblog/config.py
 jmilkfansblog/extensions.py
 jmilkfansblog/forms.py
 jmilkfansblog/i18n.py
@@ -36,6 +34,8 @@ jmilkfansblog/api/wsgi_app.py
 jmilkfansblog/cmd/__init__.py
 jmilkfansblog/cmd/api.py
 jmilkfansblog/cmd/manager.py
+jmilkfansblog/common/__init__.py
+jmilkfansblog/common/config.py
 jmilkfansblog/controllers/__init__.py
 jmilkfansblog/controllers/root.py
 jmilkfansblog/controllers/account/__init__.py
