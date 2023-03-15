@@ -1,6 +1,7 @@
-# JmilkFan's Blog: Blog system with Python Flask.
+# Blog Web Application base on Python-Flask framework
 
-CSDN Blog column: [用 Flask 来写个轻博客](http://blog.csdn.net/column/details/13463.html)<br>
+开发笔记与文档：[《用 Flask 来写个轻博客》](https://blog.csdn.net/jmilk/category_9631002.html)
+
 
 ## Installation
 
